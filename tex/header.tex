@@ -1,0 +1,49 @@
+\documentclass[norsk,a4paper,11pt]{report}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{helvet}
+\usepackage{babel,epsfig,moreverb,ifikompendiumforside,float}
+
+\author{Fagutvalget ved Institutt for informatikk}
+% m fylles ut, f.eks INxxx-x
+\title{Kursevaluering}
+% f.eks `Obligatorisk oppg. x'
+\subtitle{Høst 2015}
+
+\date{Mai 2016}
+
+\floatstyle{ruled}
+\restylefloat{figure}
+
+% for paragrafer uten innrykk og tomme linjer mellom dem:
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1ex plus 0.5ex minus 0.2ex}
+
+% Lagt inn av josek 19. okt 2009, for bedre utnyttelse av papirarealet:
+\setlength{\textwidth}		{15.0cm}
+\setlength{\textheight}		{24.5cm}
+
+\begin{document}
+
+\ififorside{}
+
+% Lagt inn av josek 19. okt 2009, disse er best å ha etter uiosloforside:
+\setlength{\topmargin}		{-1.0cm}
+\setlength{\headsep}		{0.5cm}
+\setlength{\oddsidemargin}	{0.5cm}
+\setlength{\evensidemargin}	{0.5cm}
+\setlength{\footskip}		{1.0cm}
+
+% --- eps figur ---
+%
+%\begin{figure}[htbp!]
+%  \caption{En fin liten figur}
+%  \label{fig:minfigur}
+%  \begin{center}
+%    \epsfig{file=minfigur.eps,angle=90,width=\textwidth}
+%  \end{center}
+%\end{figure}
+
+% --- textfil med tab ---
+%
+%\verbatimtabinput{textfil.txt}
