@@ -1,5 +1,38 @@
+# Program output:
 output/*
 reports/*
+
+# Editor files:
+*~
+
+# LaTeX:
+
+# Python:
+__pycache__
+
+# OS X:
 .DS_Store
 *.DS_Store
-*~
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# WINDOWS:
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
