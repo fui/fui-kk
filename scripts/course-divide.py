@@ -1,28 +1,18 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-""" Sorts subjects based on evaluation responses and divides among n people """
-#    course-divide.py
-#    Copyright (C) 2016  Ole Herman Schumacher Elgesem
+"""Divides course evaluation results among fui-members."""
 
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
+__authors__    = ["Ole Herman Schumacher Elgesem"]
+__email__      = "olehelg@uio.no"
+__copyright__  = "FUI - Fagutvalget ved Institutt for Informatikk"
+__credits__    = ["Ole Herman Schumacher Elgesem"]
 
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
+__version__    = "0.1"
+__license__    = "MIT"
 
-#    You should have received a copy of the GNU General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-import sys, os
+import os
+import sys
 from bs4 import BeautifulSoup
-
-__author__ = "Ole Herman Schumacher Elgesem"
-__email__ = "olehelg@uio.no"
-__version__ = "0.1"
 
 def subject_data(subject, linenum):
     linenum -= 1

@@ -1,6 +1,14 @@
-#!/usr/bin/env python3.3
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# Author: Lars Tveito
+"""This is a module that is used for generating plots that show's how a
+course has evolved."""
+
+__authors__    = ["Lars Tveito"]
+__copyright__  = "Lars Tveito"
+__credits__    = ["Lars Tveito"]
+
+__version__    = "1.0"
+__license__    = "MIT"
 
 # The MIT License (MIT)
 
@@ -23,9 +31,6 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 # FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 # DEALINGS IN THE SOFTWARE.
-
-"""This is a module that is used for generating plots that show's how a
-course has evolved."""
 
 import multiprocessing, pipes, os, re
 import matplotlib.pyplot as plt
