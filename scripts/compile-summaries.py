@@ -1,11 +1,19 @@
 #!/snacks/bin/python3
 # -*- coding: utf-8 -*-
+"""Compiles tex files for the course evaluation"""
 
-# Written by Bendik Rønning Opstad
+__author__     = "Bendik Rønning Opstad"
+__copyright__  = "FUI - Fagutvalget ved Institutt for Informatikk"
+__credits__    = ["Bendik Rønning Opstad", "josek"]
 
-# Se "josek" nedenfor for endringer og notater lagt inn av josek.
+__version__    = "0.1"
+__license__    = "MIT"
 
-import os, re, sys, pprint, codecs
+import os
+import re
+import sys
+import pprint
+import codecs
 import string
 import json
 
