@@ -9,7 +9,7 @@ pdf: tex
 	@echo
 	@echo "Creating pdf file from latex source"
 	@echo "-----------------------------------"
-	/snacks/bin/python3.3 ./pyscript/plotcourses.py -o plots/ -t .. -d . -r report.tex -m
+	./scripts/plotcourses.py -o plots/ -t .. -d . -r report.tex -m
 	pdflatex report.tex
 
 txt: pdf
