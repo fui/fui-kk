@@ -1,6 +1,7 @@
 # Program output:
 output/*
 reports/*
+ghostdriver.log
 
 # Editor files:
 *~
