@@ -1,18 +1,19 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""( NO LONGER WORKS )Fetch reports (html) from nettskjema results."""
+"""Fetch reports (html) from nettskjema results.(NO LONGER WORKS)"""
 
 __authors__    = ["Unknown"]
 __copyright__  = "FUI - Fagutvalget ved Institutt for Informatikk"
 __credits__    = ["FUI"]
-
-__version__    = "0.1"
 __license__    = "MIT"
+# This file is subject to the terms and conditions defined in
+# file 'LICENSE.txt', which is part of this source code package.
 
 import os
 import sys
 import requests, getpass, re, codecs
 from bs4 import BeautifulSoup
+
 
 # Usage: python fetch-reports.py FOLDER [REGEX]
 

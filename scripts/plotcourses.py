@@ -6,7 +6,6 @@ course has evolved."""
 __authors__    = ["Lars Tveito"]
 __copyright__  = "Lars Tveito"
 __credits__    = ["Lars Tveito"]
-
 __version__    = "1.0"
 __license__    = "MIT"
 

@@ -1,13 +1,13 @@
 #!/snacks/bin/python3
 # -*- coding: utf-8 -*-
-"""Compiles tex files for the course evaluation"""
+"""Compiles tex files for the course evaluation report"""
 
-__author__     = "Bendik Rønning Opstad"
+__authors__    = ["Bendik Rønning Opstad"]
 __copyright__  = "FUI - Fagutvalget ved Institutt for Informatikk"
 __credits__    = ["Bendik Rønning Opstad", "josek"]
-
-__version__    = "0.1"
 __license__    = "MIT"
+# This file is subject to the terms and conditions defined in
+# file 'LICENSE.txt', which is part of this source code package.
 
 import os
 import re
