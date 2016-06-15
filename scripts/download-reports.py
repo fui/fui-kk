@@ -22,7 +22,7 @@ from selenium import webdriver
 
 def get_args():
     argparser = argparse.ArgumentParser(description='Download report data from nettskjema.uio.no')
-    argparser.add_argument('--out', '-o', help='Output directory (default=".")', type=str, default='.')
+    argparser.add_argument('--out', '-o', help='Output directory (default="./downloads")', type=str, default='./downloads')
     argparser.add_argument('--filter', '-f', help='String to filter by', type=str)
     argparser.add_argument('--username', '-u', help='Username for login', type=str)
     argparser.add_argument('--password', '-p', help='Password for login', type=str)
