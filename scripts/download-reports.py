@@ -87,6 +87,7 @@ def download_files(driver, args):
             tsv_url = url.replace('preview', 'download') + '&encoding=utf-8'
             response = session.get(tsv_url)
             filename = os.path.join(tsv_path, name) + '.tsv'
+            filename = filename.replace(' ', '_')
             with open(filename, 'w') as f:
                 f.write(response.content)
 
@@ -94,6 +95,7 @@ def download_files(driver, args):
             html_url = url.replace('preview', 'report/web') + '&include-open=1&remove-profile=1'
             response = session.get(html_url)
             filename = os.path.join(html_path, name) + '.html'
+            filename = filename.replace(' ', '_')
             with open(filename, 'w') as f:
                 f.write(response.content)
 
