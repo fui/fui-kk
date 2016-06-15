@@ -11,7 +11,7 @@ course evaluation survey results.<br>
 0. [Title 0](./path0/)<br>
 1. [Title 1](./path1/)<br> -->
 
-MIT License
+**MIT License**
 
 Copyright (c) 2016 Fagutvalget ved Institutt for Informatikk - IFI
 
