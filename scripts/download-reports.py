@@ -97,6 +97,7 @@ def download_files(driver, args):
             filename = os.path.join(html_path, name) + '.html'
             filename = filename.replace(' ', '_')
             with open(filename, 'w') as f:
+                f.write('<meta charset="utf-8" />')
                 f.write(response.content)
 
 def main():
