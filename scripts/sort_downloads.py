@@ -5,7 +5,7 @@ automatically based on file names(form titles)."""
 
 __authors__    = ["Ole Herman Schumacher Elgesem"]
 __copyright__  = "FUI - Fagutvalget ved Institutt for Informatikk"
-__credits__    = ["Ole Herman Schumacher Elgesem", "Erik Vesteraas"]
+__credits__    = ["Erik Vesteraas"]
 __license__    = "MIT"
 # This file is subject to the terms and conditions defined in
 # file 'LICENSE.txt', which is part of this source code package.
