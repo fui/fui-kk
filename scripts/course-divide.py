@@ -81,10 +81,13 @@ def course_divide(folder, num):
     print("Empty evaluations("+str(len(empty_courses))+"):")
     print(empty_courses)
 
-if __name__ == "__main__":
+def main():
     if(len(sys.argv) < 2):
         print("Usage: ./course_divide.py num [folder]")
         exit()
     folder = sys.argv[2]
     num = int(sys.argv[1])
     course_divide(folder, num)
+
+if __name__ == "__main__":
+    main()
