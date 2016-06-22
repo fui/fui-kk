@@ -18,10 +18,14 @@ from bs4 import BeautifulSoup
 
 def get_args():
     argparser = argparse.ArgumentParser(description="Parse tsv file(s) and output json course data")
-    argparser.add_argument("--output", "-o", help="Output directory (default='.'')", type=str, default="./json")
-    argparser.add_argument("--input", "-i", help="Input directory/file", type=str, default="./tsv")
+    argparser.add_argument("--output", "-o", help="Output directory", type=str)
+    argparser.add_argument("--input", "-i", help="Input directory/file", type=str)
     argparser.add_argument("--verbose", "-v", help="Verbose", action="store_true")
+
     args = argparser.parse_args()
+
+    if not args.input or not args.output:
+        sys.exit("Error: Specify input and output using -i and -o parameters.")
     return args
 
 def parse_course_tsv(tsv_filename):
@@ -30,7 +34,7 @@ def parse_course_tsv(tsv_filename):
         #for column in zip(*[line for line in csv.reader(tsv_file, delimiter='\t', quoting=csv.QUOTE_NONE)]):
             #print("Column: "+str(column))
         for row in csv.reader(tsv_file, delimiter='\t'):
-            #print("Row: "+str(row))
+            print("Row: "+str(row))
             data.append(row)
     labels = data[0]
     responses_raw = data[1:]
@@ -72,13 +76,13 @@ def main():
             csv.field_size_limit(csv_max)
         except OverflowError:
             overflow = True
-            csv_max = int(maxInt/16)
+            csv_max = int(csv_max/16)
     courses = {}
     for tsv_filename in input_files:
         coursename = tsv_filename.replace(".tsv","")
         courses[coursename] = parse_course_tsv(tsv_filename)
 
-    print(json.dumps(courses, sort_keys=True, indent=4))
+    print(json.dumps(courses, sort_keys=True, indent=4, ensure_ascii=False))
 
 
 if __name__ == "__main__":
