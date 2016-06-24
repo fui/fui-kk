@@ -1,0 +1,96 @@
+{
+    "questions": {
+        "Are the curriculum and learning outcomes of the course sufficiently defined?": "quality",
+        "Er pensum og læringsmål i emnet godt definert?": "kvalitet",
+        "Forelesningenes relevans og nytteverdi i forhold til å formidle det du trenger å lære?": "kvalitet",
+        "How do you rate the course in general?": "quality",
+        "How do you rate the course material used (text book etc.)?": "quality",
+        "How do you rate the difficulty level of the final examination?": "amount",
+        "How do you rate the difficulty level of the midterm examination(s)?": "amount",
+        "How do you rate the difficulty level of the obligatory assignments?": "amount",
+        "How do you rate the level of the course?": "level",
+        "How do you rate the work load in proportion to the number of credits achieved?": "load",
+        "How would you assess the course's term page?": "quality",
+        "How would you assess the online course presentation?": "quality",
+        "Hva er ditt generelle intrykk av kurset?": "kvalitet",
+        "Hva synes du om antallet obliger?": "mengde",
+        "Hva synes du om arbeidsmengden sett i forhold til antall studiepoeng?": "mengde",
+        "Hva synes du om emnets nivå?": "nivå",
+        "Hva synes du om kursets semesterside?": "informasjon",
+        "Hva synes du om kurspresentasjonen på nett?": "informasjon",
+        "Hva synes du om nivået på avsluttende eksamen?": "mengde",
+        "Hva syns du om nivået på deleksamen?": "mengde",
+        "Hvordan er nivået på obligene?": "mengde",
+        "Hvordan vurderer du kursmateriellet som benyttes (lærebok m.m.)?": "kvalitet",
+        "I hvilken grad forbedrer ukesoppgavene og gruppeundervisningen din forståelse av pensum?": "kvalitet",
+        "In what degree does group tuition and weekly assignments give you practical skills and the possibility to make use of the theory at hand?": "quality",
+        "Kvaliteten på forelesningene?": "kvalitet",
+        "Kvaliteten på gruppeundervisningen i sin helhet?": "kvalitet",
+        "The lectures' relevance and usefulness in regard to relaying what you need to learn?": "quality",
+        "The quality of the group tuition as a whole?": "quality",
+        "The quality of the lectures?": "quality",
+        "What is your opinion in regard to the number of obligatory assignments?": "amount"
+    },
+    "scales": {
+        "amount": {
+            "High": 4,
+            "Large": 4,
+            "Low": 2,
+            "OK": 3,
+            "Small": 2,
+            "Too high": 5,
+            "Too large": 5,
+            "Too low": 1,
+            "Too small": 1
+        },
+        "informasjon": {
+            "Bra": 3,
+            "Grei": 2,
+            "Lite bra": 1,
+            "Meget bra": 4,
+            "Særdeles bra": 5
+        },
+        "kvalitet": {
+            "Bra": 4,
+            "Grei": 3,
+            "Greit": 3,
+            "Lite bra": 1,
+            "Meget bra": 5,
+            "Mindre bra": 2,
+            "Særdeles bra": 6
+        },
+        "level": {
+            "Difficult": 4,
+            "Easy": 2,
+            "OK": 3,
+            "Too difficult": 5,
+            "Too easy": 1
+        },
+        "mengde": {
+            "For høy": 5,
+            "For høyt": 5,
+            "For lav": 1,
+            "For lavt": 1,
+            "Høy": 4,
+            "Høyt": 4,
+            "Lav": 2,
+            "Lavt": 2,
+            "Passe": 3
+        },
+        "nivå": {
+            "For vanskelig": 5,
+            "Lett": 1,
+            "Noe lett": 2,
+            "Noe vanskelig": 4,
+            "Passe": 3
+        },
+        "quality": {
+            "Exceptionally good": 6,
+            "Good": 4,
+            "Not good": 1,
+            "Not that good": 2,
+            "OK": 3,
+            "Very good": 5
+        }
+    }
+}
