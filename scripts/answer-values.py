@@ -27,7 +27,6 @@ def gen_dict(key_list, alternative_list = [], alternative_list2 = []):
     return dic
 
 def main():
-
     kvalitet = gen_dict(\
     ["Lite bra","Mindre bra","Greit","Bra","Meget bra","Særdeles bra"],\
     ["","","Grei","","",""])
@@ -95,9 +94,7 @@ def main():
     lookup["How do you rate the difficulty level of the midterm examination(s)?"] =\
     lookup["How do you rate the difficulty level of the final examination?"] = "amount"
 
-    grades = {}
-    grades["scales"] = scales
-    grades["questions"] = lookup
+    grades = {"scales":scales, "questions": lookup}
 
     with open("data/answer-values.json", "w") as f:
         json.dump(grades,f, sort_keys=True, indent=4, ensure_ascii=False)
