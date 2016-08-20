@@ -15,6 +15,7 @@ import csv
 import json
 import argparse
 from bs4 import BeautifulSoup
+from collections import OrderedDict
 
 def get_args():
     argparser = argparse.ArgumentParser(
@@ -51,7 +52,7 @@ def parse_course_tsv(tsv_filename):
             data.append(row)
     labels = data[0]
     responses_raw = data[1:]
-    responses = {}
+    responses = OrderedDict()
     for l in labels:
         responses[l] = []
     for r in range(0, len(responses_raw)):
@@ -73,7 +74,7 @@ def init_csv_reader():
 
 def dump_to_file(data, filename):
     with open(filename, 'w') as outfile:
-        json.dump(data, outfile, sort_keys=True, indent=4, ensure_ascii=False)
+        json.dump(data, outfile, indent=4, ensure_ascii=False)
 
 def parse_tsv_files(input_path, output_dir):
     if not os.path.exists(input_path):
