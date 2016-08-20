@@ -29,11 +29,13 @@ def get_args():
     argparser.add_argument('--password', '-p', help='Password for login', type=str)
     argparser.add_argument('--tsv', help='Download TSV files', action="store_true")
     argparser.add_argument('--html', help='Download HTML reports', action="store_true")
+    argparser.add_argument('--stats', help='Download answer statistics', action="store_true")
     args = argparser.parse_args()
 
-    if not args.tsv and not args.html:
+    if not (args.tsv or args.html or args.stats):
         args.tsv = True
         args.html = True
+        args.stats = True
 
     if not args.username:
         args.username = raw_input('Username: ')
@@ -54,6 +56,20 @@ def login(driver, args):
 
     button = driver.find_element_by_css_selector('#login-box-form .submit')
     button.click()
+
+def write_to_file(folder, name, extension, content):
+    if not os.path.exists(folder):
+        os.makedirs(folder)
+    filename = os.path.join(folder, name) + '.' + extension
+    filename = filename.replace(' ', '_')
+    with open(filename, 'w') as f:
+        f.write(content)
+
+def try_to_find_int(driver, selector):
+    try:
+        return int(driver.find_element_by_css_selector(selector).text)
+    except:
+        return None
 
 def download_files(driver, args):
     driver.get('https://nettskjema.uio.no/user/form/list.html')
@@ -76,51 +92,28 @@ def download_files(driver, args):
     html_path = os.path.join(args.out, 'html')
     stats_path = os.path.join(args.out, 'stats')
 
-    if args.tsv and not os.path.exists(tsv_path):
-        os.makedirs(tsv_path)
-
-    if args.html and not os.path.exists(html_path):
-        os.makedirs(html_path)
-
-    if not os.path.exists(stats_path):
-        os.makedirs(stats_path)
-
     for (name, url) in formdata:
         print 'Fetching ' + name
 
         if args.tsv:
             tsv_url = url.replace('preview', 'download') + '&encoding=utf-8'
             response = session.get(tsv_url)
-            filename = os.path.join(tsv_path, name) + '.tsv'
-            filename = filename.replace(' ', '_')
-            with open(filename, 'w') as f:
-                f.write(response.content)
+            write_to_file(tsv_path, name, 'tsv', response.content)
 
         if args.html:
             html_url = url.replace('preview', 'report/web') + '&include-open=1&remove-profile=1'
             response = session.get(html_url)
-            filename = os.path.join(html_path, name) + '.html'
-            filename = filename.replace(' ', '_')
-            with open(filename, 'w') as f:
-                f.write('<meta charset="utf-8" />')
-                f.write(response.content)
+            write_to_file(html_path, name, 'html', '<meta charset="utf-8" />' + response.content)
 
-        def get_or_none(selector):
-            try:
-                return int(driver.find_element_by_css_selector(selector).text)
-            except:
-                return None
-
-        results_url = url.replace('preview', 'results')
-        driver.get(results_url)
-        answer_count = get_or_none('.delivered-submissions .number')
-        started_count = get_or_none('.saved-submissions .number')
-        invite_count = get_or_none('.valid-invitations .number')
-        stats_json = json.dumps({'answered': answer_count, 'started': started_count, 'invited': invite_count})
-        filename = os.path.join(stats_path, name) + '.json'
-        filename = filename.replace(' ', '_')
-        with open(filename, 'w') as f:
-            f.write(stats_json)
+        if args.stats:
+            results_url = url.replace('preview', 'results')
+            driver.get(results_url)
+            stats_json = json.dumps({
+                'answered': try_to_find_int(driver, '.delivered-submissions .number'),
+                'started': try_to_find_int(driver, '.saved-submissions .number'),
+                'invited': try_to_find_int(driver, '.valid-invitations .number')
+            })
+            write_to_file(stats_path, name, 'json', stats_json)
 
 def main():
     args = get_args()
