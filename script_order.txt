@@ -1,6 +1,0 @@
-download-reports
-sort-downloads
-parse-tsv
-course-data
-semester-data
-plot-courses
