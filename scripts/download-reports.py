@@ -15,6 +15,7 @@ import getpass
 import os
 import sys
 import argparse
+import json
 
 import requests
 
@@ -73,12 +74,16 @@ def download_files(driver, args):
 
     tsv_path = os.path.join(args.out, 'tsv')
     html_path = os.path.join(args.out, 'html')
+    stats_path = os.path.join(args.out, 'stats')
 
     if args.tsv and not os.path.exists(tsv_path):
         os.makedirs(tsv_path)
 
     if args.html and not os.path.exists(html_path):
         os.makedirs(html_path)
+
+    if not os.path.exists(stats_path):
+        os.makedirs(stats_path)
 
     for (name, url) in formdata:
         print 'Fetching ' + name
@@ -99,6 +104,23 @@ def download_files(driver, args):
             with open(filename, 'w') as f:
                 f.write('<meta charset="utf-8" />')
                 f.write(response.content)
+
+        def get_or_none(selector):
+            try:
+                return int(driver.find_element_by_css_selector(selector).text)
+            except:
+                return None
+
+        results_url = url.replace('preview', 'results')
+        driver.get(results_url)
+        answer_count = get_or_none('.delivered-submissions .number')
+        started_count = get_or_none('.saved-submissions .number')
+        invite_count = get_or_none('.valid-invitations .number')
+        stats_json = json.dumps({'answered': answer_count, 'started': started_count, 'invited': invite_count})
+        filename = os.path.join(stats_path, name) + '.json'
+        filename = filename.replace(' ', '_')
+        with open(filename, 'w') as f:
+            f.write(stats_json)
 
 def main():
     args = get_args()
