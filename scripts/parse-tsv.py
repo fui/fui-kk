@@ -22,7 +22,7 @@ def get_args():
                 description = "Parse tsv file(s) and output json course data")
     argparser.add_argument("--output", "-o", help="Output dir", type=str)
     argparser.add_argument("--input", "-i", help="Input dir/file", type=str)
-    argparser.add_argument("--semester", "-s", help="Semester", type=str)
+    argparser.add_argument("--semester", "-s", default="all", help="Semester", type=str)
 
     args = argparser.parse_args()
 
@@ -99,7 +99,8 @@ def parse_tsv_files(input_path, output_dir):
         coursename = tsv_filename.replace(".tsv","")
         coursename = coursename.replace(input_path, "")
         coursename = coursename.replace("/", "")
-        content = parse_course_tsv(tsv_filename)
+        content = OrderedDict()
+        content["responses"] = parse_course_tsv(tsv_filename)
         dump_to_file(content, os.path.join(output_dir,coursename)+".json")
 
 def main():
