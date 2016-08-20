@@ -8,7 +8,7 @@ A collection of scripts and tools for gathering, processing and exporting
 course evaluation survey results.
 
 ## Makefile
-The makefile is meant as a simple tool to run all the scripts.
+The makefile is meant as a simple tool to run all the scripts. Example:
 ```
 make download
 make json

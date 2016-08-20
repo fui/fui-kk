@@ -1,0 +1,150 @@
+{
+    "started": 0,
+    "answered": 5,
+    "invited": 0,
+    "answer_percentage": 100,
+    "questions": {
+        "Hva er ditt generelle intrykk av kurset?": {
+            "counts": {
+                "Særdeles bra": 1,
+                "Greit": 1,
+                "Bra": 1,
+                "Mindre bra": 1,
+                "Meget bra": 1
+            },
+            "average": 4.0,
+            "average-text": "Bra"
+        },
+        "Hva synes du om emnets nivå?": {
+            "counts": {
+                "For vanskelig": 1,
+                "Lett": 2,
+                "Passe": 1,
+                "Noe lett": 1
+            },
+            "average": 2.4,
+            "average-text": "Noe lett"
+        },
+        "Hva synes du om arbeidsmengden sett i forhold til antall studiepoeng?": {
+            "counts": {
+                "Passe": 2,
+                "For lav": 2,
+                "Lav": 1
+            },
+            "average": 2.0,
+            "average-text": "Lavt"
+        },
+        "Kvaliteten på forelesningene?": {
+            "counts": {
+                "Bra": 1,
+                "Meget bra": 1,
+                "Særdeles bra": 2,
+                "Grei": 1
+            },
+            "average": 4.8,
+            "average-text": "Meget bra"
+        },
+        "Forelesningenes relevans og nytteverdi i forhold til å formidle det du trenger å lære?": {
+            "counts": {
+                "Bra": 2,
+                "Særdeles bra": 1,
+                "Meget bra": 2
+            },
+            "average": 4.8,
+            "average-text": "Meget bra"
+        },
+        "Kvaliteten på gruppeundervisningen i sin helhet?": {
+            "counts": {
+                "Bra": 2,
+                "Særdeles bra": 1,
+                "Meget bra": 1,
+                "Grei": 1
+            },
+            "average": 4.4,
+            "average-text": "Bra"
+        },
+        "I hvilken grad forbedrer ukesoppgavene og gruppeundervisningen din forståelse av pensum?": {
+            "counts": {
+                "Særdeles bra": 1,
+                "Meget bra": 2,
+                "Bra": 2
+            },
+            "average": 4.8,
+            "average-text": "Meget bra"
+        },
+        "Er pensum og læringsmål i emnet godt definert?": {
+            "counts": {
+                "Særdeles bra": 1,
+                "Meget bra": 3,
+                "Grei": 1
+            },
+            "average": 4.8,
+            "average-text": "Meget bra"
+        },
+        "Hvordan vurderer du kursmateriellet som benyttes (lærebok m.m.)?": {
+            "counts": {
+                "Bra": 1,
+                "Meget bra": 1,
+                "Særdeles bra": 2,
+                "Grei": 1
+            },
+            "average": 4.8,
+            "average-text": "Meget bra"
+        },
+        "Hva synes du om kurspresentasjonen på nett?": {
+            "counts": {
+                "Særdeles bra": 2,
+                "Bra": 3
+            },
+            "average": 3.8,
+            "average-text": "Meget bra"
+        },
+        "Hva synes du om kursets semesterside?": {
+            "counts": {
+                "Bra": 1,
+                "Særdeles bra": 1,
+                "Meget bra": 1,
+                "Vet ikke": 1,
+                "Grei": 1
+            },
+            "average": 3.5,
+            "average-text": "Meget bra"
+        },
+        "Hvordan er nivået på obligene?": {
+            "counts": {
+                "For lavt": 1,
+                "Passe": 2,
+                "Lavt": 2
+            },
+            "average": 2.2,
+            "average-text": "Lavt"
+        },
+        "Hva synes du om antallet obliger?": {
+            "counts": {
+                "For lavt": 2,
+                "Passe": 1,
+                "Lavt": 2
+            },
+            "average": 1.8,
+            "average-text": "Lavt"
+        },
+        "Hva syns du om nivået på deleksamen?": {
+            "counts": {
+                "For lavt": 1,
+                "Passe": 2,
+                "Lavt": 2
+            },
+            "average": 2.2,
+            "average-text": "Lavt"
+        },
+        "Hva synes du om nivået på avsluttende eksamen?": {
+            "counts": {
+                "For lavt": 1,
+                "Passe": 2,
+                "Lavt": 2
+            },
+            "average": 2.2,
+            "average-text": "Lavt"
+        }
+    }
+}

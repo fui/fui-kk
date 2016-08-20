@@ -1,0 +1,138 @@
+{
+    "started": 0,
+    "answered": 3,
+    "invited": 0,
+    "answer_percentage": 100,
+    "questions": {
+        "How do you rate the course in general?": {
+            "counts": {
+                "Exceptionally good": 1,
+                "OK": 1,
+                "Very good": 1
+            },
+            "average": 4.666666666666667,
+            "average-text": "Very good"
+        },
+        "How do you rate the level of the course?": {
+            "counts": {
+                "Difficult": 1,
+                "Easy": 1,
+                "Too easy": 1
+            },
+            "average": 2.3333333333333335,
+            "average-text": "Easy"
+        },
+        "How do you rate the work load in proportion to the number of credits achieved?": {
+            "counts": {
+                "Too small": 1,
+                "Too large": 1,
+                "OK": 1
+            },
+            "average": 3.0,
+            "average-text": "OK"
+        },
+        "The quality of the lectures?": {
+            "counts": {
+                "Exceptionally good": 1,
+                "No opinion": 1,
+                "Very good": 1
+            },
+            "average": 5.5,
+            "average-text": "Exceptionally good"
+        },
+        "The lectures' relevance and usefulness in regard to relaying what you need to learn?": {
+            "counts": {
+                "Not good": 1,
+                "No opinion": 1,
+                "OK": 1
+            },
+            "average": 2.0,
+            "average-text": "Not that good"
+        },
+        "The quality of the group tuition as a whole?": {
+            "counts": {
+                "Exceptionally good": 1,
+                "Not that good": 1,
+                "No opinion": 1
+            },
+            "average": 4.0,
+            "average-text": "Good"
+        },
+        "In what degree does group tuition and weekly assignments give you practical skills and the possibility to make use of the theory at hand?": {
+            "counts": {
+                "Good": 1,
+                "No opinion": 2
+            },
+            "average": 4.0,
+            "average-text": "Good"
+        },
+        "Are the curriculum and learning outcomes of the course sufficiently defined?": {
+            "counts": {
+                "Good": 1,
+                "No opinion": 2
+            },
+            "average": 4.0,
+            "average-text": "Good"
+        },
+        "How do you rate the course material used (text book etc.)?": {
+            "counts": {
+                "Not good": 1,
+                "No opinion": 1,
+                "OK": 1
+            },
+            "average": 2.0,
+            "average-text": "Not that good"
+        },
+        "How would you assess the online course presentation?": {
+            "counts": {
+                "Exceptionally good": 1,
+                "Not that good": 1,
+                "OK": 1
+            },
+            "average": 3.6666666666666665,
+            "average-text": "Good"
+        },
+        "How would you assess the course's term page?": {
+            "counts": {
+                "Exceptionally good": 1,
+                "Good": 1,
+                "OK": 1
+            },
+            "average": 4.333333333333333,
+            "average-text": "Good"
+        },
+        "How do you rate the difficulty level of the obligatory assignments?": {
+            "counts": {
+                "Too low": 1,
+                "Too high": 1,
+                "Low": 1
+            },
+            "average": 2.6666666666666665,
+            "average-text": "OK"
+        },
+        "What is your opinion in regard to the number of obligatory assignments?": {
+            "counts": {
+                "OK": 2,
+                "Too high": 1
+            },
+            "average": 3.6666666666666665,
+            "average-text": "Large"
+        },
+        "How do you rate the difficulty level of the midterm examination(s)?": {
+            "counts": {
+                "Too high": 2,
+                "High": 1
+            },
+            "average": 4.666666666666667,
+            "average-text": "Too high"
+        },
+        "How do you rate the difficulty level of the final examination?": {
+            "counts": {
+                "Not relevant": 1,
+                "Too high": 2
+            },
+            "average": 5.0,
+            "average-text": "Too high"
+        }
+    }
+}

@@ -19,18 +19,28 @@ def dump_to_file(data, filename):
     with open(filename, 'w') as outfile:
         json.dump(data, outfile, indent=4, ensure_ascii=False)
 
-def count_answers(course):
+def count_answers(path):
+    course = json.load(open(path), object_pairs_hook=OrderedDict)
+    numbers = json.load(open(path.replace(".responses.json", ".numbers.json")))
     stats = OrderedDict()
-    responses = course["responses"]
-    stats["respondents"] = len(responses["NR"])
-    stats["invited"] = "Unknown"
+    started = int(numbers["started"])
+    answered = int(numbers["answered"])
+    invited = int(numbers["invited"])
+    percentage = 100;
+    if(invited > 0):
+        percentage = 100 * answered/invited;
+    stats["started"] = started
+    stats["answered"] = answered
+    stats["invited"] = invited
+    stats["answer_percentage"] = percentage
+
     questions = OrderedDict()
 
     scales = json.load(open("data/response-scales.json"))
-    for question in course["responses"]:
+    for question in course:
         if question in scales["questions"]:
             questions[question] = OrderedDict()
-            responses = course["responses"][question]
+            responses = course[question]
             scale_key = scales["questions"][question]
             scale = scales["scales"][scale_key]
 
@@ -45,29 +55,30 @@ def count_answers(course):
                     counts[response] += 1
                 else:
                     counts[response] = 1
-            average = total/ctr
+            if ctr == 0:
+                average = "None"
+            else:
+                average = total/ctr
             delta = 1000
             average_text = ""
-            for grade in scale:
-                d = abs(average - scale[grade])
-                if d < delta:
-                    delta = d
-                    average_text = grade
+            if average != "None":
+                for grade in scale:
+                    d = abs(average - scale[grade])
+                    if d < delta:
+                        delta = d
+                        average_text = grade
             questions[question]["counts"] = counts
             questions[question]["average"] = average
             questions[question]["average-text"] = average_text
 
-
     stats["questions"] = questions
-    course["stats"] = stats
+    return stats
 
 def main(path):
-    course = json.load(open(path), object_pairs_hook=OrderedDict)
-
-    count_answers(course)
-    course.move_to_end("responses")
-    dump_to_file(course, path)
-
+    stats = count_answers(path)
+    path = path.replace(".responses.json", ".stats.json")
+    dump_to_file(stats, path)
+    # os.remove(path.replace(".stats.json", ".numbers.json"))
 
 if __name__ == '__main__':
     if(len(sys.argv) == 1):
@@ -79,7 +90,7 @@ if __name__ == '__main__':
     else:
         for (root, dirs, files) in os.walk(path):
             for file_x in files:
-                if file_x.endswith(".json") and file_x.startswith("INF"):
+                if file_x.endswith(".responses.json") and file_x.startswith("INF"):
                     input_files.append(os.path.join(root, file_x))
     for f in input_files:
         main(f)

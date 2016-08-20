@@ -99,9 +99,8 @@ def parse_tsv_files(input_path, output_dir):
         coursename = tsv_filename.replace(".tsv","")
         coursename = coursename.replace(input_path, "")
         coursename = coursename.replace("/", "")
-        content = OrderedDict()
-        content["responses"] = parse_course_tsv(tsv_filename)
-        dump_to_file(content, os.path.join(output_dir,coursename)+".json")
+        content = parse_course_tsv(tsv_filename)
+        dump_to_file(content, os.path.join(output_dir,coursename)+".responses.json")
 
 def main():
     args = get_args()

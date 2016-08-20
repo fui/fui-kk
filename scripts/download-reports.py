@@ -69,7 +69,7 @@ def try_to_find_int(driver, selector):
     try:
         return int(driver.find_element_by_css_selector(selector).text)
     except:
-        return None
+        return 0
 
 def download_files(driver, args):
     driver.get('https://nettskjema.uio.no/user/form/list.html')

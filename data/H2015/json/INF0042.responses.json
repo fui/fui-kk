@@ -1,0 +1,373 @@
+{
+    "NR": [
+        "1266982",
+        "1267494",
+        "1267849",
+        "1268359",
+        "1268363"
+    ],
+    "Jeg er:": [
+        "Mann",
+        "Kvinne",
+        "Ønsker ikke svare på spørsmålet",
+        "Mann",
+        "Ønsker ikke svare på spørsmålet"
+    ],
+    "Hvor mange studiepoeng tar du dette semesteret?": [
+        "30",
+        "40",
+        "over 60",
+        "20",
+        "40"
+    ],
+    "Hvor mange arbeidstimer i snitt har du brukt på dette emnet?": [
+        "11 - 15 timer/uke",
+        "16 - 20 timer/uke",
+        "over 30 timer/uke",
+        "16 - 20 timer/uke",
+        "11 - 15 timer/uke"
+    ],
+    "Hvor stor andel av forelesningene har du vært på?": [
+        "51 - 75 %",
+        "1 - 25 %",
+        "100 %",
+        "51 - 75 %",
+        "51 - 75 %"
+    ],
+    "Hva er ditt generelle intrykk av kurset?": [
+        "Bra",
+        "Greit",
+        "Særdeles bra",
+        "Meget bra",
+        "Mindre bra"
+    ],
+    "Hva synes du om emnets nivå?": [
+        "Passe",
+        "Lett",
+        "Lett",
+        "Noe lett",
+        "For vanskelig"
+    ],
+    "Hva synes du om arbeidsmengden sett i forhold til antall studiepoeng?": [
+        "Passe",
+        "Passe",
+        "For lav",
+        "For lav",
+        "Lav"
+    ],
+    "Hva bør det være mer av i emnet?_1": [
+        "",
+        "Forelesninger",
+        "Forelesninger",
+        "",
+        ""
+    ],
+    "Hva bør det være mer av i emnet?_2": [
+        "",
+        "Gruppeundervisning på tavle",
+        "",
+        "",
+        ""
+    ],
+    "Hva bør det være mer av i emnet?_3": [
+        "",
+        "Terminaltimer/lab",
+        "Terminaltimer/lab",
+        "",
+        ""
+    ],
+    "Hva bør det være mer av i emnet?_4": [
+        "Orakeltjeneste",
+        "Orakeltjeneste",
+        "",
+        "",
+        "Orakeltjeneste"
+    ],
+    "Hva bør det være mer av i emnet?_5": [
+        "",
+        "Obligatoriske oppgaver",
+        "Obligatoriske oppgaver",
+        "Obligatoriske oppgaver",
+        ""
+    ],
+    "Hva bør det være mer av i emnet?_6": [
+        "",
+        "Underveisvurdering (Deleksamen)",
+        "",
+        "",
+        ""
+    ],
+    "Hva bør det være mer av i emnet?_7": [
+        "",
+        "Ukeoppgaver",
+        "Ukeoppgaver",
+        "Ukeoppgaver",
+        ""
+    ],
+    "Hva bør det være mindre av i emnet?_1": [
+        "",
+        "",
+        "Forelesninger",
+        "",
+        ""
+    ],
+    "Hva bør det være mindre av i emnet?_2": [
+        "",
+        "",
+        "",
+        "",
+        "Gruppeundervisning på tavle"
+    ],
+    "Hva bør det være mindre av i emnet?_3": [
+        "",
+        "",
+        "Terminaltimer/lab",
+        "",
+        ""
+    ],
+    "Hva bør det være mindre av i emnet?_4": [
+        "Orakeltjeneste",
+        "",
+        "",
+        "",
+        ""
+    ],
+    "Hva bør det være mindre av i emnet?_5": [
+        "Obligatoriske oppgaver",
+        "",
+        "Obligatoriske oppgaver",
+        "",
+        ""
+    ],
+    "Hva bør det være mindre av i emnet?_6": [
+        "",
+        "",
+        "",
+        "",
+        ""
+    ],
+    "Hva bør det være mindre av i emnet?_7": [
+        "",
+        "",
+        "Ukeoppgaver",
+        "",
+        ""
+    ],
+    "Kvaliteten på forelesningene?": [
+        "Særdeles bra",
+        "Bra",
+        "Særdeles bra",
+        "Meget bra",
+        "Grei"
+    ],
+    "Forelesningenes relevans og nytteverdi i forhold til å formidle det du trenger å lære?": [
+        "Meget bra",
+        "Meget bra",
+        "Særdeles bra",
+        "Bra",
+        "Bra"
+    ],
+    "Kvaliteten på gruppeundervisningen i sin helhet?": [
+        "Meget bra",
+        "Bra",
+        "Særdeles bra",
+        "Bra",
+        "Grei"
+    ],
+    "I hvilken grad forbedrer ukesoppgavene og gruppeundervisningen din forståelse av pensum?": [
+        "Bra",
+        "Meget bra",
+        "Særdeles bra",
+        "Meget bra",
+        "Bra"
+    ],
+    "Er pensum og læringsmål i emnet godt definert?": [
+        "Meget bra",
+        "Meget bra",
+        "Særdeles bra",
+        "Meget bra",
+        "Grei"
+    ],
+    "Hvordan vurderer du kursmateriellet som benyttes (lærebok m.m.)?": [
+        "Særdeles bra",
+        "Meget bra",
+        "Særdeles bra",
+        "Grei",
+        "Bra"
+    ],
+    "Hva synes du om kurspresentasjonen på nett?": [
+        "Bra",
+        "Bra",
+        "Særdeles bra",
+        "Bra",
+        "Særdeles bra"
+    ],
+    "Hva synes du om kursets semesterside?": [
+        "Meget bra",
+        "Bra",
+        "Særdeles bra",
+        "Grei",
+        "Vet ikke"
+    ],
+    "Var det noe informasjon du føler du ikke fikk, eller noe informasjon som manglet?": [
+        "Informasjon om eksamen kom sent.",
+        "",
+        "Informasjon om Haskell",
+        "",
+        "Ja"
+    ],
+    "Dersom du ikke fant informasjonen du lette etter, fikk du tilstrekkelig informasjon av kursansvarlig, gruppelærer eller administrasjonen?": [
+        "Ja",
+        "Jeg fant all informasjonen jeg lette etter",
+        "Ja",
+        "Jeg fant all informasjonen jeg lette etter",
+        "Jeg fant all informasjonen jeg lette etter"
+    ],
+    "Hvordan er nivået på obligene?": [
+        "Passe",
+        "Lavt",
+        "For lavt",
+        "Lavt",
+        "Passe"
+    ],
+    "Hva synes du om antallet obliger?": [
+        "Lavt",
+        "Lavt",
+        "For lavt",
+        "For lavt",
+        "Passe"
+    ],
+    "Hva syns du om nivået på deleksamen?": [
+        "Passe",
+        "Lavt",
+        "For lavt",
+        "Lavt",
+        "Passe"
+    ],
+    "Hva synes du om nivået på avsluttende eksamen?": [
+        "Lavt",
+        "Passe",
+        "For lavt",
+        "Lavt",
+        "Passe"
+    ],
+    "Dine kommentarer til faglærer (tips, ros, forbedringsmuligheter):": [
+        "Faglærerne gjorde en god jobb med transparanter og overhead maskin.",
+        "Bra at foreleser viste forskjeller og likheter mellom programmeringsspråk tydelig!",
+        "Bra",
+        "Snakk mer om hvor fantastisk COBOL er. Du får det til å høres ut som om du bare lærer det bort av historiske grunner.",
+        "prøv å snakke med åpen munn"
+    ],
+    "Dine kommentarer til fellesøvelser eller gruppetimene med tavleundervisning:": [
+        "Admiral Ackbar er en dyktig gruppelærer!",
+        "",
+        "Dårlig",
+        "",
+        "her var det lugubert."
+    ],
+    "Dine kommentarer til labtimer og orakeltjeneste:": [
+        "",
+        "",
+        "Bra",
+        "",
+        "nei"
+    ],
+    "Dine kommentarer til obligatoriske oppgaver og eksamen:": [
+        "Lærte veldig mye om COBOL og FORTRAN på obligene, synd jeg ikke fikk vist alt på eksamen.",
+        "",
+        "Dårlig",
+        "",
+        ":)"
+    ],
+    "Hva vil du trekke frem som spesielt bra med emnet og undervisningen?": [
+        "Oversiktlige transparenter; god bruk av overhead.",
+        "",
+        "Bra",
+        "COBOL. Alle elsker jo det!",
+        "\""
+    ],
+    "Andre kommentarer og tilbakemeldinger:": [
+        "",
+        "Jeg er oppvokst med COBOL og FORTRAN, så jeg kunne nesten alt fra før.",
+        "Dårlig",
+        "Skulle gjerne lært mer om moderne COBOL. Og mer COBOL generelt.",
+        "\\n"
+    ],
+    "Ønsker du å nominere noen til undervisningsprisen for beste foreleser?": [
+        "Ja",
+        "Nei",
+        "Ja",
+        "Nei",
+        "Ja"
+    ],
+    "Hvilken foreleser ønsker du å nominere?": [
+        "Foo Bar",
+        "",
+        "Ole Herman",
+        "",
+        "Trond"
+    ],
+    "Begrunnelse for nominasjon av foreleser": [
+        "F. Bar er en dyktig formidler og viser stor interesse for eldre programmeringsspråk.",
+        "",
+        "Bra",
+        "",
+        "Han er kul"
+    ],
+    "Ønsker du å nominere noen til undervisningsprisen for beste gruppelærer?": [
+        "Ja",
+        "Nei",
+        "Nei",
+        "Nei",
+        "Nei"
+    ],
+    "Hvilken gruppelærer ønsker du å nominere?": [
+        "Admiral Ackbar",
+        "",
+        "",
+        "",
+        ""
+    ],
+    "Nyttig og forståelig forklaring av pensum": [
+        "Bra",
+        "",
+        "",
+        "",
+        ""
+    ],
+    "Motiverende og engasjerende undervisning": [
+        "Kunne vært bedre",
+        "",
+        "",
+        "",
+        ""
+    ],
+    "Etablerer et godt sosialt miljø": [
+        "Bra",
+        "",
+        "",
+        "",
+        ""
+    ],
+    "Tilgjengelig og er villig til å svare på spørsmål": [
+        "Svært bra",
+        "",
+        "",
+        "",
+        ""
+    ],
+    "Hjelper med forståelse (i stedet for løsninger) på obligatoriske oppgaver": [
+        "Bra",
+        "",
+        "",
+        "",
+        ""
+    ],
+    "Begrunnelse for nominasjon av gruppelærer": [
+        "Hverdagshelt.",
+        "",
+        "",
+        "",
+        ""
+    ]
+}
