@@ -69,7 +69,25 @@ def count_answers(path):
                         average_text = grade
             questions[question]["counts"] = counts
             questions[question]["average"] = average
-            questions[question]["average-text"] = average_text
+            questions[question]["average_text"] = average_text
+
+            max_people = 0
+            most_common = None
+            for c in counts:
+                if counts[c] > max_people:
+                    most_common = c
+                    max_people = counts[c]
+                elif counts[c] == max_people:
+                    if type(most_common) is list:
+                        most_common.append(c)
+                    else:
+                        if most_common is not None:
+                            most_common = [most_common, c]
+                        else:
+                            most_common = [c]
+            questions[question]["most_common"] = most_common
+            questions[question]["most_common_num"] = max_people
+            questions[question]["most_common_per"] = max_people/answered
 
     stats["questions"] = questions
     return stats

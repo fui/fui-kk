@@ -10,7 +10,10 @@
                 "Mindre bra": 1
             },
             "average": 2.6666666666666665,
-            "average-text": "Greit"
+            "average_text": "Greit",
+            "most_common": "Greit",
+            "most_common_num": 2,
+            "most_common_per": 0.6666666666666666
         },
         "Hva synes du om emnets nivå?": {
             "counts": {
@@ -18,7 +21,10 @@
                 "Passe": 1
             },
             "average": 1.6666666666666667,
-            "average-text": "Noe lett"
+            "average_text": "Noe lett",
+            "most_common": "Lett",
+            "most_common_num": 2,
+            "most_common_per": 0.6666666666666666
         },
         "Hva synes du om arbeidsmengden sett i forhold til antall studiepoeng?": {
             "counts": {
@@ -26,25 +32,42 @@
                 "For lav": 1
             },
             "average": 3.0,
-            "average-text": "Passe"
+            "average_text": "Passe",
+            "most_common": "Høy",
+            "most_common_num": 2,
+            "most_common_per": 0.6666666666666666
         },
         "Kvaliteten på forelesningene?": {
             "counts": {
+                "Grei": 1,
                 "Mindre bra": 1,
-                "Vet ikke": 1,
-                "Grei": 1
+                "Vet ikke": 1
             },
             "average": 2.5,
-            "average-text": "Greit"
+            "average_text": "Greit",
+            "most_common": [
+                "Grei",
+                "Mindre bra",
+                "Vet ikke"
+            ],
+            "most_common_num": 1,
+            "most_common_per": 0.3333333333333333
         },
         "Forelesningenes relevans og nytteverdi i forhold til å formidle det du trenger å lære?": {
             "counts": {
+                "Grei": 1,
                 "Bra": 1,
-                "Vet ikke": 1,
-                "Grei": 1
+                "Vet ikke": 1
             },
             "average": 3.5,
-            "average-text": "Greit"
+            "average_text": "Greit",
+            "most_common": [
+                "Grei",
+                "Bra",
+                "Vet ikke"
+            ],
+            "most_common_num": 1,
+            "most_common_per": 0.3333333333333333
         },
         "Kvaliteten på gruppeundervisningen i sin helhet?": {
             "counts": {
@@ -53,7 +76,14 @@
                 "Vet ikke": 1
             },
             "average": 4.5,
-            "average-text": "Bra"
+            "average_text": "Bra",
+            "most_common": [
+                "Meget bra",
+                "Bra",
+                "Vet ikke"
+            ],
+            "most_common_num": 1,
+            "most_common_per": 0.3333333333333333
         },
         "I hvilken grad forbedrer ukesoppgavene og gruppeundervisningen din forståelse av pensum?": {
             "counts": {
@@ -61,15 +91,21 @@
                 "Vet ikke": 1
             },
             "average": 4.0,
-            "average-text": "Bra"
+            "average_text": "Bra",
+            "most_common": "Bra",
+            "most_common_num": 2,
+            "most_common_per": 0.6666666666666666
         },
         "Er pensum og læringsmål i emnet godt definert?": {
             "counts": {
-                "Vet ikke": 1,
-                "Grei": 2
+                "Grei": 2,
+                "Vet ikke": 1
             },
             "average": 3.0,
-            "average-text": "Greit"
+            "average_text": "Greit",
+            "most_common": "Grei",
+            "most_common_num": 2,
+            "most_common_per": 0.6666666666666666
         },
         "Hvordan vurderer du kursmateriellet som benyttes (lærebok m.m.)?": {
             "counts": {
@@ -77,24 +113,37 @@
                 "Vet ikke": 2
             },
             "average": 5.0,
-            "average-text": "Meget bra"
+            "average_text": "Meget bra",
+            "most_common": "Vet ikke",
+            "most_common_num": 2,
+            "most_common_per": 0.6666666666666666
         },
         "Hva synes du om kurspresentasjonen på nett?": {
             "counts": {
-                "Særdeles bra": 1,
-                "Meget bra": 2
+                "Meget bra": 2,
+                "Særdeles bra": 1
             },
             "average": 4.333333333333333,
-            "average-text": "Meget bra"
+            "average_text": "Meget bra",
+            "most_common": "Meget bra",
+            "most_common_num": 2,
+            "most_common_per": 0.6666666666666666
         },
         "Hva synes du om kursets semesterside?": {
             "counts": {
-                "Særdeles bra": 1,
+                "Grei": 1,
                 "Bra": 1,
-                "Grei": 1
+                "Særdeles bra": 1
             },
             "average": 3.3333333333333335,
-            "average-text": "Bra"
+            "average_text": "Bra",
+            "most_common": [
+                "Grei",
+                "Bra",
+                "Særdeles bra"
+            ],
+            "most_common_num": 1,
+            "most_common_per": 0.3333333333333333
         },
         "Hvordan er nivået på obligene?": {
             "counts": {
@@ -103,16 +152,30 @@
                 "For lavt": 1
             },
             "average": 2.5,
-            "average-text": "Lavt"
+            "average_text": "Passe",
+            "most_common": [
+                "Ikke aktuelt",
+                "Høyt",
+                "For lavt"
+            ],
+            "most_common_num": 1,
+            "most_common_per": 0.3333333333333333
         },
         "Hva synes du om antallet obliger?": {
             "counts": {
-                "Ikke aktuelt": 1,
                 "Passe": 1,
+                "Ikke aktuelt": 1,
                 "Lavt": 1
             },
             "average": 2.5,
-            "average-text": "Lavt"
+            "average_text": "Passe",
+            "most_common": [
+                "Passe",
+                "Ikke aktuelt",
+                "Lavt"
+            ],
+            "most_common_num": 1,
+            "most_common_per": 0.3333333333333333
         },
         "Hva syns du om nivået på deleksamen?": {
             "counts": {
@@ -120,16 +183,26 @@
                 "Høyt": 1
             },
             "average": 4.0,
-            "average-text": "Høy"
+            "average_text": "Høy",
+            "most_common": "Ikke aktuelt",
+            "most_common_num": 2,
+            "most_common_per": 0.6666666666666666
         },
         "Hva synes du om nivået på avsluttende eksamen?": {
             "counts": {
+                "Passe": 1,
                 "Ikke aktuelt": 1,
-                "For høyt": 1,
-                "Passe": 1
+                "For høyt": 1
             },
             "average": 4.0,
-            "average-text": "Høy"
+            "average_text": "Høy",
+            "most_common": [
+                "Passe",
+                "Ikke aktuelt",
+                "For høyt"
+            ],
+            "most_common_num": 1,
+            "most_common_per": 0.3333333333333333
         }
     }
 }

@@ -6,14 +6,23 @@
     "questions": {
         "Hva er ditt generelle intrykk av kurset?": {
             "counts": {
-                "Særdeles bra": 1,
                 "Greit": 1,
+                "Meget bra": 1,
                 "Bra": 1,
                 "Mindre bra": 1,
-                "Meget bra": 1
+                "Særdeles bra": 1
             },
             "average": 4.0,
-            "average-text": "Bra"
+            "average_text": "Bra",
+            "most_common": [
+                "Greit",
+                "Meget bra",
+                "Bra",
+                "Mindre bra",
+                "Særdeles bra"
+            ],
+            "most_common_num": 1,
+            "most_common_per": 0.2
         },
         "Hva synes du om emnets nivå?": {
             "counts": {
@@ -23,128 +32,197 @@
                 "Noe lett": 1
             },
             "average": 2.4,
-            "average-text": "Noe lett"
+            "average_text": "Noe lett",
+            "most_common": "Lett",
+            "most_common_num": 2,
+            "most_common_per": 0.4
         },
         "Hva synes du om arbeidsmengden sett i forhold til antall studiepoeng?": {
             "counts": {
                 "Passe": 2,
-                "For lav": 2,
-                "Lav": 1
+                "Lav": 1,
+                "For lav": 2
             },
             "average": 2.0,
-            "average-text": "Lavt"
+            "average_text": "Lav",
+            "most_common": [
+                "Passe",
+                "For lav"
+            ],
+            "most_common_num": 2,
+            "most_common_per": 0.4
         },
         "Kvaliteten på forelesningene?": {
             "counts": {
-                "Bra": 1,
                 "Meget bra": 1,
-                "Særdeles bra": 2,
-                "Grei": 1
+                "Bra": 1,
+                "Grei": 1,
+                "Særdeles bra": 2
             },
             "average": 4.8,
-            "average-text": "Meget bra"
+            "average_text": "Meget bra",
+            "most_common": "Særdeles bra",
+            "most_common_num": 2,
+            "most_common_per": 0.4
         },
         "Forelesningenes relevans og nytteverdi i forhold til å formidle det du trenger å lære?": {
             "counts": {
+                "Meget bra": 2,
                 "Bra": 2,
-                "Særdeles bra": 1,
-                "Meget bra": 2
+                "Særdeles bra": 1
             },
             "average": 4.8,
-            "average-text": "Meget bra"
+            "average_text": "Meget bra",
+            "most_common": [
+                "Meget bra",
+                "Bra"
+            ],
+            "most_common_num": 2,
+            "most_common_per": 0.4
         },
         "Kvaliteten på gruppeundervisningen i sin helhet?": {
             "counts": {
-                "Bra": 2,
-                "Særdeles bra": 1,
                 "Meget bra": 1,
-                "Grei": 1
+                "Bra": 2,
+                "Grei": 1,
+                "Særdeles bra": 1
             },
             "average": 4.4,
-            "average-text": "Bra"
+            "average_text": "Bra",
+            "most_common": "Bra",
+            "most_common_num": 2,
+            "most_common_per": 0.4
         },
         "I hvilken grad forbedrer ukesoppgavene og gruppeundervisningen din forståelse av pensum?": {
             "counts": {
-                "Særdeles bra": 1,
                 "Meget bra": 2,
-                "Bra": 2
+                "Bra": 2,
+                "Særdeles bra": 1
             },
             "average": 4.8,
-            "average-text": "Meget bra"
+            "average_text": "Meget bra",
+            "most_common": [
+                "Meget bra",
+                "Bra"
+            ],
+            "most_common_num": 2,
+            "most_common_per": 0.4
         },
         "Er pensum og læringsmål i emnet godt definert?": {
             "counts": {
-                "Særdeles bra": 1,
                 "Meget bra": 3,
-                "Grei": 1
+                "Grei": 1,
+                "Særdeles bra": 1
             },
             "average": 4.8,
-            "average-text": "Meget bra"
+            "average_text": "Meget bra",
+            "most_common": "Meget bra",
+            "most_common_num": 3,
+            "most_common_per": 0.6
         },
         "Hvordan vurderer du kursmateriellet som benyttes (lærebok m.m.)?": {
             "counts": {
-                "Bra": 1,
                 "Meget bra": 1,
-                "Særdeles bra": 2,
-                "Grei": 1
+                "Bra": 1,
+                "Grei": 1,
+                "Særdeles bra": 2
             },
             "average": 4.8,
-            "average-text": "Meget bra"
+            "average_text": "Meget bra",
+            "most_common": "Særdeles bra",
+            "most_common_num": 2,
+            "most_common_per": 0.4
         },
         "Hva synes du om kurspresentasjonen på nett?": {
             "counts": {
-                "Særdeles bra": 2,
-                "Bra": 3
+                "Bra": 3,
+                "Særdeles bra": 2
             },
             "average": 3.8,
-            "average-text": "Meget bra"
+            "average_text": "Meget bra",
+            "most_common": "Bra",
+            "most_common_num": 3,
+            "most_common_per": 0.6
         },
         "Hva synes du om kursets semesterside?": {
             "counts": {
-                "Bra": 1,
-                "Særdeles bra": 1,
                 "Meget bra": 1,
+                "Bra": 1,
+                "Grei": 1,
                 "Vet ikke": 1,
-                "Grei": 1
+                "Særdeles bra": 1
             },
             "average": 3.5,
-            "average-text": "Meget bra"
+            "average_text": "Bra",
+            "most_common": [
+                "Meget bra",
+                "Bra",
+                "Grei",
+                "Vet ikke",
+                "Særdeles bra"
+            ],
+            "most_common_num": 1,
+            "most_common_per": 0.2
         },
         "Hvordan er nivået på obligene?": {
             "counts": {
-                "For lavt": 1,
                 "Passe": 2,
-                "Lavt": 2
+                "Lavt": 2,
+                "For lavt": 1
             },
             "average": 2.2,
-            "average-text": "Lavt"
+            "average_text": "Lav",
+            "most_common": [
+                "Passe",
+                "Lavt"
+            ],
+            "most_common_num": 2,
+            "most_common_per": 0.4
         },
         "Hva synes du om antallet obliger?": {
             "counts": {
-                "For lavt": 2,
                 "Passe": 1,
-                "Lavt": 2
+                "Lavt": 2,
+                "For lavt": 2
             },
             "average": 1.8,
-            "average-text": "Lavt"
+            "average_text": "Lav",
+            "most_common": [
+                "Lavt",
+                "For lavt"
+            ],
+            "most_common_num": 2,
+            "most_common_per": 0.4
         },
         "Hva syns du om nivået på deleksamen?": {
             "counts": {
-                "For lavt": 1,
                 "Passe": 2,
-                "Lavt": 2
+                "Lavt": 2,
+                "For lavt": 1
             },
             "average": 2.2,
-            "average-text": "Lavt"
+            "average_text": "Lav",
+            "most_common": [
+                "Passe",
+                "Lavt"
+            ],
+            "most_common_num": 2,
+            "most_common_per": 0.4
         },
         "Hva synes du om nivået på avsluttende eksamen?": {
             "counts": {
-                "For lavt": 1,
                 "Passe": 2,
-                "Lavt": 2
+                "Lavt": 2,
+                "For lavt": 1
             },
             "average": 2.2,
-            "average-text": "Lavt"
+            "average_text": "Lav",
+            "most_common": [
+                "Passe",
+                "Lavt"
+            ],
+            "most_common_num": 2,
+            "most_common_per": 0.4
         }
     }
 }
