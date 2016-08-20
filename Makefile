@@ -1,30 +1,35 @@
-# Author: Helga Nyrud
-# This file is subject to the terms and conditions defined in
-# file 'LICENSE.txt', which is part of this source code package.
+default: help
+
+install:
+	brew install python
+	brew install python3
+	brew install phantomjs
+	pip install requests
+	pip install selenium
+	pip3 install bs4
+
+download:
+	python scripts/download-reports.py -f "(testskjema)"
+	python3 scripts/sort-downloads.py
+
+json:
+	python3 scripts/parse-tsv.py -s all
+	python3 scripts/course-data.py data
+
+tex:
+	@echo "Not yet implemented!"
+
+pdf:
+	@echo "Not yet implemented!"
+
+scales:
+	python3 scripts/misc/response-scales.py
 
 help:
 	@echo "Available targets:"
+	@echo "download"
+	@echo "json"
+	@echo "tex"
 	@echo "pdf"
-	@echo "txt - plaintext (created from pdf)"
-	@echo "tex - mostly for debugging"
 
-pdf: tex
-	@echo
-	@echo "Creating pdf file from latex source"
-	@echo "-----------------------------------"
-	./scripts/plotcourses.py -o plots/ -t .. -d . -r report.tex -m
-	pdflatex report.tex
-
-txt: pdf
-	@echo
-	@echo "Creating txt file from pdf "
-	@echo "---------------------------"
-	ps2ascii report.pdf report.txt
-
-#Sed replaces wonky "å" chars with good one
-tex:
-	@echo
-	@echo "Creating latex file from course summaries"
-	@echo "-----------------------------------------"
-	sed -i.bak 's/å/å/Ig' INF*.txt
-	/snacks/bin/python3 ./pyscript/compile-summaries.py
+.PHONY: download json tex pdf help install scales

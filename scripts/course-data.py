@@ -82,5 +82,4 @@ if __name__ == '__main__':
                 if file_x.endswith(".json") and file_x.startswith("INF"):
                     input_files.append(os.path.join(root, file_x))
     for f in input_files:
-        print(f)
         main(f)
