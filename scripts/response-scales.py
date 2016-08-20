@@ -77,7 +77,7 @@ def main():
 
     lookup["How do you rate the course in general?"] = "quality"
     lookup["How do you rate the level of the course?"] = "level"
-    lookup["How do you rate the work load in proportion to the number of credits achieved?"] = "load"
+    lookup["How do you rate the work load in proportion to the number of credits achieved?"] = "amount"
 
     lookup["The quality of the lectures?"] =\
     lookup["The lectures' relevance and usefulness in regard to relaying what you need to learn?"] =\
@@ -94,7 +94,8 @@ def main():
     lookup["How do you rate the difficulty level of the midterm examination(s)?"] =\
     lookup["How do you rate the difficulty level of the final examination?"] = "amount"
 
-    grades = {"scales":scales, "questions": lookup}
+    invalid = ["No opinion", "Not relevant", "Not applicable", "Ikke relevant", "Ikke aktuelt", "Vet ikke"]
+    grades = {"scales":scales, "questions": lookup, "invalid": invalid}
 
     with open("data/response-scales.json", "w") as f:
         json.dump(grades,f, sort_keys=True, indent=4, ensure_ascii=False)

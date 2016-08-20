@@ -1,4 +1,12 @@
 {
+    "invalid": [
+        "No opinion",
+        "Not relevant",
+        "Not applicable",
+        "Ikke relevant",
+        "Ikke aktuelt",
+        "Vet ikke"
+    ],
     "questions": {
         "Are the curriculum and learning outcomes of the course sufficiently defined?": "quality",
         "Er pensum og læringsmål i emnet godt definert?": "kvalitet",
@@ -9,7 +17,7 @@
         "How do you rate the difficulty level of the midterm examination(s)?": "amount",
         "How do you rate the difficulty level of the obligatory assignments?": "amount",
         "How do you rate the level of the course?": "level",
-        "How do you rate the work load in proportion to the number of credits achieved?": "load",
+        "How do you rate the work load in proportion to the number of credits achieved?": "amount",
         "How would you assess the course's term page?": "quality",
         "How would you assess the online course presentation?": "quality",
         "Hva er ditt generelle intrykk av kurset?": "kvalitet",
