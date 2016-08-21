@@ -16,6 +16,7 @@ json:
 	python3 scripts/parse-tsv.py -s all
 	python3 scripts/course-data.py data
 	python3 scripts/semester-data.py
+	python3 scripts/courses.py
 
 tex:
 	@echo "Not yet implemented!"
@@ -26,6 +27,8 @@ pdf:
 scales:
 	python3 scripts/misc/response-scales.py
 
+all: download json
+
 help:
 	@echo "Available targets:"
 	@echo "download"
@@ -33,4 +36,4 @@ help:
 	@echo "tex"
 	@echo "pdf"
 
-.PHONY: download json tex pdf help install scales
+.PHONY: download json tex pdf help install scales all
