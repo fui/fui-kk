@@ -14,8 +14,19 @@ import os
 import sys
 from bs4 import BeautifulSoup
 
-def main():
-    pass
+def get_course_data(path):
+    course = json.load(open(path))
+    print(course)
+
+def main(semester_dir):
+    files = []
+    for f in os.listdir(semester_dir+"/json"):
+        if f.endswith(".stats.json"):
+            files.append(f)
+    semester_data = OrderedDict()
+    for f in files:
+        semester_data[course_name] = get_course_data(f)
+
 
 if __name__ == '__main__':
-    main()
+    main(sys.argv[1])

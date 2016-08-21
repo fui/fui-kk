@@ -3,56 +3,61 @@
     "answered": 3,
     "invited": 0,
     "answer_percentage": 100,
+    "language": "EN",
     "questions": {
-        "How do you rate the course in general?": {
+        "general": {
+            "text": "How do you rate the course in general?",
             "counts": {
                 "Very good": 1,
-                "OK": 1,
-                "Exceptionally good": 1
+                "Exceptionally good": 1,
+                "OK": 1
             },
             "average": 4.666666666666667,
             "average_text": "Very good",
             "most_common": [
                 "Very good",
-                "OK",
-                "Exceptionally good"
+                "Exceptionally good",
+                "OK"
             ],
             "most_common_num": 1,
             "most_common_per": 0.3333333333333333
         },
-        "How do you rate the level of the course?": {
+        "level": {
+            "text": "How do you rate the level of the course?",
             "counts": {
+                "Too easy": 1,
                 "Easy": 1,
-                "Difficult": 1,
-                "Too easy": 1
+                "Difficult": 1
             },
             "average": 2.3333333333333335,
             "average_text": "Easy",
             "most_common": [
+                "Too easy",
                 "Easy",
-                "Difficult",
-                "Too easy"
+                "Difficult"
             ],
             "most_common_num": 1,
             "most_common_per": 0.3333333333333333
         },
-        "How do you rate the work load in proportion to the number of credits achieved?": {
+        "workload": {
+            "text": "How do you rate the work load in proportion to the number of credits achieved?",
             "counts": {
-                "Too large": 1,
                 "OK": 1,
+                "Too large": 1,
                 "Too small": 1
             },
             "average": 3.0,
             "average_text": "OK",
             "most_common": [
-                "Too large",
                 "OK",
+                "Too large",
                 "Too small"
             ],
             "most_common_num": 1,
             "most_common_per": 0.3333333333333333
         },
-        "The quality of the lectures?": {
+        "lecture_quality": {
+            "text": "The quality of the lectures?",
             "counts": {
                 "No opinion": 1,
                 "Very good": 1,
@@ -68,39 +73,42 @@
             "most_common_num": 1,
             "most_common_per": 0.3333333333333333
         },
-        "The lectures' relevance and usefulness in regard to relaying what you need to learn?": {
+        "lecture_relevance": {
+            "text": "The lectures' relevance and usefulness in regard to relaying what you need to learn?",
             "counts": {
-                "Not good": 1,
                 "No opinion": 1,
+                "Not good": 1,
                 "OK": 1
             },
             "average": 2.0,
             "average_text": "Not that good",
             "most_common": [
-                "Not good",
                 "No opinion",
+                "Not good",
                 "OK"
             ],
             "most_common_num": 1,
             "most_common_per": 0.3333333333333333
         },
-        "The quality of the group tuition as a whole?": {
+        "group_quality": {
+            "text": "The quality of the group tuition as a whole?",
             "counts": {
-                "Not that good": 1,
                 "No opinion": 1,
+                "Not that good": 1,
                 "Exceptionally good": 1
             },
             "average": 4.0,
             "average_text": "Good",
             "most_common": [
-                "Not that good",
                 "No opinion",
+                "Not that good",
                 "Exceptionally good"
             ],
             "most_common_num": 1,
             "most_common_per": 0.3333333333333333
         },
-        "In what degree does group tuition and weekly assignments give you practical skills and the possibility to make use of the theory at hand?": {
+        "group_relevance": {
+            "text": "In what degree does group tuition and weekly assignments give you practical skills and the possibility to make use of the theory at hand?",
             "counts": {
                 "No opinion": 2,
                 "Good": 1
@@ -111,7 +119,8 @@
             "most_common_num": 2,
             "most_common_per": 0.6666666666666666
         },
-        "Are the curriculum and learning outcomes of the course sufficiently defined?": {
+        "curriculum": {
+            "text": "Are the curriculum and learning outcomes of the course sufficiently defined?",
             "counts": {
                 "No opinion": 2,
                 "Good": 1
@@ -122,23 +131,25 @@
             "most_common_num": 2,
             "most_common_per": 0.6666666666666666
         },
-        "How do you rate the course material used (text book etc.)?": {
+        "materials": {
+            "text": "How do you rate the course material used (text book etc.)?",
             "counts": {
-                "Not good": 1,
                 "No opinion": 1,
+                "Not good": 1,
                 "OK": 1
             },
             "average": 2.0,
             "average_text": "Not that good",
             "most_common": [
-                "Not good",
                 "No opinion",
+                "Not good",
                 "OK"
             ],
             "most_common_num": 1,
             "most_common_per": 0.3333333333333333
         },
-        "How would you assess the online course presentation?": {
+        "course_web": {
+            "text": "How would you assess the online course presentation?",
             "counts": {
                 "Not that good": 1,
                 "OK": 1,
@@ -154,7 +165,8 @@
             "most_common_num": 1,
             "most_common_per": 0.3333333333333333
         },
-        "How would you assess the course's term page?": {
+        "semester_web": {
+            "text": "How would you assess the course's term page?",
             "counts": {
                 "Good": 1,
                 "OK": 1,
@@ -170,37 +182,40 @@
             "most_common_num": 1,
             "most_common_per": 0.3333333333333333
         },
-        "How do you rate the difficulty level of the obligatory assignments?": {
+        "assignment_level": {
+            "text": "How do you rate the difficulty level of the obligatory assignments?",
             "counts": {
                 "Low": 1,
-                "Too high": 1,
-                "Too low": 1
+                "Too low": 1,
+                "Too high": 1
             },
             "average": 2.6666666666666665,
             "average_text": "OK",
             "most_common": [
                 "Low",
-                "Too high",
-                "Too low"
+                "Too low",
+                "Too high"
             ],
             "most_common_num": 1,
             "most_common_per": 0.3333333333333333
         },
-        "What is your opinion in regard to the number of obligatory assignments?": {
+        "assignments_amount": {
+            "text": "What is your opinion in regard to the number of obligatory assignments?",
             "counts": {
-                "Too high": 1,
-                "OK": 2
+                "OK": 2,
+                "Too high": 1
             },
             "average": 3.6666666666666665,
-            "average_text": "High",
+            "average_text": "Large",
             "most_common": "OK",
             "most_common_num": 2,
             "most_common_per": 0.6666666666666666
         },
-        "How do you rate the difficulty level of the midterm examination(s)?": {
+        "midterm_level": {
+            "text": "How do you rate the difficulty level of the midterm examination(s)?",
             "counts": {
-                "Too high": 2,
-                "High": 1
+                "High": 1,
+                "Too high": 2
             },
             "average": 4.666666666666667,
             "average_text": "Too high",
@@ -208,10 +223,11 @@
             "most_common_num": 2,
             "most_common_per": 0.6666666666666666
         },
-        "How do you rate the difficulty level of the final examination?": {
+        "final_level": {
+            "text": "How do you rate the difficulty level of the final examination?",
             "counts": {
-                "Too high": 2,
-                "Not relevant": 1
+                "Not relevant": 1,
+                "Too high": 2
             },
             "average": 5.0,
             "average_text": "Too high",

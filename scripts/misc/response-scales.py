@@ -56,46 +56,47 @@ def main():
     scales["amount"] = amount
 
     lookup = {}
-    lookup["Hva er ditt generelle intrykk av kurset?"] = "kvalitet"
-    lookup["Hva synes du om emnets nivå?"] = "nivå"
-    lookup["Hva synes du om arbeidsmengden sett i forhold til antall studiepoeng?"] = "mengde"
+    lookup["Hva er ditt generelle intrykk av kurset?"] = {"qid":"general", "scale": "kvalitet"}
+    lookup["Hva synes du om emnets nivå?"] = {"qid":"level", "scale": "nivå"}
+    lookup["Hva synes du om arbeidsmengden sett i forhold til antall studiepoeng?"] = {"qid":"workload", "scale": "mengde"}
 
-    lookup["Kvaliteten på forelesningene?"] =\
-    lookup["Forelesningenes relevans og nytteverdi i forhold til å formidle det du trenger å lære?"] =\
-    lookup["Kvaliteten på gruppeundervisningen i sin helhet?"] =\
-    lookup["I hvilken grad forbedrer ukesoppgavene og gruppeundervisningen din forståelse av pensum?"] =\
-    lookup["Er pensum og læringsmål i emnet godt definert?"] =\
-    lookup["Hvordan vurderer du kursmateriellet som benyttes (lærebok m.m.)?"] = "kvalitet"
+    lookup["Kvaliteten på forelesningene?"] = {"qid":"lecture_quality", "scale": "kvalitet"}
+    lookup["Forelesningenes relevans og nytteverdi i forhold til å formidle det du trenger å lære?"] = {"qid":"lecture_relevance", "scale": "kvalitet"}
+    lookup["Kvaliteten på gruppeundervisningen i sin helhet?"] = {"qid":"group_quality", "scale": "kvalitet"}
+    lookup["I hvilken grad forbedrer ukesoppgavene og gruppeundervisningen din forståelse av pensum?"] = {"qid":"group_relevance", "scale": "kvalitet"}
+    lookup["Er pensum og læringsmål i emnet godt definert?"] = {"qid":"curriculum", "scale": "kvalitet"}
+    lookup["Hvordan vurderer du kursmateriellet som benyttes (lærebok m.m.)?"] = {"qid":"materials", "scale": "kvalitet"}
 
-    lookup["Hva synes du om kurspresentasjonen på nett?"] = "informasjon"
-    lookup["Hva synes du om kursets semesterside?"] = "informasjon"
+    lookup["Hva synes du om kurspresentasjonen på nett?"] = {"qid":"course_web", "scale": "informasjon"}
+    lookup["Hva synes du om kursets semesterside?"] = {"qid":"semester_web", "scale": "informasjon"}
 
-    lookup["Hvordan er nivået på obligene?"] =\
-    lookup["Hva synes du om antallet obliger?"] =\
-    lookup["Hva syns du om nivået på deleksamen?"] =\
-    lookup["Hva synes du om nivået på avsluttende eksamen?"] = "mengde"
+    lookup["Hvordan er nivået på obligene?"] = {"qid":"assignment_level", "scale": "mengde"}
+    lookup["Hva synes du om antallet obliger?"] = {"qid":"assignments_amount", "scale": "mengde"}
+    lookup["Hva syns du om nivået på deleksamen?"] = {"qid":"midterm_level", "scale": "mengde"}
+    lookup["Hva synes du om nivået på avsluttende eksamen?"] = {"qid":"final_level", "scale": "mengde"}
 
-    lookup["How do you rate the course in general?"] = "quality"
-    lookup["How do you rate the level of the course?"] = "level"
-    lookup["How do you rate the work load in proportion to the number of credits achieved?"] = "amount"
+    lookup["How do you rate the course in general?"] = {"qid":"general", "scale": "quality"}
+    lookup["How do you rate the level of the course?"] = {"qid":"level", "scale": "level"}
+    lookup["How do you rate the work load in proportion to the number of credits achieved?"] = {"qid":"workload", "scale": "amount"}
 
-    lookup["The quality of the lectures?"] =\
-    lookup["The lectures' relevance and usefulness in regard to relaying what you need to learn?"] =\
-    lookup["The quality of the group tuition as a whole?"] =\
-    lookup["In what degree does group tuition and weekly assignments give you practical skills and the possibility to make use of the theory at hand?"] =\
-    lookup["Are the curriculum and learning outcomes of the course sufficiently defined?"] =\
-    lookup["How do you rate the course material used (text book etc.)?"] = "quality"
+    lookup["The quality of the lectures?"] = {"qid":"lecture_quality", "scale": "quality"}
+    lookup["The lectures' relevance and usefulness in regard to relaying what you need to learn?"] = {"qid":"lecture_relevance", "scale": "quality"}
+    lookup["The quality of the group tuition as a whole?"] = {"qid":"group_quality", "scale": "quality"}
+    lookup["In what degree does group tuition and weekly assignments give you practical skills and the possibility to make use of the theory at hand?"] = {"qid":"group_relevance", "scale": "quality"}
+    lookup["Are the curriculum and learning outcomes of the course sufficiently defined?"] = {"qid":"curriculum", "scale": "quality"}
+    lookup["How do you rate the course material used (text book etc.)?"] = {"qid":"materials", "scale": "quality"}
 
-    lookup["How would you assess the online course presentation?"] = "quality"
-    lookup["How would you assess the course's term page?"] = "quality"
+    lookup["How would you assess the online course presentation?"] = {"qid":"course_web", "scale": "quality"}
+    lookup["How would you assess the course's term page?"] = {"qid":"semester_web", "scale": "quality"}
 
-    lookup["How do you rate the difficulty level of the obligatory assignments?"] =\
-    lookup["What is your opinion in regard to the number of obligatory assignments?"] =\
-    lookup["How do you rate the difficulty level of the midterm examination(s)?"] =\
-    lookup["How do you rate the difficulty level of the final examination?"] = "amount"
+    lookup["How do you rate the difficulty level of the obligatory assignments?"] = {"qid":"assignment_level", "scale": "amount"}
+    lookup["What is your opinion in regard to the number of obligatory assignments?"] = {"qid":"assignments_amount", "scale": "amount"}
+    lookup["How do you rate the difficulty level of the midterm examination(s)?"] = {"qid":"midterm_level", "scale": "amount"}
+    lookup["How do you rate the difficulty level of the final examination?"] = {"qid":"final_level", "scale": "amount"}
 
     invalid = ["No opinion", "Not relevant", "Not applicable", "Ikke relevant", "Ikke aktuelt", "Vet ikke"]
     grades = {"scales":scales, "questions": lookup, "invalid": invalid}
+
 
     with open("data/response-scales.json", "w") as f:
         json.dump(grades,f, sort_keys=True, indent=4, ensure_ascii=False)

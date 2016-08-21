@@ -8,36 +8,126 @@
         "Vet ikke"
     ],
     "questions": {
-        "Are the curriculum and learning outcomes of the course sufficiently defined?": "quality",
-        "Er pensum og læringsmål i emnet godt definert?": "kvalitet",
-        "Forelesningenes relevans og nytteverdi i forhold til å formidle det du trenger å lære?": "kvalitet",
-        "How do you rate the course in general?": "quality",
-        "How do you rate the course material used (text book etc.)?": "quality",
-        "How do you rate the difficulty level of the final examination?": "amount",
-        "How do you rate the difficulty level of the midterm examination(s)?": "amount",
-        "How do you rate the difficulty level of the obligatory assignments?": "amount",
-        "How do you rate the level of the course?": "level",
-        "How do you rate the work load in proportion to the number of credits achieved?": "amount",
-        "How would you assess the course's term page?": "quality",
-        "How would you assess the online course presentation?": "quality",
-        "Hva er ditt generelle intrykk av kurset?": "kvalitet",
-        "Hva synes du om antallet obliger?": "mengde",
-        "Hva synes du om arbeidsmengden sett i forhold til antall studiepoeng?": "mengde",
-        "Hva synes du om emnets nivå?": "nivå",
-        "Hva synes du om kursets semesterside?": "informasjon",
-        "Hva synes du om kurspresentasjonen på nett?": "informasjon",
-        "Hva synes du om nivået på avsluttende eksamen?": "mengde",
-        "Hva syns du om nivået på deleksamen?": "mengde",
-        "Hvordan er nivået på obligene?": "mengde",
-        "Hvordan vurderer du kursmateriellet som benyttes (lærebok m.m.)?": "kvalitet",
-        "I hvilken grad forbedrer ukesoppgavene og gruppeundervisningen din forståelse av pensum?": "kvalitet",
-        "In what degree does group tuition and weekly assignments give you practical skills and the possibility to make use of the theory at hand?": "quality",
-        "Kvaliteten på forelesningene?": "kvalitet",
-        "Kvaliteten på gruppeundervisningen i sin helhet?": "kvalitet",
-        "The lectures' relevance and usefulness in regard to relaying what you need to learn?": "quality",
-        "The quality of the group tuition as a whole?": "quality",
-        "The quality of the lectures?": "quality",
-        "What is your opinion in regard to the number of obligatory assignments?": "amount"
+        "Are the curriculum and learning outcomes of the course sufficiently defined?": {
+            "qid": "curriculum",
+            "scale": "quality"
+        },
+        "Er pensum og læringsmål i emnet godt definert?": {
+            "qid": "curriculum",
+            "scale": "kvalitet"
+        },
+        "Forelesningenes relevans og nytteverdi i forhold til å formidle det du trenger å lære?": {
+            "qid": "lecture_relevance",
+            "scale": "kvalitet"
+        },
+        "How do you rate the course in general?": {
+            "qid": "general",
+            "scale": "quality"
+        },
+        "How do you rate the course material used (text book etc.)?": {
+            "qid": "materials",
+            "scale": "quality"
+        },
+        "How do you rate the difficulty level of the final examination?": {
+            "qid": "final_level",
+            "scale": "amount"
+        },
+        "How do you rate the difficulty level of the midterm examination(s)?": {
+            "qid": "midterm_level",
+            "scale": "amount"
+        },
+        "How do you rate the difficulty level of the obligatory assignments?": {
+            "qid": "assignment_level",
+            "scale": "amount"
+        },
+        "How do you rate the level of the course?": {
+            "qid": "level",
+            "scale": "level"
+        },
+        "How do you rate the work load in proportion to the number of credits achieved?": {
+            "qid": "workload",
+            "scale": "amount"
+        },
+        "How would you assess the course's term page?": {
+            "qid": "semester_web",
+            "scale": "quality"
+        },
+        "How would you assess the online course presentation?": {
+            "qid": "course_web",
+            "scale": "quality"
+        },
+        "Hva er ditt generelle intrykk av kurset?": {
+            "qid": "general",
+            "scale": "kvalitet"
+        },
+        "Hva synes du om antallet obliger?": {
+            "qid": "assignments_amount",
+            "scale": "mengde"
+        },
+        "Hva synes du om arbeidsmengden sett i forhold til antall studiepoeng?": {
+            "qid": "workload",
+            "scale": "mengde"
+        },
+        "Hva synes du om emnets nivå?": {
+            "qid": "level",
+            "scale": "nivå"
+        },
+        "Hva synes du om kursets semesterside?": {
+            "qid": "semester_web",
+            "scale": "informasjon"
+        },
+        "Hva synes du om kurspresentasjonen på nett?": {
+            "qid": "course_web",
+            "scale": "informasjon"
+        },
+        "Hva synes du om nivået på avsluttende eksamen?": {
+            "qid": "final_level",
+            "scale": "mengde"
+        },
+        "Hva syns du om nivået på deleksamen?": {
+            "qid": "midterm_level",
+            "scale": "mengde"
+        },
+        "Hvordan er nivået på obligene?": {
+            "qid": "assignment_level",
+            "scale": "mengde"
+        },
+        "Hvordan vurderer du kursmateriellet som benyttes (lærebok m.m.)?": {
+            "qid": "materials",
+            "scale": "kvalitet"
+        },
+        "I hvilken grad forbedrer ukesoppgavene og gruppeundervisningen din forståelse av pensum?": {
+            "qid": "group_relevance",
+            "scale": "kvalitet"
+        },
+        "In what degree does group tuition and weekly assignments give you practical skills and the possibility to make use of the theory at hand?": {
+            "qid": "group_relevance",
+            "scale": "quality"
+        },
+        "Kvaliteten på forelesningene?": {
+            "qid": "lecture_quality",
+            "scale": "kvalitet"
+        },
+        "Kvaliteten på gruppeundervisningen i sin helhet?": {
+            "qid": "group_quality",
+            "scale": "kvalitet"
+        },
+        "The lectures' relevance and usefulness in regard to relaying what you need to learn?": {
+            "qid": "lecture_relevance",
+            "scale": "quality"
+        },
+        "The quality of the group tuition as a whole?": {
+            "qid": "group_quality",
+            "scale": "quality"
+        },
+        "The quality of the lectures?": {
+            "qid": "lecture_quality",
+            "scale": "quality"
+        },
+        "What is your opinion in regard to the number of obligatory assignments?": {
+            "qid": "assignments_amount",
+            "scale": "amount"
+        }
     },
     "scales": {
         "amount": {

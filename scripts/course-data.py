@@ -36,13 +36,23 @@ def count_answers(path):
 
     questions = OrderedDict()
 
+    language = ""
+
     scales = json.load(open("data/response-scales.json"))
     for question in course:
         if question in scales["questions"]:
-            questions[question] = OrderedDict()
+            if language == "":
+                if question[0:3] == "Hva":
+                    language = "NO"
+                if question[0:3] == "How":
+                    language = "EN"
             responses = course[question]
-            scale_key = scales["questions"][question]
+            scale_key = scales["questions"][question]["scale"]
+            qid = scales["questions"][question]["qid"]
             scale = scales["scales"][scale_key]
+
+            questions[qid] = OrderedDict()
+            questions[qid]["text"] = question
 
             counts = {}
             total = 0;
@@ -67,9 +77,9 @@ def count_answers(path):
                     if d < delta:
                         delta = d
                         average_text = grade
-            questions[question]["counts"] = counts
-            questions[question]["average"] = average
-            questions[question]["average_text"] = average_text
+            questions[qid]["counts"] = counts
+            questions[qid]["average"] = average
+            questions[qid]["average_text"] = average_text
 
             max_people = 0
             most_common = None
@@ -85,10 +95,11 @@ def count_answers(path):
                             most_common = [most_common, c]
                         else:
                             most_common = [c]
-            questions[question]["most_common"] = most_common
-            questions[question]["most_common_num"] = max_people
-            questions[question]["most_common_per"] = max_people/answered
+            questions[qid]["most_common"] = most_common
+            questions[qid]["most_common_num"] = max_people
+            questions[qid]["most_common_per"] = max_people/answered
 
+    stats["language"] = language
     stats["questions"] = questions
     return stats
 
