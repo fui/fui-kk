@@ -1,0 +1,26 @@
+{
+    "INF0456": {
+        "started": 0,
+        "answered": 3,
+        "invited": 0,
+        "answer_percentage": 100,
+        "language": "EN",
+        "general": {
+            "text": "How do you rate the course in general?",
+            "counts": {
+                "OK": 1,
+                "Exceptionally good": 1,
+                "Very good": 1
+            },
+            "average": 4.666666666666667,
+            "average_text": "Very good",
+            "most_common": [
+                "OK",
+                "Exceptionally good",
+                "Very good"
+            ],
+            "most_common_num": 1,
+            "most_common_per": 0.3333333333333333
+        }
+    }
+}

@@ -13,10 +13,18 @@ __license__    = "MIT"
 import os
 import sys
 from bs4 import BeautifulSoup
+from collections import OrderedDict
+import json
+
+def dump_to_file(data, filename):
+    with open(filename, 'w') as outfile:
+        json.dump(data, outfile, indent=4, ensure_ascii=False)
 
 def get_course_data(path):
-    course = json.load(open(path))
-    print(course)
+    course = json.load(open(path), object_pairs_hook=OrderedDict)
+    course["general"] = course["questions"]["general"]
+    del course["questions"]
+    return course
 
 def main(semester_dir):
     files = []
@@ -25,8 +33,17 @@ def main(semester_dir):
             files.append(f)
     semester_data = OrderedDict()
     for f in files:
-        semester_data[course_name] = get_course_data(f)
-
+        course_name = f.replace(".stats.json", "")
+        semester_data[course_name] = get_course_data(semester_dir+"/json/"+f)
+    dump_to_file(semester_data, semester_dir+"/semester-data.json")
 
 if __name__ == '__main__':
-    main(sys.argv[1])
+    if len(sys.argv) < 2:
+        semesters = []
+        for root, subdirs, files in os.walk("./data"):
+            semesters = subdirs
+            break
+        for sem in semesters:
+            main("./data/"+sem)
+    else:
+        main(sys.argv[1])

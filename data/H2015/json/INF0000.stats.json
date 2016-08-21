@@ -32,8 +32,8 @@
         "workload": {
             "text": "Hva synes du om arbeidsmengden sett i forhold til antall studiepoeng?",
             "counts": {
-                "Høy": 2,
-                "For lav": 1
+                "For lav": 1,
+                "Høy": 2
             },
             "average": 3.0,
             "average_text": "Passe",
@@ -44,16 +44,16 @@
         "lecture_quality": {
             "text": "Kvaliteten på forelesningene?",
             "counts": {
+                "Grei": 1,
                 "Vet ikke": 1,
-                "Mindre bra": 1,
-                "Grei": 1
+                "Mindre bra": 1
             },
             "average": 2.5,
-            "average_text": "Mindre bra",
+            "average_text": "Greit",
             "most_common": [
+                "Grei",
                 "Vet ikke",
-                "Mindre bra",
-                "Grei"
+                "Mindre bra"
             ],
             "most_common_num": 1,
             "most_common_per": 0.3333333333333333
@@ -131,8 +131,8 @@
         "course_web": {
             "text": "Hva synes du om kurspresentasjonen på nett?",
             "counts": {
-                "Særdeles bra": 1,
-                "Meget bra": 2
+                "Meget bra": 2,
+                "Særdeles bra": 1
             },
             "average": 4.333333333333333,
             "average_text": "Meget bra",
@@ -160,16 +160,16 @@
         "assignment_level": {
             "text": "Hvordan er nivået på obligene?",
             "counts": {
-                "Ikke aktuelt": 1,
                 "Høyt": 1,
-                "For lavt": 1
+                "For lavt": 1,
+                "Ikke aktuelt": 1
             },
             "average": 2.5,
             "average_text": "Lavt",
             "most_common": [
-                "Ikke aktuelt",
                 "Høyt",
-                "For lavt"
+                "For lavt",
+                "Ikke aktuelt"
             ],
             "most_common_num": 1,
             "most_common_per": 0.3333333333333333
@@ -177,15 +177,15 @@
         "assignments_amount": {
             "text": "Hva synes du om antallet obliger?",
             "counts": {
-                "Passe": 1,
                 "Lavt": 1,
+                "Passe": 1,
                 "Ikke aktuelt": 1
             },
             "average": 2.5,
             "average_text": "Lavt",
             "most_common": [
-                "Passe",
                 "Lavt",
+                "Passe",
                 "Ikke aktuelt"
             ],
             "most_common_num": 1,
@@ -194,11 +194,11 @@
         "midterm_level": {
             "text": "Hva syns du om nivået på deleksamen?",
             "counts": {
-                "Ikke aktuelt": 2,
-                "Høyt": 1
+                "Høyt": 1,
+                "Ikke aktuelt": 2
             },
             "average": 4.0,
-            "average_text": "Høy",
+            "average_text": "Høyt",
             "most_common": "Ikke aktuelt",
             "most_common_num": 2,
             "most_common_per": 0.6666666666666666
@@ -206,16 +206,16 @@
         "final_level": {
             "text": "Hva synes du om nivået på avsluttende eksamen?",
             "counts": {
+                "Ikke aktuelt": 1,
                 "Passe": 1,
-                "For høyt": 1,
-                "Ikke aktuelt": 1
+                "For høyt": 1
             },
             "average": 4.0,
-            "average_text": "Høy",
+            "average_text": "Høyt",
             "most_common": [
+                "Ikke aktuelt",
                 "Passe",
-                "For høyt",
-                "Ikke aktuelt"
+                "For høyt"
             ],
             "most_common_num": 1,
             "most_common_per": 0.3333333333333333

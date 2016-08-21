@@ -15,6 +15,7 @@ download:
 json:
 	python3 scripts/parse-tsv.py -s all
 	python3 scripts/course-data.py data
+	python3 scripts/semester-data.py
 
 tex:
 	@echo "Not yet implemented!"
