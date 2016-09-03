@@ -38,10 +38,10 @@ python3 scripts/parse-tsv.py -s all
 Updates the json files with useful statistics, by counting how many answered
 each option, calculating averages, etc.
 ```
-python3 scripts/course-data.py data/V2015
+python3 scripts/course.py data/V2015
 ```
 
-### semester-data.py
+### semester.py
 Not yet implemented.
 ### plot-courses.py
 Not yet up to date.

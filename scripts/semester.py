@@ -23,7 +23,10 @@ def dump_to_file(data, filename):
 def get_course_data(path):
     course = json.load(open(path), object_pairs_hook=OrderedDict)
     course["general"] = course["questions"]["general"]
+    del course["general"]["counts"]
+    del course["general"]["most_common"]
     del course["questions"]
+    del course["respondents"]
     return course
 
 def main(semester_dir):
@@ -35,7 +38,7 @@ def main(semester_dir):
     for f in files:
         course_name = f.replace(".stats.json", "")
         semester_data[course_name] = get_course_data(semester_dir+"/json/"+f)
-    dump_to_file(semester_data, semester_dir+"/semester-data.json")
+    dump_to_file(semester_data, semester_dir+"/semester.json")
 
 if __name__ == '__main__':
     if len(sys.argv) < 2:

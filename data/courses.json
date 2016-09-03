@@ -1,78 +1,61 @@
 {
-    "INF0042": {
-        "H2015": {
-            "started": 0,
-            "answered": 5,
-            "invited": 0,
-            "answer_percentage": 100,
-            "language": "NO",
-            "general": {
-                "text": "Hva er ditt generelle intrykk av kurset?",
-                "counts": {
-                    "Mindre bra": 1,
-                    "Bra": 1,
-                    "Greit": 1,
-                    "Meget bra": 1,
-                    "Særdeles bra": 1
-                },
-                "average": 4.0,
-                "average_text": "Bra",
-                "most_common": [
-                    "Mindre bra",
-                    "Bra",
-                    "Greit",
-                    "Meget bra",
-                    "Særdeles bra"
-                ],
-                "most_common_num": 1,
-                "most_common_per": 0.2
-            }
-        }
-    },
     "INF0456": {
-        "V2015": {
-            "started": 0,
-            "answered": 3,
-            "invited": 0,
+        "V2013": {
             "answer_percentage": 100,
             "language": "EN",
             "general": {
                 "text": "How do you rate the course in general?",
-                "counts": {
-                    "OK": 1,
-                    "Exceptionally good": 1,
-                    "Very good": 1
-                },
                 "average": 4.666666666666667,
-                "average_text": "Very good",
-                "most_common": [
-                    "OK",
-                    "Exceptionally good",
-                    "Very good"
-                ],
-                "most_common_num": 1,
-                "most_common_per": 0.3333333333333333
+                "average_text": "Very good"
+            }
+        },
+        "V2015": {
+            "answer_percentage": 100,
+            "language": "EN",
+            "general": {
+                "text": "How do you rate the course in general?",
+                "average": 4.666666666666667,
+                "average_text": "Very good"
             }
         }
     },
     "INF0000": {
-        "H2015": {
-            "started": 0,
-            "answered": 3,
-            "invited": 0,
+        "H2014": {
             "answer_percentage": 100,
             "language": "NO",
             "general": {
                 "text": "Hva er ditt generelle intrykk av kurset?",
-                "counts": {
-                    "Greit": 2,
-                    "Mindre bra": 1
-                },
                 "average": 2.6666666666666665,
-                "average_text": "Greit",
-                "most_common": "Greit",
-                "most_common_num": 2,
-                "most_common_per": 0.6666666666666666
+                "average_text": "Grei"
+            }
+        },
+        "H2015": {
+            "answer_percentage": 100,
+            "language": "NO",
+            "general": {
+                "text": "Hva er ditt generelle intrykk av kurset?",
+                "average": 2.6666666666666665,
+                "average_text": "Grei"
+            }
+        }
+    },
+    "INF0042": {
+        "H2014": {
+            "answer_percentage": 100,
+            "language": "NO",
+            "general": {
+                "text": "Hva er ditt generelle intrykk av kurset?",
+                "average": 4.0,
+                "average_text": "Bra"
+            }
+        },
+        "H2015": {
+            "answer_percentage": 100,
+            "language": "NO",
+            "general": {
+                "text": "Hva er ditt generelle intrykk av kurset?",
+                "average": 4.0,
+                "average_text": "Bra"
             }
         }
     }

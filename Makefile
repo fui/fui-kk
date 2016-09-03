@@ -10,12 +10,12 @@ install:
 
 download:
 	python scripts/download-reports.py -f "(testskjema)"
-	python3 scripts/sort-downloads.py
+	python3 scripts/sort-downloads.py --delete
 
 json:
 	python3 scripts/parse-tsv.py -s all
-	python3 scripts/course-data.py data
-	python3 scripts/semester-data.py
+	python3 scripts/course.py data
+	python3 scripts/semester.py
 	python3 scripts/courses.py
 
 tex:
@@ -25,9 +25,12 @@ pdf:
 	@echo "Not yet implemented!"
 
 scales:
-	python3 scripts/misc/response-scales.py
+	python3 scripts/misc/scales.py
 
-all: download json
+plots:
+	python3 scripts/plot-courses.py
+
+all: scales json plots
 
 help:
 	@echo "Available targets:"
@@ -36,4 +39,4 @@ help:
 	@echo "tex"
 	@echo "pdf"
 
-.PHONY: download json tex pdf help install scales all
+.PHONY: download json tex pdf help install scales all plots

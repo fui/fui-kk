@@ -98,7 +98,7 @@ def main():
     grades = {"scales":scales, "questions": lookup, "invalid": invalid}
 
 
-    with open("data/response-scales.json", "w") as f:
+    with open("data/scales.json", "w") as f:
         json.dump(grades,f, sort_keys=True, indent=4, ensure_ascii=False)
 
 if __name__ == '__main__':

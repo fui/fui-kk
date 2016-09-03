@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """Create relevant statistics from individual responses"""
 
 __authors__    = ["Ole Herman Schumacher Elgesem"]
@@ -25,20 +24,24 @@ def count_answers(path):
     stats = OrderedDict()
     started = int(numbers["started"])
     answered = int(numbers["answered"])
+    if(answered == 0):
+        return None
     invited = int(numbers["invited"])
     percentage = 100;
     if(invited > 0):
         percentage = 100 * answered/invited;
-    stats["started"] = started
-    stats["answered"] = answered
-    stats["invited"] = invited
+    respondents = OrderedDict()
+    respondents["started"] = started
+    respondents["answered"] = answered
+    respondents["invited"] = invited
+    stats["respondents"] = respondents
     stats["answer_percentage"] = percentage
 
     questions = OrderedDict()
 
     language = ""
 
-    scales = json.load(open("data/response-scales.json"))
+    scales = json.load(open("data/scales.json"))
     for question in course:
         if question in scales["questions"]:
             if language == "":
@@ -82,22 +85,17 @@ def count_answers(path):
             questions[qid]["average_text"] = average_text
 
             max_people = 0
-            most_common = None
+            most_common = []
             for c in counts:
                 if counts[c] > max_people:
-                    most_common = c
+                    most_common = [c]
                     max_people = counts[c]
                 elif counts[c] == max_people:
-                    if type(most_common) is list:
-                        most_common.append(c)
-                    else:
-                        if most_common is not None:
-                            most_common = [most_common, c]
-                        else:
-                            most_common = [c]
-            questions[qid]["most_common"] = most_common
-            questions[qid]["most_common_num"] = max_people
-            questions[qid]["most_common_per"] = max_people/answered
+                    most_common.append(c)
+            questions[qid]["most_common"] = OrderedDict()
+            questions[qid]["most_common"]["words"] = most_common
+            questions[qid]["most_common"]["num"] = max_people
+            questions[qid]["most_common"]["per"] = max_people/answered
 
     stats["language"] = language
     stats["questions"] = questions
@@ -105,6 +103,8 @@ def count_answers(path):
 
 def main(path):
     stats = count_answers(path)
+    if(stats is None):
+        return
     path = path.replace(".responses.json", ".stats.json")
     dump_to_file(stats, path)
     # os.remove(path.replace(".stats.json", ".numbers.json"))
