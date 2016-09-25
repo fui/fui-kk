@@ -2,6 +2,7 @@
 output/*
 reports/*
 ghostdriver.log
+data/*
 
 # Editor files:
 *~

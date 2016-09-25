@@ -46,8 +46,10 @@ Not yet implemented.
 ### plot-courses.py
 Not yet up to date.
 
+## Mount DAV
+https://www-dav.mn.uio.no/ifi/livet-rundt-studiene/organisasjoner/fui-kk/kursevaluering/
 
-
+Finder -> Go -> Connect to Server
 
 <!-- **List of stuff**<br>
 0. [Title 0](./path0/)<br>

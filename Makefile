@@ -9,7 +9,7 @@ install:
 	pip3 install bs4
 
 download:
-	python scripts/download-reports.py -f "(testskjema)"
+	python scripts/download-reports.py
 	python3 scripts/sort-downloads.py --delete
 
 json:
