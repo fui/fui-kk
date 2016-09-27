@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """Parses tsv files and outputs json data for course."""
 
 __authors__    = ["Ole Herman Schumacher Elgesem"]

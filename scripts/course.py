@@ -3,7 +3,6 @@
 
 __authors__    = ["Ole Herman Schumacher Elgesem"]
 __copyright__  = "FUI - Fagutvalget ved Institutt for Informatikk"
-__credits__    = []
 __license__    = "MIT"
 # This file is subject to the terms and conditions defined in
 # file 'LICENSE.txt', which is part of this source code package.

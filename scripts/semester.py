@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """Combines all data for the semester into a shared json"""
 
 __authors__    = ["Ole Herman Schumacher Elgesem"]

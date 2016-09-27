@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """This is a module that is used for generating plots that show how a
 course has evolved."""
 

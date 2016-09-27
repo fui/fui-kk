@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """Script to sort downloaded data (html and tsv) into folder structure
 automatically based on file names(form titles)."""
 
