@@ -71,6 +71,27 @@ def try_to_find_int(driver, selector):
     except:
         return 0
 
+def render_html(stats, content):
+    return '''
+    <html>
+        <head>
+            <meta charset="utf-8" />
+        </head>
+        <body>
+            <p>Delivered replies: {answered}</p>
+            <p>Commenced replies: {started}</p>
+            <p>Number of sent invitations: {invited}</p>
+            <hr />
+            {content}
+        </body>
+    </html>
+    '''.format(
+        content=content,
+        answered=stats['answered'],
+        started=stats['started'],
+        invited=stats['invited']
+    )
+
 def download_files(driver, args):
     driver.get('https://nettskjema.uio.no/user/form/list.html')
 
@@ -95,6 +116,14 @@ def download_files(driver, args):
     for (name, url) in formdata:
         print 'Fetching ' + name
 
+        results_url = url.replace('preview', 'results')
+        driver.get(results_url)
+        stats = {
+            'answered': try_to_find_int(driver, '.delivered-submissions .number'),
+            'started': try_to_find_int(driver, '.saved-submissions .number'),
+            'invited': try_to_find_int(driver, '.valid-invitations .number')
+        }
+
         if args.tsv:
             tsv_url = url.replace('preview', 'download') + '&encoding=utf-8'
             response = session.get(tsv_url)
@@ -103,16 +132,10 @@ def download_files(driver, args):
         if args.html:
             html_url = url.replace('preview', 'report/web') + '&include-open=1&remove-profile=1'
             response = session.get(html_url)
-            write_to_file(html_path, name, 'html', '<meta charset="utf-8" />' + response.content)
+            write_to_file(html_path, name, 'html', render_html(stats, response.content))
 
         if args.stats:
-            results_url = url.replace('preview', 'results')
-            driver.get(results_url)
-            stats_json = json.dumps({
-                'answered': try_to_find_int(driver, '.delivered-submissions .number'),
-                'started': try_to_find_int(driver, '.saved-submissions .number'),
-                'invited': try_to_find_int(driver, '.valid-invitations .number')
-            })
+            stats_json = json.dumps(stats)
             write_to_file(stats_path, name, 'json', stats_json)
 
 def main():
