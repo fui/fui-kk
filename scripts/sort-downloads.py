@@ -30,7 +30,6 @@ def get_args():
 def main():
     args = get_args()
     delete = args.delete
-
     for root, subdirs, files in os.walk(args.input):
         for file_x in files:
             path = os.path.join(root, file_x)
@@ -38,16 +37,17 @@ def main():
                 os.remove(path)
                 if args.verbose:
                     print("rm: "+path)
-                break
+                continue
             filename, extension = os.path.splitext(path)
             m = re.search('(V|H)[0-9]{4}',path)
             if m is None:
-                break
+                continue
             semester = m.group(0)
-            m = re.search('INF[0-9]{4}',path)
+            m = re.search('([A-Z]{2,4}[0-9]{4})|([A-Z]{2,4}-[A-Z]{2,4}[0-9]{4})',path)
             if m is None:
-                break
+                continue
             course = m.group(0)
+
             target_folder = os.path.join(args.output, semester, extension[1:])
             os.makedirs( target_folder, exist_ok=True )
             newpath = os.path.join(target_folder, course + extension )
