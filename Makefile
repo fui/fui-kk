@@ -10,6 +10,7 @@ install:
 	pip3 install requests
 	pip3 install selenium
 	pip3 install bs4
+	brew install pandoc
 
 download:
 	python scripts/download-reports.py
@@ -25,7 +26,7 @@ json:
 	python3 scripts/courses.py
 
 tex:
-	@echo "Not yet implemented!"
+	./scripts/tex.sh
 
 pdf:
 	@echo "Not yet implemented!"
@@ -45,4 +46,15 @@ help:
 	@echo "tex"
 	@echo "pdf"
 
-.PHONY: download json tex pdf help install scales all plots sample_data
+clean:
+	@find ./data -type f -path "*/tex/*.tex" -delete
+	@find ./data -type f -path "*/plots/*.pdf" -delete
+	@find ./data -type f -path "*/plots/*.png" -delete
+	@find ./data -type d -name "tex" -delete
+	@find ./data -type d -name "plots" -delete
+	@find ./data -type f -name "courses.json" -delete
+	@find ./data -type f -name "semester.json" -delete
+	@find ./data -type f -name "*.responses.json" -delete
+	@find ./data -type f -name "*.stats.json" -delete
+
+.PHONY: download json tex pdf help install scales all plots sample_data clean
