@@ -97,7 +97,7 @@ def generate_plots(courses, scales, semester_name):
 
 
 def main():
-    semester = "V2015"
+    semester = "V2016"
     courses = json.load(open("./data/courses.json"), object_pairs_hook=OrderedDict)
     scales = json.load(open("./data/scales.json"), object_pairs_hook=OrderedDict)
     scales = scales["scales"]
