@@ -12,82 +12,39 @@ __license__    = "MIT"
 
 import os
 import sys
-from bs4 import BeautifulSoup
+from collections import OrderedDict
+import json
 
-def subject_data(subject, linenum):
-    linenum -= 1
-    filep = open(subject+".html", "r")
-    empty = False
-    str = "result"
-    for i, line in enumerate(filep):
-        if i == linenum:
-            str = line
-            break
-        elif i == 32:
-            if(line.strip() == "Dette skjemaet har ikke mottatt noen svar"):
-                empty = True
-                break
-        elif i > linenum:
-            break
-    filep.close()
-    if(empty == True):
-        return (subject, 0)
-    return (subject, int(str.strip()))
-
-def course_divide(folder, num):
-    subjects = []
-    for file in os.listdir(folder):
-        if file.endswith(".html"):
-            subjects.append(file[0: -5])
-    data = []
-    for s in subjects:
-        data.append(subject_data(s, 37))
-    data.sort(key=lambda x: x[1]);
-    data.reverse()
-
-    print("There are "+str(len(data))+" courses total.")
-
+def course_divide(semester, num):
+    p = "./data/"+semester+"/semester.json"
+    semester = json.load(open(p), object_pairs_hook=OrderedDict)
+    courses = []
+    for name, data in semester.items():
+        answers = data["respondents"]["answered"]
+        courses.append((name, answers))
+    courses = sorted(courses, reverse=True, key= lambda x: x[1])
     people = []
     for i in range(num):
-        people.append([])
-    i = 0
-    order = []
-    while i < len(data):
-        for j in range(num):
-            order.append(j)
-            i += 1
-        for j in range(num):
-            order.append(num-j-1)
-            i += 1
-
-    i = 0
-    while i < len(data):
-        subject = data[i]
-        if(subject[1] == 0):
-            break
-        people[order[i]].append(subject)
-        i += 1
-    empty_courses = []
-    while i < len(data):
-        empty_courses.append(data[i])
-        i += 1
-
-    for i, p in enumerate(people):
-        print("Person " + str(i) + ":")
-        print(people[i])
-        sum = 0
-        for s in people[i]:
-            sum += s[1]
-    print("Empty evaluations("+str(len(empty_courses))+"):")
-    print(empty_courses)
+        people.append( OrderedDict() )
+        people[-1]["name"] = "Unknown"
+        people[-1]["answers"] = 0
+        people[-1]["courses"] = []
+    for course in courses:
+        victim = people[0]
+        for person in people:
+            if person["answers"] < victim["answers"]:
+                victim = person
+        victim["answers"] += course[1]
+        victim["courses"].append(course[0])
+    print(json.dumps(people, indent=1))
 
 def main():
     if(len(sys.argv) < 2):
-        print("Usage: ./course_divide.py num [folder]")
+        print("Usage: ./course_divide.py num semester")
         exit()
-    folder = sys.argv[2]
+    semester = sys.argv[2]
     num = int(sys.argv[1])
-    course_divide(folder, num)
+    course_divide(semester, num)
 
 if __name__ == "__main__":
     main()

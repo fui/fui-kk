@@ -25,7 +25,6 @@ def get_course_data(path):
     del course["general"]["counts"]
     del course["general"]["most_common"]
     del course["questions"]
-    del course["respondents"]
     return course
 
 def main(semester_dir):

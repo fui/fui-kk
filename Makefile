@@ -4,13 +4,19 @@ install:
 	brew install python
 	brew install python3
 	brew install phantomjs
+	brew install rename
 	pip install requests
 	pip install selenium
+	pip3 install requests
+	pip3 install selenium
 	pip3 install bs4
 
 download:
 	python scripts/download-reports.py
 	python3 scripts/sort-downloads.py --delete
+
+sample_data:
+	rename -s sample_data data sample_data
 
 json:
 	python3 scripts/parse-tsv.py -s all
@@ -39,4 +45,4 @@ help:
 	@echo "tex"
 	@echo "pdf"
 
-.PHONY: download json tex pdf help install scales all plots
+.PHONY: download json tex pdf help install scales all plots sample_data
