@@ -3,7 +3,7 @@
 """Fetch reports (html) from nettskjema results.(NO LONGER WORKS)"""
 
 __authors__    = ["Unknown"]
-__copyright__  = "FUI - Fagutvalget ved Institutt for Informatikk"
+__copyright__  = "Ole Herman Schumacher Elgesem"
 __credits__    = ["FUI"]
 __license__    = "MIT"
 # This file is subject to the terms and conditions defined in

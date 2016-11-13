@@ -1,4 +1,12 @@
-# Downloads TSV and HTML reports for a user from nettskjema.uio.no
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""Downloads TSV and HTML reports for a user from nettskjema.uio.no"""
+
+__authors__    = ["Erik Vesteraas"]
+__copyright__  = "Erik Vesteraas"
+__license__    = "MIT"
+# This file is subject to the terms and conditions defined in
+# file 'LICENSE.txt', which is part of this source code package.
 
 # Dependencies:
 # pip install selenium

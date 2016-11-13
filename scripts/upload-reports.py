@@ -1,13 +1,18 @@
 #!/usr/bin/env python3
 """ Moves reports(raw data) from the local folder to mounted DAV folder. """
 
+__authors__    = ["Ole Herman Schumacher Elgesem"]
+__copyright__  = "Ole Herman Schumacher Elgesem"
+__license__    = "MIT"
+# This file is subject to the terms and conditions defined in
+# file 'LICENSE.txt', which is part of this source code package.
+
 import getpass
 import os
 import sys
 import argparse
 import json
 from shutil import copyfile
-
 
 def get_args():
     argparser = argparse.ArgumentParser(description='Upload reports to vortex')

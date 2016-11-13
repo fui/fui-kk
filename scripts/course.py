@@ -2,7 +2,7 @@
 """Create relevant statistics from individual responses"""
 
 __authors__    = ["Ole Herman Schumacher Elgesem"]
-__copyright__  = "FUI - Fagutvalget ved Institutt for Informatikk"
+__copyright__  = "Ole Herman Schumacher Elgesem"
 __license__    = "MIT"
 # This file is subject to the terms and conditions defined in
 # file 'LICENSE.txt', which is part of this source code package.
