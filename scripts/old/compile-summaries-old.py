@@ -3,7 +3,7 @@
 """Compiles tex files for the course evaluation report"""
 
 __authors__    = ["Bendik Rønning Opstad"]
-__copyright__  = "FUI - Fagutvalget ved Institutt for Informatikk"
+__copyright__  = "Ole Herman Schumacher Elgesem"
 __credits__    = ["Bendik Rønning Opstad", "josek"]
 __license__    = "MIT"
 # This file is subject to the terms and conditions defined in

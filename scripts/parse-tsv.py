@@ -2,7 +2,7 @@
 """Parses tsv files and outputs json data for course."""
 
 __authors__    = ["Ole Herman Schumacher Elgesem"]
-__copyright__  = "FUI - Fagutvalget ved Institutt for Informatikk"
+__copyright__  = "Ole Herman Schumacher Elgesem"
 __credits__    = ["Erik Vesteraas"]
 __license__    = "MIT"
 # This file is subject to the terms and conditions defined in

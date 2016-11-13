@@ -4,7 +4,7 @@
 
 __authors__    = ["Person1", "Person2"]
 __email__      = "person@mail"
-__copyright__  = "FUI - Fagutvalget ved Institutt for Informatikk"
+__copyright__  = "Ole Herman Schumacher Elgesem"
 __credits__    = ["Person1", "Person2", "Person3"]
 __version__    = "0.1"
 __license__    = "MIT"

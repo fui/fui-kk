@@ -4,7 +4,7 @@
 
 __authors__    = ["Ole Herman Schumacher Elgesem"]
 __email__      = "olehelg@uio.no"
-__copyright__  = "FUI - Fagutvalget ved Institutt for Informatikk"
+__copyright__  = "Ole Herman Schumacher Elgesem"
 __credits__    = ["Ole Herman Schumacher Elgesem"]
 __license__    = "MIT"
 # This file is subject to the terms and conditions defined in
