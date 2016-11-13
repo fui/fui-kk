@@ -28,6 +28,9 @@ json:
 tex:
 	./scripts/tex.sh
 
+rename:
+	rename -v -f -s inf INF ./data/*
+
 pdf:
 	@echo "Not yet implemented!"
 
@@ -57,4 +60,4 @@ clean:
 	@find ./data -type f -name "*.responses.json" -delete
 	@find ./data -type f -name "*.stats.json" -delete
 
-.PHONY: download json tex pdf help install scales all plots sample_data clean
+.PHONY: download json tex pdf help install scales all plots sample_data clean rename
