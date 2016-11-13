@@ -7,53 +7,63 @@
 A collection of scripts and tools for gathering, processing and exporting
 course evaluation survey results.
 
-## Makefile
-The makefile is meant as a simple tool to run all the scripts. Example:
+## Hacking
+If you want to test this software, or contribute to the project you can get started like this:
+```
+git clone git@github.com:fui/fui-kk.git
+cd fui-kk
+make sample_data
+```
+You will now have some test data to work with.
+
+## KK Report (pdf)
+The makefile is meant as a simple tool to run all the scripts.
+
+If you need to download reports from nettskjema:
 ```
 make download
+```
+(Not needed if you're using sample_data)
+
+Generate statistics and plots:
+```
 make json
 make plots
+```
+
+Insert markdown files into `./data/<semester>/md`.
+Then convert them to latex and put everything together using:
+```
 make tex
 make pdf
 ```
 
-## Scripts
-### download-reports.py
-Downloads reports from nettskjema.uio.no, requires login.
-```
-python scripts/download-reports.py -f V2016 -u "username"
-Password: *
-```
-### sort-downloads.py
-Sorts downloaded files (tsv and html) into folder structure(data/).
-```
-python3 scripts/sort-downloads.py
-```
-### parse-tsv.py
-Parses tsv files, "converting" them to json.
-```
-python3 scripts/parse-tsv.py -s all
-```
-### course-data.py
-Updates the json files with useful statistics, by counting how many answered
-each option, calculating averages, etc.
-```
-python3 scripts/course.py data/V2015
-```
+## Publish raw data:
 
-### semester.py
-Not yet implemented.
-### plot-courses.py
-Not yet up to date.
-
-## Mount DAV
+### Mount DAV
 https://www-dav.mn.uio.no/ifi/livet-rundt-studiene/organisasjoner/fui-kk/kursevaluering/
 
-Finder -> Go -> Connect to Server
+Finder -> Go -> Connect to Server.
 
-<!-- **List of stuff**<br>
-0. [Title 0](./path0/)<br>
-1. [Title 1](./path1/)<br> -->
+Use script `upload-reports.py` to move html reports to the mounted folder structure.
+
+## Folder structure
+
+### data folder
+
+Reports and survey answers are downloaded to `download/` and sorted into `data/`.
+This folder contains *everything*, html reports, json statistics, plots etc. for all semesters.
+Note that `downloads` and `data` folders are in `.gitignore` so git doesn't track changes.
+This means you can work on the real data in the same project folder as you do development,
+you will *not* push confidential content to github.
+
+### old folders
+
+`scripts/old/` contain old scripts which are no longer in use.
+
+### misc folders
+
+`misc/` and `scripts/misc` contain files and scripts that are not important for one semester run of kk.
 
 ## MIT License
 
