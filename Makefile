@@ -1,6 +1,6 @@
 default: help
 
-install: # mac only :)
+install-mac: # mac only :)
 	brew install python
 	brew install python3
 	brew install phantomjs
@@ -17,7 +17,8 @@ download:
 	python3 scripts/sort-downloads.py --delete
 
 sample_data:
-	rename -s sample_data data sample_data && cp -r data sample_data
+	tar -xzf "sample_data.tgz"
+	rename -s sample_data data sample_data
 
 json:
 	python3 scripts/parse-tsv.py -s all
