@@ -3,6 +3,7 @@ output/*
 reports/*
 ghostdriver.log
 data/*
+sample_data/*
 
 # Editor files:
 *~
