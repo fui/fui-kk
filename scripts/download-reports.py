@@ -79,7 +79,7 @@ def try_to_find_int(driver, selector):
     except:
         return 0
 
-def render_html(stats, content):
+def render_html(name, stats, content):
     return '''
     <html>
         <head>
@@ -90,10 +90,12 @@ def render_html(stats, content):
             <p>Commenced replies: {started}</p>
             <p>Number of sent invitations: {invited}</p>
             <hr />
+            <h1>{title}</h1>
             {content}
         </body>
     </html>
     '''.format(
+        title=name,
         content=content,
         answered=stats['answered'],
         started=stats['started'],
@@ -140,7 +142,7 @@ def download_files(driver, args):
         if args.html:
             html_url = url.replace('preview', 'report/web') + '&include-open=1&remove-profile=1'
             response = session.get(html_url)
-            write_to_file(html_path, name, 'html', render_html(stats, response.content))
+            write_to_file(html_path, name, 'html', render_html(name, stats, response.content))
 
         if args.stats:
             stats_json = json.dumps(stats)
