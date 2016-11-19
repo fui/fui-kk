@@ -1,19 +1,16 @@
 default: help
 
 install-mac: # mac only :)
-	brew install python
 	brew install python3
 	brew install phantomjs
 	brew install rename
-	pip install requests
-	pip install selenium
+	brew install pandoc
 	pip3 install requests
 	pip3 install selenium
-	pip3 install bs4
-	brew install pandoc
+	pip3 install beautifulsoup4
 
 download:
-	python scripts/download-reports.py
+	python3 scripts/download-reports.py
 	python3 scripts/sort-downloads.py --delete
 
 sample_data:
