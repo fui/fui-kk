@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """Downloads TSV and HTML reports for a user from nettskjema.uio.no"""
 
@@ -46,7 +46,7 @@ def get_args():
         args.stats = True
 
     if not args.username:
-        args.username = raw_input('Username: ')
+        args.username = input('Username: ')
 
     if not args.password:
         args.password = getpass.getpass()
@@ -107,11 +107,11 @@ def download_files(driver, args):
 
     forms = driver.find_elements_by_css_selector('.forms .formName')
 
-    formdata = map(lambda form: (form.text, form.get_attribute('href')), forms)
+    formdata = [(form.text, form.get_attribute('href')) for form in forms]
 
     if args.filter:
-        filtered = filter(lambda x: args.filter in x[0], formdata)
-        print 'Filter matched {} of {} forms'.format(len(filtered), len(formdata))
+        filtered = [x for x in formdata if args.filter in x[0]]
+        print('Filter matched {} of {} forms'.format(len(filtered), len(formdata)))
         formdata = filtered
 
     session = requests.Session()
@@ -124,7 +124,7 @@ def download_files(driver, args):
     stats_path = os.path.join(args.out, 'stats')
 
     for (name, url) in formdata:
-        print 'Fetching ' + name
+        print('Fetching ' + name)
 
         results_url = url.replace('preview', 'results')
         driver.get(results_url)
@@ -137,12 +137,12 @@ def download_files(driver, args):
         if args.tsv:
             tsv_url = url.replace('preview', 'download') + '&encoding=utf-8'
             response = session.get(tsv_url)
-            write_to_file(tsv_path, name, 'tsv', response.content)
+            write_to_file(tsv_path, name, 'tsv', response.text)
 
         if args.html:
             html_url = url.replace('preview', 'report/web') + '&include-open=1&remove-profile=1'
             response = session.get(html_url)
-            write_to_file(html_path, name, 'html', render_html(name, stats, response.content))
+            write_to_file(html_path, name, 'html', render_html(name, stats, response.text))
 
         if args.stats:
             stats_json = json.dumps(stats)
