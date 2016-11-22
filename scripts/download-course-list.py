@@ -59,7 +59,7 @@ def course_list(url, path, filters_path):
             filters = f.read().splitlines()
 
     page = requests.get(args.url)
-    write_page(page.content, path)
+    # write_page(page.content, path)
 
     html = page.content.decode("utf-8")
     courses = course_filter(course_dict(html), filters)
