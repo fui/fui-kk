@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""Downloads TSV and HTML reports for a user from nettskjema.uio.no"""
+"""Downloads course codes and names"""
 
-__authors__    = ["Erik Vesteraas"]
-__copyright__  = "Erik Vesteraas"
+__authors__    = ["Ole Herman Schumacher Elgesem"]
+__copyright__  = "Ole Herman Schumacher Elgesem"
 __license__    = "MIT"
 
 import os

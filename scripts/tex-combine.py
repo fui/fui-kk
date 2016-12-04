@@ -37,11 +37,11 @@ def tex_combine(semester, verbose=False):
         tex_contents.append(f.read())
 
     for course_code, course_data in semester_data.items():
-        path = semester_folder + "/tex/" + course_code + ".tex"
+        path = semester_folder + "tex/" + course_code + ".tex"
         try:
             with open(path,'r') as f:
                 tex_contents.append(f.read())
-        except FileNotFoundError: # parent of IOError, OSError *and* WindowsError where available
+        except FileNotFoundError:
             print('Could not open '+path+' ! Skipping...')
 
     with open('./tex/tail.tex') as f:

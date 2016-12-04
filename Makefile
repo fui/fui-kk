@@ -24,13 +24,13 @@ json:
 	python3 scripts/courses.py
 
 tex:
-	./scripts/tex.sh
-
-rename:
-	rename -v -f -s inf INF ./data/*
+	rename -v -f -S inf INF ./data/*/md/*
+	sed -i.bak 's/å/å/g' ./data/*/md/*.md
+	./scripts/tex.sh V2016
+	python3 scripts/tex-combine.py -s V2016
 
 pdf:
-	@echo "Not yet implemented!"
+	./scripts/pdf.sh V2016
 
 scales:
 	python3 scripts/misc/scales.py
@@ -38,7 +38,7 @@ scales:
 plots:
 	python3 scripts/plot-courses.py
 
-all: scales json plots
+all: scales json plots tex pdf
 
 help:
 	@echo "Available targets:"
@@ -57,5 +57,7 @@ clean:
 	@find ./data -type f -name "semester.json" -delete
 	@find ./data -type f -name "*.responses.json" -delete
 	@find ./data -type f -name "*.stats.json" -delete
+	@find ./data -type d -name "report" -delete
 
-.PHONY: download json tex pdf help install scales all plots sample_data clean rename
+
+.PHONY: default install-mac download sample_data json tex pdf scales plots all help clean
