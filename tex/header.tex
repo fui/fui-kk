@@ -3,6 +3,14 @@
 \usepackage[utf8]{inputenc}
 \usepackage{helvet}
 \usepackage{babel,epsfig,moreverb,ifikompendiumforside,float}
+\usepackage[
+    colorlinks,
+    citecolor=black,              % I like links with standard black color
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+]{hyperref}                       % Links in TOC etc.
+\usepackage[all]{hypcap}          % Better links to floating environment
 
 \author{Fagutvalget ved Institutt for informatikk}
 \title{Kursevaluering}
@@ -31,17 +39,11 @@
 \setlength{\oddsidemargin}	{0.5cm}
 \setlength{\evensidemargin}	{0.5cm}
 \setlength{\footskip}		{1.0cm}
-
-% --- eps figur ---
-%
-%\begin{figure}[htbp!]
-%  \caption{En fin liten figur}
-%  \label{fig:minfigur}
-%  \begin{center}
-%    \epsfig{file=minfigur.eps,angle=90,width=\textwidth}
-%  \end{center}
-%\end{figure}
-
-% --- textfil med tab ---
-%
-%\verbatimtabinput{textfil.txt}
+\renewcommand{\thesection}{}
+\renewcommand{\thesubsection}{}
+\tableofcontents
+\newpage
+\chapter{Introduksjon}
+\newpage
+\chapter{Kurs}
+\newpage

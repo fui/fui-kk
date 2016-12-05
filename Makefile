@@ -29,7 +29,7 @@ tex:
 	./scripts/tex.sh V2016
 	python3 scripts/tex-combine.py -s V2016
 
-pdf:
+pdf: tex
 	./scripts/pdf.sh V2016
 
 scales:

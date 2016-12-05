@@ -27,6 +27,9 @@ def data_folder(semester):
     return "./data/"+semester+"/"
 
 def tex_combine(semester, verbose=False):
+    path = "./resources/course_names/all.json"
+    course_names = json.load(open(path), object_pairs_hook=OrderedDict)
+
     semester_folder = data_folder(semester)
     path = semester_folder + "semester.json"
     semester_data = json.load(open(path), object_pairs_hook=OrderedDict)
@@ -40,9 +43,13 @@ def tex_combine(semester, verbose=False):
         path = semester_folder + "tex/" + course_code + ".tex"
         try:
             with open(path,'r') as f:
+                tex_contents.append("".join([
+                r"\section{",course_code,r" - ",
+                                course_names[course_code],r"}"]))
                 tex_contents.append(f.read())
         except FileNotFoundError:
             print('Could not open '+path+' ! Skipping...')
+            tex_contents.append("\nThe course "+course_code+" file is missing!\n")
 
     with open('./tex/tail.tex') as f:
         tex_contents.append(f.read())
