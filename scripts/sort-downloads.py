@@ -42,6 +42,7 @@ def main():
             if m is None:
                 continue
             semester = m.group(0)
+            # TODO: Fix this to correctly catch course code INF4015NSA
             m = re.search('([A-Z]{2,4}[0-9]{4})|([A-Z]{2,4}-[A-Z]{2,4}[0-9]{4})',path)
             if m is None:
                 continue

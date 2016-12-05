@@ -46,6 +46,13 @@ def tex_combine(semester, verbose=False):
                 tex_contents.append("".join([
                 r"\section{",course_code,r" - ",
                                 course_names[course_code],r"}"]))
+                tex_contents.append(r'''
+                \begin{figure}[H]
+                \begin{center}
+                \includegraphics[width=0.9\textwidth]{../plots/COURSE.pdf}
+                \end{center}
+                \end{figure}
+                '''.replace("COURSE", course_code))
                 tex_contents.append(f.read())
         except FileNotFoundError:
             print('Could not open '+path+' ! Skipping...')
