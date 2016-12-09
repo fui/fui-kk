@@ -14,8 +14,7 @@ download:
 	python3 scripts/sort-downloads.py --delete
 
 sample_data:
-	tar -xzf "sample_data.tgz"
-	rename -s sample_data data sample_data
+	ln -s sample_data data
 
 json:
 	python3 scripts/parse-tsv.py -s all
