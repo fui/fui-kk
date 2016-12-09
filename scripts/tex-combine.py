@@ -49,7 +49,7 @@ def tex_combine(semester, verbose=False):
                 tex_contents.append(r'''
                 \begin{figure}[H]
                 \begin{center}
-                \includegraphics[width=0.9\textwidth]{../plots/COURSE.pdf}
+                \includegraphics[width=0.99\textwidth]{../plots/COURSE.pdf}
                 \end{center}
                 \end{figure}
                 '''.replace("COURSE", course_code))
