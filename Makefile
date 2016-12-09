@@ -14,8 +14,9 @@ download:
 	python3 scripts/sort-downloads.py --delete
 
 sample_data:
-	tar -xzf "sample_data.tgz"
-	rename -s sample_data data sample_data
+	git submodule init
+	git submodule update
+	ln -s sample_data data
 
 json:
 	python3 scripts/parse-tsv.py -s all

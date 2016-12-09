@@ -1,0 +1,3 @@
+[submodule "sample_data"]
+	path = sample_data
+	url = git@github.com:fui/fui-kk-sample-data
