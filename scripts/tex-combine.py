@@ -40,12 +40,35 @@ def tex_combine(semester, verbose=False):
         tex_contents.append(f.read())
 
     for course_code, course_data in semester_data.items():
+        path = semester_folder + "json/" + course_code + ".numbers.json"
+        participation_string = ""
+        try:
+            with open(path,'r') as f:
+                participation_data = json.load(f)
+                invited = int(participation_data["invited"])
+                answered = int(participation_data["answered"])
+                participation = answered / invited
+
+                participation_string = r'''
+                \textbf{Respondents -}
+                \textbf{Invited:} INVITED
+                \textbf{Answered:} ANSWERED
+                \textbf{Participation:} PARTICIPATION
+                '''.replace("INVITED", str(invited))\
+                .replace("ANSWERED", str(answered))\
+                .replace("PARTICIPATION", "{0:.1f}".format(participation*100))
+                participation_string += r"\%"
+        except FileNotFoundError:
+            print('Could not open '+path+' ! Skipping...')
+            participation_string = ("\nThe course "+course_code+" numbers.json file is missing!\n")
+
         path = semester_folder + "tex/" + course_code + ".tex"
         try:
             with open(path,'r') as f:
                 tex_contents.append("".join([
                 r"\section{",course_code,r" - ",
                                 course_names[course_code],r"}"]))
+                tex_contents.append(participation_string)
                 tex_contents.append(r'''
                 \begin{figure}[H]
                 \begin{center}
@@ -57,7 +80,7 @@ def tex_combine(semester, verbose=False):
                 tex_contents.append(r"\newpage")
         except FileNotFoundError:
             print('Could not open '+path+' ! Skipping...')
-            tex_contents.append("\nThe course "+course_code+" file is missing!\n")
+            tex_contents.append("\nThe course "+course_code+" tex file is missing!\n")
 
     with open('./resources/tex/tail.tex') as f:
         tex_contents.append(f.read())
