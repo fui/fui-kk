@@ -54,6 +54,7 @@ def tex_combine(semester, verbose=False):
                 \end{figure}
                 '''.replace("COURSE", course_code))
                 tex_contents.append(f.read())
+                tex_contents.append(r"\newpage")
         except FileNotFoundError:
             print('Could not open '+path+' ! Skipping...')
             tex_contents.append("\nThe course "+course_code+" file is missing!\n")
