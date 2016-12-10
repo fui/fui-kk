@@ -1,0 +1,162 @@
+%% Standard headers:
+
+\DeclareOption{american}{\def \IfiF@lang {eng}}
+\DeclareOption{english}{\def \IfiF@lang {eng}}
+\DeclareOption{UKenglish}{\def \IfiF@lang {eng}}
+\DeclareOption{USenglish}{\def \IfiF@lang {eng}}
+\DeclareOption{norsk}{\def \IfiF@lang {bm}}
+\DeclareOption{nynorsk}{\def \IfiF@lang {nn}}
+
+\ExecuteOptions{norsk}
+\ProcessOptions \relax
+
+
+%% Initial code:
+
+\RequirePackage[T1]{fontenc}
+\RequirePackage{eso-pic,graphicx,keyval,xifthen}
+\IfFileExists{type1cm.sty}{\RequirePackage{type1cm}}{}
+\IfFileExists{type1ec.sty}{\RequirePackage{type1ec}}{}
+
+
+%% The main command:
+
+\newcommand{\ififorside}[1][]{\begin{titlepage}
+    \def \and {, }
+    \setkeys{IfiF@keys}{#1}
+    \AddToShipoutPictureBG*{\IfiF@print@background}
+    \ifthenelse{\equal{ifi}{\IfiF@dept}}
+      {}
+      {\AddToShipoutPictureFG*{\IfiF@print@dept}}
+    \AddToShipoutPictureFG*{\IfiF@print@title}
+    \null
+  \end{titlepage}
+  \if@twoside \IfiF@blankpage \fi}
+
+
+%% The options:
+
+\define@key{IfiF@keys}{dept}{\def \IfiF@dept {#1}}
+\define@key{IfiF@keys}{fac}{\def \IfiF@fac {#1}}
+\define@key{IfiF@keys}{isbn}{\def \IfiF@isbn {#1}}
+\define@key{IfiF@keys}{issn}{\def \IfiF@issn {#1}}
+\define@key{IfiF@keys}{kind}{\def \IfiF@kind {#1}}
+\define@key{IfiF@keys}{n}{\def \IfiF@rrnum {#1}}
+
+\def \IfiF@dept {ifi}
+\def \IfiF@fac {}
+\def \IfiF@isbn {}
+\def \IfiF@issn {0806-3036}
+\def \IfiF@rrnum {0}
+
+
+%% Additional commands:
+
+\newcommand{\subtitle}[1]{\def \IfiF@subtitle{#1}}
+\subtitle{}
+
+
+%% Include the title page background:
+
+\newcommand{\IfiF@print@background}{{%
+  \setlength{\unitlength}{1bp}%
+  \ifthenelse{\equal{ifi}{\IfiF@dept}}
+    {\put(-21,-21){\includegraphics{\IfiF@dept-\IfiF@background-forside-\IfiF@lang}}}
+    {\put(0,0){%
+        \parbox[b][\paperheight]{\paperwidth}{%
+          \vfill
+          \centering
+          \includegraphics{uio-\IfiF@background-forside}%
+          \vfill}}}}}
+
+
+%% Include the name of the university and department (if needed):
+
+\newcommand{\IfiF@print@dept}{{%
+    \setlength{\unitlength}{1cm}%
+    \put(3.9,22.6){\makebox[10cm][l]{\rm
+        \fontfamily{\IfiF@font}\fontseries{b}%
+        \fontsize{24}{0pt}\selectfont
+        \IfiF@dept}}
+    \put(3.9,21.9){\makebox[10cm][l]{\rm              % Should have been Questor
+        \fontfamily{pnc}\fontsize{17}{0pt}\selectfont % but New Cent Schb looks
+        \IfiF@fac}}}}                                 % quite like it.
+
+
+%% Include the title, subtitle, author and date:
+
+\newcommand{\IfiF@print@title}{{%
+  \setlength{\unitlength}{1cm}%
+  \put(3.5,14.6){\vbox to 6.1cm {\hsize=15.5cm
+    \raggedright
+    %
+    \ifthenelse{\isundefined{\fveLaTeX}}{}
+    { % Redefinition of standard \LaTeX command because font package
+      % 'bera' mangles it!
+      \DeclareRobustCommand{\ifik@LaTeX}{L\kern-.36em%
+       {\sbox\z@ T%
+         \vbox to\ht\z@{\hbox{\check@mathfonts
+                              \fontsize\sf@size\z@
+                              \math@fontsfalse\selectfont
+                              A}%
+                        \vss}%
+        }%
+        \kern-.15em%
+        \TeX}%
+      \let \LaTeX = \ifik@LaTeX
+    }
+    %
+    \fontfamily{\IfiF@font}
+    \fontsize{32}{35pt}\selectfont 
+    \@title
+
+    \vskip 0pt plus 1fill
+    \fontsize{17}{20pt}\selectfont 
+    \IfiF@subtitle
+
+    \vskip 0pt plus 2fill\relax
+    \@author\\[0.5ex] \IfiF@kind}}%
+  \ifthenelse{\equal{\IfiF@isbn}{}}
+    {}
+    {\put(3.5,11.2){\vbox to 2.8cm {\hsize=15.5cm
+     \raggedright
+     \vfill
+     \fontfamily{\IfiF@font}
+     \fontsize{17}{20pt}\selectfont
+     \begin{tabular}{@{}ll}
+       ISBN& \IfiF@isbn\\[0.5ex]
+       ISSN& \IfiF@issn\\
+     \end{tabular}
+     \vfill}}}}}
+
+
+%% Find the best font:
+
+\newcommand{\IfiF@font}{phv}  % Helvetica is always available, but use
+\IfFileExists{t1ua1.fd}{\renewcommand{\IfiF@font}{ua1}}{} % Arial if possible.
+
+
+%% Determine the term (as in "Spring 2012"):
+
+\newcounter{IfiF@cur@year}   \setcounter{IfiF@cur@year}{\the\year}
+\newcounter{IfiF@cur@month}  \setcounter{IfiF@cur@month}{\the\month}
+
+\ifthenelse{\theIfiF@cur@month<7}
+  {\newcommand{\IfiF@term@eng}{Spring}%
+   \newcommand{\IfiF@term@bm}{v\aa ren}%
+   \newcommand{\IfiF@term@nn}{v\aa ren}}
+  {\newcommand{\IfiF@term@eng}{Autumn}%
+   \newcommand{\IfiF@term@bm}{h\o sten}%
+   \newcommand{\IfiF@term@nn}{hausten}}
+\newcommand{\IfiF@term}{\csname IfiF@term@\IfiF@lang\endcsname}
+\newcommand{\IfiF@year}{\arabic{IfiF@cur@year}}
+
+
+%% Other utilities:
+
+\newcommand{\IfiF@blankpage}{%
+    \thispagestyle{empty}
+    \null
+    \newpage}
+
+\endinput
