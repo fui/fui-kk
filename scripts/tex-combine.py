@@ -36,7 +36,7 @@ def tex_combine(semester, verbose=False):
 
     tex_contents = deque([])
 
-    with open('./tex/header.tex') as f:
+    with open('./resources/tex/header.tex') as f:
         tex_contents.append(f.read())
 
     for course_code, course_data in semester_data.items():
@@ -58,7 +58,7 @@ def tex_combine(semester, verbose=False):
             print('Could not open '+path+' ! Skipping...')
             tex_contents.append("\nThe course "+course_code+" file is missing!\n")
 
-    with open('./tex/tail.tex') as f:
+    with open('./resources/tex/tail.tex') as f:
         tex_contents.append(f.read())
 
     tex_final = "\n\n".join(tex_contents)
