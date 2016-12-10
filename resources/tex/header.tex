@@ -5,6 +5,7 @@
 \usepackage{babel,epsfig,moreverb,ifikompendiumforside,float}
 \usepackage{enumitem}
 \usepackage{color}
+\usepackage{etoolbox}
 \usepackage[
     colorlinks,
     citecolor=black,              % I like links with standard black color
@@ -19,6 +20,8 @@
 \subtitle{Vår 2016}
 
 \date{\today}
+
+\AtBeginEnvironment{quote}{\itshape}
 
 \floatstyle{ruled}
 \restylefloat{figure}
