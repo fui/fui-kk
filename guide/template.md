@@ -1,10 +1,10 @@
 <!---
-Selvhjelpsfil for KK-gjengen
+Guide / Eksempel for KK oppsummering
 Denne kommentaren blir ikke vist.
 -->
 
 Avsnitt om studentenes meninger, basert på avkrysning. Om du nevner en
-karakter fra valgene i skjema, f.eks. *Meget Bra*, bruk stjernetegn(asterisk)
+karakter fra valgene i skjema, f.eks. *Meget bra*, bruk stjernetegn(asterisk)
 for kursiv, og samme store bokstaver som du leser ut av rapporten. Ikke list
 opp tall og prosenter, men trekk frem det viktigste.
 
