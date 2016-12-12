@@ -45,6 +45,8 @@ if __name__ == '__main__':
     semesters = get_semesters("./data")
     courses = OrderedDict()
     for s in semesters:
+        if s[0] == '.':
+            continue
         p = "./data/"+s+"/semester.json"
         semester = json.load(open(p), object_pairs_hook=OrderedDict)
         for course in semester:
