@@ -13,6 +13,7 @@ import os
 import sys
 import json
 import argparse
+import re
 from collections import OrderedDict, deque
 
 def get_args():
@@ -25,6 +26,15 @@ def get_args():
 
 def data_folder(semester):
     return "./data/"+semester+"/"
+
+def extract_number(course_code):
+    m = re.search(r"[0-9]{4}", course_code)
+    if m is None:
+        return None
+    return int(m.group(0))
+
+def latex_label_value(label, value, post=""):
+    return r"".join([r"\textbf{",label,r":} ",str(value),post])
 
 def tex_combine(semester, verbose=False):
     path = "./resources/course_names/all.json"
@@ -40,6 +50,11 @@ def tex_combine(semester, verbose=False):
         tex_contents.append(f.read())
 
     for course_code, course_data in semester_data.items():
+        if extract_number(course_code) >= 4000:
+            labels = ["Respondents","of"]
+        else:
+            labels = ["Antall besvarelser","av"]
+
         path = semester_folder + "json/" + course_code + ".numbers.json"
         participation_string = ""
         try:
@@ -48,16 +63,13 @@ def tex_combine(semester, verbose=False):
                 invited = int(participation_data["invited"])
                 answered = int(participation_data["answered"])
                 participation = answered / invited
-
-                participation_string = r'''
-                \textbf{Respondents -}
-                \textbf{Invited:} INVITED
-                \textbf{Answered:} ANSWERED
-                \textbf{Participation:} PARTICIPATION
-                '''.replace("INVITED", str(invited))\
-                .replace("ANSWERED", str(answered))\
-                .replace("PARTICIPATION", "{0:.1f}".format(participation*100))
-                participation_string += r"\%"
+                participation_string = r" ".join([
+                r"\textbf{", labels[0], r":}",
+                str(answered),
+                labels[1],
+                str(invited),
+                "({0:.1f}\%)".format(participation*100)
+                ])
         except FileNotFoundError:
             print('Could not open '+path+' ! Skipping...')
             participation_string = ("\nThe course "+course_code+" numbers.json file is missing!\n")
