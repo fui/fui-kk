@@ -63,7 +63,6 @@ def main():
                 print(" -> "+newpath)
                 print(root)
 
-    delete = True
     while delete:
         delete = False
         for root, subdirs, files in os.walk(args.input):

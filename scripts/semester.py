@@ -34,7 +34,7 @@ def main(semester_dir):
     for f in files:
         course_name = f.replace(".stats.json", "")
         semester_data[course_name] = get_course_data(semester_dir+"/json/"+f)
-    dump_to_file(semester_data, semester_dir+"/semester.json")
+    dump_to_file(semester_data, semester_dir+"/courses.json")
 
 if __name__ == '__main__':
     if len(sys.argv) < 2:
