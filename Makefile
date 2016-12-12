@@ -29,6 +29,7 @@ tex:
 	sed -i.bak 's/å/å/g' ./data/*/md/*.md
 	find ./data -type f -name *.md.bak -delete
 	./scripts/tex.sh V2016
+	python3 scripts/participation_summary.py V2016
 	python3 scripts/tex-combine.py -s V2016
 
 pdf: tex
