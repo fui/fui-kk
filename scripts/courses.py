@@ -21,9 +21,8 @@ def dump_to_file(data, filename):
 def get_semester_order(start_year, stop_year):
     start_year = int(start_year)
     stop_year = int(stop_year)
-
     s_order = []
-    for i in range(2000,2030):
+    for i in range(start_year,stop_year):
         s_order.append("V"+str(i))
         s_order.append("H"+str(i))
     return s_order
