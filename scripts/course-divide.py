@@ -16,7 +16,7 @@ from collections import OrderedDict
 import json
 
 def course_divide(semester, num):
-    p = "./data/"+semester+"/semester.json"
+    p = "./data/"+semester+"/courses.json"
     semester = json.load(open(p), object_pairs_hook=OrderedDict)
     courses = []
     for name, data in semester.items():

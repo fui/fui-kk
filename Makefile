@@ -11,7 +11,7 @@ install-mac: # mac only :)
 
 download:
 	python3 scripts/download-reports.py
-	python3 scripts/sort-downloads.py --delete
+	python3 scripts/sort-downloads.py -i downloads -o data
 
 sample_data:
 	git submodule init
@@ -43,9 +43,14 @@ plots:
 
 all: scales json plots tex pdf
 
+open:
+	open data/V2016/report/fui-kk_report*.pdf
+
 help:
 	@echo "Available targets:"
 	@echo "download"
+	@echo "sample_data"
+	@echo "all"
 	@echo "json"
 	@echo "tex"
 	@echo "pdf"
@@ -54,13 +59,13 @@ clean:
 	@find ./data -type f -path "*/tex/*.tex" -delete
 	@find ./data -type f -path "*/plots/*.pdf" -delete
 	@find ./data -type f -path "*/plots/*.png" -delete
-	@find ./data -type d -name "tex" -delete
-	@find ./data -type d -name "plots" -delete
-	@find ./data -type f -name "courses.json" -delete
 	@find ./data -type f -name "semester.json" -delete
+	@find ./data -type f -name "courses.json" -delete
 	@find ./data -type f -name "*.responses.json" -delete
 	@find ./data -type f -name "*.stats.json" -delete
-	@find ./data -type d -name "report" -delete
+	@find ./data -type d -name "tex" -exec rm -rf {} +
+	@find ./data -type d -name "plots" -exec rm -rf {} +
+	@find ./data -type d -name "report" -exec rm -rf {} +
 
 
 .PHONY: default install-mac download sample_data json tex pdf scales plots all help clean

@@ -47,7 +47,7 @@ if __name__ == '__main__':
     for s in semesters:
         if s[0] == '.':
             continue
-        p = "./data/"+s+"/semester.json"
+        p = "./data/"+s+"/courses.json"
         semester = json.load(open(p), object_pairs_hook=OrderedDict)
         for course in semester:
             if course not in courses:

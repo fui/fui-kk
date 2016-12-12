@@ -41,7 +41,7 @@ def tex_combine(semester, verbose=False):
     course_names = json.load(open(path), object_pairs_hook=OrderedDict)
 
     semester_folder = data_folder(semester)
-    path = semester_folder + "semester.json"
+    path = semester_folder + "courses.json"
     semester_data = json.load(open(path), object_pairs_hook=OrderedDict)
 
     tex_contents = deque([])
