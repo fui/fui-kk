@@ -80,6 +80,7 @@ def tex_combine(semester, verbose=False):
                 tex_contents.append("".join([
                 r"\section{",course_code,r" - ",
                                 course_names[course_code],r"}"]))
+                tex_contents.append(r"\label{course:"+course_code+r"}")
                 tex_contents.append(participation_string)
                 tex_contents.append(r'''
                 \begin{figure}[H]
