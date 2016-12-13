@@ -24,6 +24,7 @@ import os
 import sys
 import argparse
 import json
+import re
 
 import requests
 
@@ -102,7 +103,21 @@ def render_html(name, stats, content):
         invited=stats['invited']
     )
 
+def get_id(url):
+    p = re.compile("id=[0-9]{1,10}")
+    m = p.search(url)
+    if m is None:
+        return ""
+    return m.group(0)[3:]
+
 def download_files(driver, args):
+    downloaded = []
+    try:
+        with open(args.out+"/downloaded.txt", 'r') as f:
+            downloaded = f.read().split("\n")
+    except FileNotFoundError:
+        pass
+
     driver.get('https://nettskjema.uio.no/user/form/list.html')
 
     forms = driver.find_elements_by_css_selector('.forms .formName')
@@ -124,6 +139,10 @@ def download_files(driver, args):
     stats_path = os.path.join(args.out, 'stats')
 
     for (name, url) in formdata:
+        form_id = get_id(url)
+        if form_id in downloaded:
+            print("Skipping {} ({})".format(name,form_id))
+            continue
         print('Fetching ' + name)
 
         results_url = url.replace('preview', 'results')
@@ -133,20 +152,23 @@ def download_files(driver, args):
             'started': try_to_find_int(driver, '.saved-submissions .number'),
             'invited': try_to_find_int(driver, '.valid-invitations .number')
         }
-
+        name_underscored = name.replace("/", "_")
         if args.tsv:
             tsv_url = url.replace('preview', 'download') + '&encoding=utf-8'
             response = session.get(tsv_url)
-            write_to_file(tsv_path, name, 'tsv', response.text)
+            write_to_file(tsv_path, name_underscored, 'tsv', response.text)
 
         if args.html:
             html_url = url.replace('preview', 'report/web') + '&include-open=1&remove-profile=1'
             response = session.get(html_url)
-            write_to_file(html_path, name, 'html', render_html(name, stats, response.text))
+            write_to_file(html_path, name_underscored, 'html', render_html(name, stats, response.text))
 
         if args.stats:
             stats_json = json.dumps(stats)
-            write_to_file(stats_path, name, 'json', stats_json)
+            write_to_file(stats_path, name_underscored, 'json', stats_json)
+
+        with open(args.out+"/downloaded.txt", 'a') as f:
+            f.write(form_id+"\n")
 
 def main():
     args = get_args()
