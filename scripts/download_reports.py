@@ -25,6 +25,7 @@ import sys
 import argparse
 import json
 import re
+import pickle
 
 import requests
 
@@ -110,19 +111,36 @@ def get_id(url):
         return ""
     return m.group(0)[3:]
 
-def download_files(driver, args):
-    downloaded = []
+def read_list(path):
     try:
-        with open(args.out+"/downloaded.txt", 'r') as f:
-            downloaded = f.read().split("\n")
+        with open(path, 'r') as f:
+            return f.read().split("\n")
     except FileNotFoundError:
-        pass
+        return []
 
-    driver.get('https://nettskjema.uio.no/user/form/list.html')
+def read_binary(path):
+    try:
+        with open (path, 'rb') as fp:
+            return pickle.load(fp)
+    except FileNotFoundError:
+        return None
 
-    forms = driver.find_elements_by_css_selector('.forms .formName')
+def write_binary(path, data):
+    folder = os.path.dirname(path)
+    if not os.path.exists(folder):
+        os.makedirs(folder)
+    with open(path, 'wb') as fp:
+        pickle.dump(data, fp)
 
-    formdata = [(form.text, form.get_attribute('href')) for form in forms]
+def download_files(driver, args):
+    downloaded = read_list(args.out+"/downloaded.txt")
+
+    formdata = read_binary(args.out+"/formdata.dat")
+    if not formdata:
+        driver.get('https://nettskjema.uio.no/user/form/list.html')
+        forms = driver.find_elements_by_css_selector('.forms .formName')
+        formdata = [(form.text, form.get_attribute('href')) for form in forms]
+        write_binary(args.out+"/formdata.dat",formdata)
 
     if args.filter:
         filtered = [x for x in formdata if args.filter in x[0]]
@@ -141,9 +159,9 @@ def download_files(driver, args):
     for (name, url) in formdata:
         form_id = get_id(url)
         if form_id in downloaded:
-            print("Skipping {} ({})".format(name,form_id))
+            print("Skipping {} (id={})".format(name,form_id))
             continue
-        print("Fetching {} ({})".format(name,form_id))
+        print("Fetching {} (id={})".format(name,form_id))
 
         results_url = url.replace('preview', 'results')
         driver.get(results_url)
