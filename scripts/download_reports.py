@@ -143,7 +143,7 @@ def download_files(driver, args):
         if form_id in downloaded:
             print("Skipping {} ({})".format(name,form_id))
             continue
-        print('Fetching ' + name)
+        print("Fetching {} ({})".format(name,form_id))
 
         results_url = url.replace('preview', 'results')
         driver.get(results_url)

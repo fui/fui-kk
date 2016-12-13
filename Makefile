@@ -10,8 +10,8 @@ install-mac: # mac only :)
 	pip3 install beautifulsoup4
 
 download:
-	python3 scripts/download-reports.py
-	python3 scripts/sort-downloads.py -i downloads -o data
+	python3 scripts/download_reports.py
+	python3 scripts/sort_downloads.py -i downloads -o data
 
 sample_data:
 	git submodule init
@@ -19,7 +19,7 @@ sample_data:
 	ln -s sample_data data
 
 json:
-	python3 scripts/parse-tsv.py -s all
+	python3 scripts/parse_tsv.py -s all
 	python3 scripts/course.py data
 	python3 scripts/semester.py
 	python3 scripts/courses.py
@@ -30,7 +30,7 @@ tex:
 	find ./data -type f -name *.md.bak -delete
 	./scripts/tex.sh V2016
 	python3 scripts/participation_summary.py V2016
-	python3 scripts/tex-combine.py -s V2016
+	python3 scripts/tex_combine.py -s V2016
 
 pdf: tex
 	./scripts/pdf.sh V2016
@@ -39,7 +39,7 @@ scales:
 	python3 scripts/misc/scales.py
 
 plots:
-	python3 scripts/plot-courses.py
+	python3 scripts/plot_courses.py
 
 all: scales json plots tex pdf
 
