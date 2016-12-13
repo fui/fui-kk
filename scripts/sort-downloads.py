@@ -29,22 +29,25 @@ def get_args():
 def main():
     args = get_args()
     delete = args.delete
+    exclude_pattern = re.compile('(testskjema)|(INF9)|(\*\*\*)|(\.DS_Store)')
+    semester_pattern = re.compile('(V|H)[0-9]{4}')
+    course_code_pattern = re.compile('(([A-Z]{2,4}-){0-1}[A-Z]{2,4}[0-9]{4})([A-Z]{2,4}){0,1}')
     for root, subdirs, files in os.walk(args.input):
         for file_x in files:
             path = os.path.join(root, file_x)
-            if(file_x == ".DS_Store"):
-                os.remove(path)
-                if args.verbose:
-                    print("rm: "+path)
-                continue
             filename, extension = os.path.splitext(path)
-            m = re.search('(V|H)[0-9]{4}',path)
+            m = re.search(exclude_pattern,path)
+            if m is not None:
+                print("Excluded: " + path)
+                continue
+            m = re.search(semester_pattern,path)
             if m is None:
+                print("Skipped - No semester: " + path)
                 continue
             semester = m.group(0)
-            # TODO: Fix this to correctly catch course code INF4015NSA
-            m = re.search('([A-Z]{2,4}[0-9]{4})|([A-Z]{2,4}-[A-Z]{2,4}[0-9]{4})',path)
+            m = re.search(course_code_pattern, path)
             if m is None:
+                print("Skipped - No course code: " + path)
                 continue
             course = m.group(0)
 
