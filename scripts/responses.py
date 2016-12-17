@@ -31,11 +31,12 @@ def get_args():
             for d in dirs:
                 if d.replace("/", "") == "all":
                     sys.exit("Error: Recursion check failed - 'all' folder!")
-                os.system("python3 scripts/parse-tsv.py -s "+d)
+                if d[0] != ".":
+                    os.system("python3 scripts/responses.py -s "+d)
             sys.exit()
         else:
-            args.input = os.path.join("data",args.semester,"tsv")
-            args.output = os.path.join("data",args.semester,"json")
+            args.input = os.path.join("data",args.semester,"downloads/tsv")
+            args.output = os.path.join("data",args.semester,"outputs/responses")
 
     if not args.input or not args.output:
         sys.exit("Error: Specify input and output using -i and -o parameters, or semester using -s parameter")
@@ -44,10 +45,7 @@ def get_args():
 def parse_course_tsv(tsv_filename):
     data = []
     with open(tsv_filename) as tsv_file:
-        #for column in zip(*[line for line in csv.reader(tsv_file, delimiter='\t', quoting=csv.QUOTE_NONE)]):
-            #print("Column: "+str(column))
         for row in csv.reader(tsv_file, delimiter='\t'):
-            #print("Row: "+str(row))
             data.append(row)
     labels = data[0]
     responses_raw = data[1:]
@@ -92,14 +90,14 @@ def parse_tsv_files(input_path, output_dir):
         if os.path.isfile(output_dir):
             sys.exit("Error: Out arg must be directory.")
     else:
-        os.mkdir(output_dir)
+        os.makedirs(output_dir)
 
     for tsv_filename in input_files:
         coursename = tsv_filename.replace(".tsv","")
         coursename = coursename.replace(input_path, "")
         coursename = coursename.replace("/", "")
         content = parse_course_tsv(tsv_filename)
-        dump_to_file(content, os.path.join(output_dir,coursename)+".responses.json")
+        dump_to_file(content, os.path.join(output_dir,coursename)+".json")
 
 def main():
     args = get_args()

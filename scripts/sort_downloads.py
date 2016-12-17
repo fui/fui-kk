@@ -29,34 +29,35 @@ def get_args():
 def main():
     args = get_args()
     delete = args.delete
-    exclude_pattern = re.compile('(testskjema)|(INF9)|(\*\*\*)|(\.DS_Store)')
+    exclude_pattern = re.compile('(testskjema)|(\*\*\*)|(\.DS_Store)')
     semester_pattern = re.compile('(V|H)[0-9]{4}')
-    course_code_pattern = re.compile('(([A-Z]{2,4}-){0-1}[A-Z]{2,4}[0-9]{4})([A-Z]{2,4}){0,1}')
+    course_code_pattern = re.compile('(([A-Z]{2,4}-){0,1}[A-Z]{2,4}[0-9]{4})([A-Z]{2,4}){0,1}')
     for root, subdirs, files in os.walk(args.input):
         for file_x in files:
             path = os.path.join(root, file_x)
             filename, extension = os.path.splitext(path)
-            m = re.search(exclude_pattern,path)
+            m = exclude_pattern.search(path)
             if m is not None:
                 print("Excluded: " + path)
                 continue
-            m = re.search(semester_pattern,path)
+            m = semester_pattern.search(path)
             if m is None:
                 print("Skipped - No semester: " + path)
                 continue
             semester = m.group(0)
-            m = re.search(course_code_pattern, path)
+            m = course_code_pattern.search(path)
             if m is None:
                 print("Skipped - No course code: " + path)
                 continue
             course = m.group(0)
 
-            target_folder = os.path.join(args.output, semester, extension[1:])
+            dir_name = extension[1:]
+            if dir_name == "json":
+                dir_name = "participation"
+            target_folder = os.path.join(args.output, semester, "downloads", dir_name)
             os.makedirs( target_folder, exist_ok=True )
             newpath = os.path.join(target_folder, course + extension )
 
-            if root.endswith("stats"):
-                newpath = newpath.replace(".json", ".numbers.json")
             if delete:
                 os.rename(path, newpath)
             else:

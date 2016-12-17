@@ -87,9 +87,9 @@ def plot_course(course_name, courses, output, scales, semester):
     plt.close('all')
 
 def generate_plots(courses, scales, semester_name):
-    semester = json.load(open("./data/"+semester_name+"/courses.json"), object_pairs_hook=OrderedDict)
+    semester = json.load(open("./data/"+semester_name+"/outputs/courses.json"), object_pairs_hook=OrderedDict)
     courses_to_plot = list(semester.keys())
-    outdir = "".join(["./data/", semester_name, "/plots/"])
+    outdir = "".join(["./data/", semester_name, "/outputs/plots/"])
     if not os.path.exists(outdir):
         os.makedirs(outdir)
     for c in courses_to_plot:

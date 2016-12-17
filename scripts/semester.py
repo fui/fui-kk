@@ -27,22 +27,19 @@ def get_course_data(path):
 
 def main(semester_dir):
     files = []
-    for f in os.listdir(semester_dir+"/json"):
-        if f.endswith(".stats.json"):
+    for f in os.listdir(semester_dir+"/outputs/stats"):
+        if f.endswith(".json"):
             files.append(f)
     semester_data = OrderedDict()
     for f in files:
-        course_name = f.replace(".stats.json", "")
-        semester_data[course_name] = get_course_data(semester_dir+"/json/"+f)
-    dump_to_file(semester_data, semester_dir+"/courses.json")
+        course_name = f.replace(".json", "")
+        semester_data[course_name] = get_course_data(semester_dir+"/outputs/stats/"+f)
+    dump_to_file(semester_data, semester_dir+"/outputs/courses.json")
 
 if __name__ == '__main__':
-    if len(sys.argv) < 2:
-        semesters = []
-        for root, subdirs, files in os.walk("./data"):
-            semesters = subdirs
-            break
-        for sem in semesters:
-            main("./data/"+sem)
-    else:
-        main(sys.argv[1])
+    semesters = []
+    for root, subdirs, files in os.walk("./data"):
+        semesters = filter(lambda x: ".git" not in x, subdirs)
+        break
+    for sem in semesters:
+        main("./data/"+sem)
