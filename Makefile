@@ -19,14 +19,14 @@ sample_data:
 	ln -s sample_data data
 
 json:
-	python3 scripts/parse_tsv.py -s all
+	python3 scripts/responses.py -s all
 	python3 scripts/course.py data
 	python3 scripts/semester.py
 	python3 scripts/courses.py
 
 tex:
-	rename -v -f -S inf INF ./data/*/md/*
-	sed -i.bak 's/å/å/g' ./data/*/md/*.md
+	rename -v -f -S inf INF ./data/*/inputs/md/*
+	sed -i.bak 's/å/å/g' ./data/*/inputs/md/*.md
 	find ./data -type f -name *.md.bak -delete
 	./scripts/tex.sh V2016
 	python3 scripts/participation_summary.py V2016
@@ -44,7 +44,7 @@ plots:
 all: scales json plots tex pdf
 
 open:
-	open data/V2016/report/fui-kk_report*.pdf
+	open data/V2016/outputs/report/fui-kk_report*.pdf
 
 help:
 	@echo "Available targets:"
@@ -56,16 +56,6 @@ help:
 	@echo "pdf"
 
 clean:
-	@find ./data -type f -path "*/tex/*.tex" -delete
-	@find ./data -type f -path "*/plots/*.pdf" -delete
-	@find ./data -type f -path "*/plots/*.png" -delete
-	@find ./data -type f -name "semester.json" -delete
-	@find ./data -type f -name "courses.json" -delete
-	@find ./data -type f -name "*.responses.json" -delete
-	@find ./data -type f -name "*.stats.json" -delete
-	@find ./data -type d -name "tex" -exec rm -rf {} +
-	@find ./data -type d -name "plots" -exec rm -rf {} +
-	@find ./data -type d -name "report" -exec rm -rf {} +
-
+	@find ./data -type d -name "outputs" -exec rm -rf {} +
 
 .PHONY: default install-mac download sample_data json tex pdf scales plots all help clean

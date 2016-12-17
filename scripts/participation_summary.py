@@ -50,4 +50,4 @@ if __name__ == '__main__':
         print("Usage: participation_summary semester")
         sys.exit(0)
     semester_folder = "./data/"+sys.argv[1]+"/"
-    participation_summary(semester_folder+"courses.json", semester_folder+"participation.tex")
+    participation_summary(semester_folder+"/outputs/courses.json", semester_folder+"/outputs/participation.tex")

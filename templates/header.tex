@@ -1,0 +1,88 @@
+\documentclass[norsk,a4paper,11pt]{report}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{helvet}
+\usepackage{babel,epsfig,moreverb,ifikompendiumforside,float}
+\usepackage{enumitem}
+\usepackage{color}
+\usepackage{etoolbox}
+\usepackage{varioref}
+\usepackage[
+    colorlinks,
+    citecolor=black,              % I like links with standard black color
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+]{hyperref}                       % Links in TOC etc.
+\usepackage[all]{hypcap}          % Better links to floating environment
+
+\author{Fagutvalget ved Institutt for informatikk}
+\title{Kursevaluering}
+\subtitle{Vår 2016}
+
+\date{\today}
+
+\AtBeginEnvironment{quote}{\itshape}
+
+\floatstyle{ruled}
+\restylefloat{figure}
+
+% for paragrafer uten innrykk og tomme linjer mellom dem:
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1ex plus 0.5ex minus 0.2ex}
+
+% Lagt inn av josek 19. okt 2009, for bedre utnyttelse av papirarealet:
+\setlength{\textwidth}      {15.0cm}
+\setlength{\textheight}     {24.5cm}
+
+\begin{document}
+
+\ififorside{}
+
+% Lagt inn av josek 19. okt 2009, disse er best å ha etter uiosloforside:
+\setlength{\topmargin}      {-1.0cm}
+\setlength{\headsep}        {0.5cm}
+\setlength{\oddsidemargin}  {0.5cm}
+\setlength{\evensidemargin} {0.5cm}
+\setlength{\footskip}       {1.0cm}
+\renewcommand{\thesection}{}
+\renewcommand{\thesubsection}{}
+\tableofcontents
+\newpage
+\chapter{Introduksjon}
+\label{chp:intro}
+\section{FUIs kursevaluering}
+Hvert semester utfører Fagutvalget ved Institutt for Informatikk (FUI) en evaluering av alle bachelor- og master-emner på Institutt for Informatikk (IFI).
+
+I 2016 introduserte FUI en ny teknisk løsning rundt kursevalueringen.
+Generell vurdering som vises på grafer er regnet ut basert på et enkelt gjennomsnitt, også tilbake i tid.
+Dette medfører en finere oppdelt skala og vi kan se trender bedre.
+For mer informasjon se \textbf{\hyperref[sec:OS]{Kapittel 3: Teknisk løsning - Open source}} i slutten av rapporten.
+
+\section{Deltakerstatistikk}
+Nedenfor vises deltakelse i FUIs kursevaluering fordelt på kurs, for alle kurs med 100 eller flere inviterte studenter:
+\input{../../outputs/participation.tex}
+
+\section{Fag FUI mener bør trekkes frem}
+Hvert år presenterer FUI noen fag som gjør det veldig bra og noen som har forbedringspotensiale.
+FUI ser på det som svært positivt at mange fag får meget gode tilbakemeldinger og at det derfor er vanskelig å nevne noen, men utelate andre.
+
+\hyperref[course:INF1234]{\textbf{INF1234 - Eksempelkurs}} har siden V2012 gått fra vurderingen  \emph{Bra} til \emph{Meget bra}.
+
+\begin{quote}
+I felt exemplified.
+\end{quote}
+
+\section{Å lese kursevalueringen}
+Hvert kurs er tredelt og består av
+\begin{itemize}
+    \item Statistikk og graf, generert basert på flervalgsspørsmål.
+    \item Oppsummering av studentenes meninger, skrevet av FUI-medlemmer.
+    \item Utvalgte representative sitater.
+\end{itemize}
+Kurs med veldig få respondenter er med for å kunne se statistikken, og får kortere oppsummeringer og færre sitater.
+
+\newpage
+\chapter{Kurs}
+\label{chp:courses}
+\newpage

@@ -31,23 +31,18 @@ def get_semesters(path):
     semester_order = get_semester_order(2000,2030)
     semesters = []
     for root, subdirs, files in os.walk(path):
-        semesters = subdirs
+        semesters = list(filter(lambda x: x != ".git", subdirs))
         break
 
     indices = [semester_order.index(x) for x in semesters]
     semesters = [x for (y,x) in sorted(zip(indices,semesters))]
     return semesters
 
-def main(dir):
-    pass
-
 if __name__ == '__main__':
     semesters = get_semesters("./data")
     courses = OrderedDict()
     for s in semesters:
-        if s[0] == '.':
-            continue
-        p = "./data/"+s+"/courses.json"
+        p = "./data/"+s+"/outputs/courses.json"
         semester = json.load(open(p), object_pairs_hook=OrderedDict)
         for course in semester:
             if course not in courses:

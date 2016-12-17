@@ -14,6 +14,6 @@ function triplelatex {
     fi
 }
 
-mkdir -p ./data/$1/report
-cd ./data/$1/report
+mkdir -p ./data/$1/outputs/report
+cd ./data/$1/outputs/report
 triplelatex fui-kk_report_$1.tex

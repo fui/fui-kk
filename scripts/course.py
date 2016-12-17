@@ -14,18 +14,23 @@ import json
 from collections import OrderedDict
 
 def dump_to_file(data, filename):
-    with open(filename, 'w') as outfile:
-        json.dump(data, outfile, indent=4, ensure_ascii=False)
+    folder = os.path.dirname(filename)
+    if not os.path.exists(folder):
+        os.makedirs(folder)
+    with open(filename, 'w') as out_file:
+        json.dump(data, out_file, indent=4, ensure_ascii=False)
 
-def count_answers(path):
-    course = json.load(open(path), object_pairs_hook=OrderedDict)
-    numbers = json.load(open(path.replace(".responses.json", ".numbers.json")))
+def read_from_file(filename):
+    with open(filename, 'r') as in_file:
+        return json.load(in_file, object_pairs_hook=OrderedDict)
+
+def generate_stats(responses, participation):
     stats = OrderedDict()
-    started = int(numbers["started"])
-    answered = int(numbers["answered"])
+    started = int(participation["started"])
+    answered = int(participation["answered"])
     if(answered == 0):
         return None
-    invited = int(numbers["invited"])
+    invited = int(participation["invited"])
     percentage = 100;
     if(invited > 0):
         percentage = 100 * answered/invited;
@@ -41,14 +46,14 @@ def count_answers(path):
     language = ""
 
     scales = json.load(open("data/scales.json"))
-    for question in course:
+    for question in responses:
         if question in scales["questions"]:
             if language == "":
                 if question[0:3] == "Hva":
                     language = "NO"
                 if question[0:3] == "How":
                     language = "EN"
-            responses = course[question]
+            question_answers = responses[question]
             scale_key = scales["questions"][question]["scale"]
             qid = scales["questions"][question]["qid"]
             scale = scales["scales"][scale_key]
@@ -59,14 +64,14 @@ def count_answers(path):
             counts = {}
             total = 0;
             ctr = 0;
-            for response in responses:
-                if response not in scales["invalid"]:
+            for answer in question_answers:
+                if answer not in scales["invalid"]:
                     ctr += 1
-                    total += scale[response]
-                if response in counts:
-                    counts[response] += 1
+                    total += scale[answer]
+                if answer in counts:
+                    counts[answer] += 1
                 else:
-                    counts[response] = 1
+                    counts[answer] = 1
             if ctr == 0:
                 average = "None"
             else:
@@ -100,25 +105,38 @@ def count_answers(path):
     stats["questions"] = questions
     return stats
 
-def main(path):
-    stats = count_answers(path)
-    if(stats is None):
-        return
-    path = path.replace(".responses.json", ".stats.json")
-    dump_to_file(stats, path)
-    # os.remove(path.replace(".stats.json", ".numbers.json"))
+def generate_stats_file(responses_path, participation_path, output_path):
+    responses = read_from_file(responses_path)
+    participation = read_from_file(participation_path)
+    stats = generate_stats(responses, participation)
+    if stats is not None:
+        dump_to_file(stats, output_path)
+
+def generate_stats_dir(responses_dir, participation_dir, output_dir):
+    for filename in os.listdir(responses_dir):
+        if ".json" in filename:
+            responses_path = os.path.join(responses_dir,filename)
+            participation_path = os.path.join(participation_dir,filename)
+            output_path = os.path.join(output_dir, filename)
+            generate_stats_file(responses_path, participation_path, output_path)
+
+def generate_stats_semester(semester_path):
+    generate_stats_dir(semester_path+"/outputs/responses",
+                       semester_path+"/downloads/participation",
+                       semester_path+"/outputs/stats")
 
 if __name__ == '__main__':
-    if(len(sys.argv) == 1):
-        sys.exit("Must specify file path (overwrites file)")
-    path = sys.argv[1]
-    input_files = []
-    if os.path.isfile(path):
-        input_files.append(path)
-    else:
-        for (root, dirs, files) in os.walk(path):
-            for file_x in files:
-                if file_x.endswith(".responses.json") and file_x.startswith("INF"):
-                    input_files.append(os.path.join(root, file_x))
-    for f in input_files:
-        main(f)
+    if len(sys.argv) == 1 or not os.path.isdir(sys.argv[1]):
+        sys.exit("Must specify dir")
+    directory = sys.argv[1]
+    semester_dirs = []
+    for (root, dirs, files) in os.walk(directory):
+        for d in dirs:
+            if "." not in d:
+                semester_dirs.append(os.path.join(root, d))
+                # TODO: Move this somewhere else:
+                os.makedirs(os.path.join(root,d,"inputs","md"), exist_ok=True)
+                os.makedirs(os.path.join(root,d,"inputs","tex"), exist_ok=True)
+        break
+    for d in semester_dirs:
+        generate_stats_semester(d)

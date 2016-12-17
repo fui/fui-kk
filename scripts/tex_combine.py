@@ -37,16 +37,17 @@ def latex_label_value(label, value, post=""):
     return r"".join([r"\textbf{",label,r":} ",str(value),post])
 
 def tex_combine(semester, verbose=False):
-    path = "./resources/course_names/all.json"
+    semester_folder = data_folder(semester)
+
+    path = semester_folder+"/resources/course_names/all.json"
     course_names = json.load(open(path), object_pairs_hook=OrderedDict)
 
-    semester_folder = data_folder(semester)
-    path = semester_folder + "courses.json"
+    path = semester_folder + "/outputs/courses.json"
     semester_data = json.load(open(path), object_pairs_hook=OrderedDict)
 
     tex_contents = deque([])
 
-    with open('./resources/tex/header.tex') as f:
+    with open(semester_folder+"/inputs/tex/header.tex") as f:
         tex_contents.append(f.read())
 
     for course_code, course_data in semester_data.items():
@@ -55,7 +56,7 @@ def tex_combine(semester, verbose=False):
         else:
             labels = ["Antall besvarelser","av"]
 
-        path = semester_folder + "json/" + course_code + ".numbers.json"
+        path = semester_folder + "downloads/participation/" + course_code + ".json"
         participation_string = ""
         try:
             with open(path,'r') as f:
@@ -74,7 +75,7 @@ def tex_combine(semester, verbose=False):
             print('Could not open '+path+' ! Skipping...')
             participation_string = ("\nThe course "+course_code+" numbers.json file is missing!\n")
 
-        path = semester_folder + "tex/" + course_code + ".tex"
+        path = semester_folder + "outputs/tex/" + course_code + ".tex"
         try:
             with open(path,'r') as f:
                 tex_contents.append("".join([
@@ -95,12 +96,12 @@ def tex_combine(semester, verbose=False):
             print('Could not open '+path+' ! Skipping...')
             tex_contents.append("\nThe course "+course_code+" tex file is missing!\n")
 
-    with open('./resources/tex/tail.tex') as f:
+    with open(semester_folder+"/inputs/tex/tail.tex") as f:
         tex_contents.append(f.read())
 
     tex_final = "\n\n".join(tex_contents)
 
-    report_folder = semester_folder + "report/"
+    report_folder = semester_folder + "/outputs/report/"
     os.makedirs(report_folder, exist_ok = True)
     report_name = "fui-kk_report_"+semester+".tex"
 

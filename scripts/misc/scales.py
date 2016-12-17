@@ -94,7 +94,7 @@ def main():
     lookup["How do you rate the difficulty level of the midterm examination(s)?"] = {"qid":"midterm_level", "scale": "amount"}
     lookup["How do you rate the difficulty level of the final examination?"] = {"qid":"final_level", "scale": "amount"}
 
-    invalid = ["No opinion", "Not relevant", "Not applicable", "Ikke relevant", "Ikke aktuelt", "Vet ikke"]
+    invalid = ["No opinion", "Not relevant", "Not applicable", "Ikke relevant", "Ikke aktuelt", "Vet ikke", ""]
     grades = {"scales":scales, "questions": lookup, "invalid": invalid}
 
 
