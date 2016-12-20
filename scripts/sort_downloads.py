@@ -22,6 +22,8 @@ def get_args():
     argparser.add_argument('--output', '-o', help='Output directory (default="./data")', type=str, default='./data')
     argparser.add_argument('--verbose', '-v', help='Print moves', action="store_true")
     argparser.add_argument('--delete', '-d', help='Delete moved files', action="store_true")
+    argparser.add_argument('--exclude', '-e', default=r'(testskjema)|(\*\*\*)', type=str,
+                            help=r'Exclude regex(default="(testskjema)|(\*\*\*)")')
     args = argparser.parse_args()
 
     return args
@@ -29,15 +31,15 @@ def get_args():
 def main():
     args = get_args()
     delete = args.delete
-    exclude_pattern = re.compile('(testskjema)|(\*\*\*)|(\.DS_Store)')
-    semester_pattern = re.compile('(V|H)[0-9]{4}')
-    course_code_pattern = re.compile('(([A-Z]{2,4}-){0,1}[A-Z]{2,4}[0-9]{4})([A-Z]{2,4}){0,1}')
+    exclude_pattern = re.compile(args.exclude)
+    semester_pattern = re.compile(r'(V|H)[0-9]{4}')
+    course_code_pattern = re.compile(r'(([A-Z]{2,4}-){0,1}[A-Z]{2,4}[0-9]{4})([A-Z]{2,4}){0,1}')
     for root, subdirs, files in os.walk(args.input):
         for file_x in files:
             path = os.path.join(root, file_x)
             filename, extension = os.path.splitext(path)
             m = exclude_pattern.search(path)
-            if m is not None:
+            if m is not None or path[0] == ".":
                 print("Excluded: " + path)
                 continue
             m = semester_pattern.search(path)

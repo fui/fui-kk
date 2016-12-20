@@ -1,8 +1,8 @@
 # Program output:
-output/*
-reports/*
 ghostdriver.log
 data
+downloads
+backup
 data.tgz
 sample_data/*
 
@@ -40,6 +40,3 @@ Desktop.ini
 $RECYCLE.BIN/
 
 # Linux
-
-
-downloads/*
