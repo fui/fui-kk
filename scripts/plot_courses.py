@@ -32,6 +32,7 @@ __license__    = "MIT"
 import multiprocessing, pipes, os, re
 import matplotlib.pyplot as plt
 import json
+import sys
 from collections import OrderedDict
 
 from functools import partial
@@ -95,13 +96,12 @@ def generate_plots(courses, scales, semester_name):
     for c in courses_to_plot:
         plot_course(c, courses, outdir, scales, semester_name)
 
-
-def main():
-    semester = "V2016"
+def plot_courses(semester):
+    semester = sys.argv[1]
     courses = json.load(open("./data/courses.json"), object_pairs_hook=OrderedDict)
     scales = json.load(open("./data/scales.json"), object_pairs_hook=OrderedDict)
     scales = scales["scales"]
     generate_plots(courses, scales, semester)
 
 if __name__ == "__main__":
-    main()
+    plot_courses(sys.argv[1])
