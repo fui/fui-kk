@@ -16,7 +16,7 @@ download:
 sample_data:
 	git submodule init
 	git submodule update
-	ln -s sample_data data
+	cp -r sample_data data
 
 json:
 	python3 scripts/responses.py -s all
