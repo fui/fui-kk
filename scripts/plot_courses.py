@@ -35,6 +35,8 @@ import json
 import sys
 from collections import OrderedDict
 
+from file_funcs import dump_json, load_json
+
 from functools import partial
 
 def get_general_question(course_semester):
@@ -49,7 +51,6 @@ def get_general_question(course_semester):
         sys.exit(1)
 
 def plot_course(course_name, courses, output, scales, semester):
-    print(course_name)
     course = courses[course_name]
     general_question = get_general_question(course[semester])
 
@@ -95,7 +96,7 @@ def plot_course(course_name, courses, output, scales, semester):
     plt.close('all')
 
 def generate_plots(courses, scales, semester_name):
-    semester = json.load(open("./data/"+semester_name+"/outputs/courses.json"), object_pairs_hook=OrderedDict)
+    semester = load_json("./data/"+semester_name+"/outputs/courses.json")
     courses_to_plot = list(semester.keys())
     outdir = "".join(["./data/", semester_name, "/outputs/plots/"])
     if not os.path.exists(outdir):
@@ -105,8 +106,8 @@ def generate_plots(courses, scales, semester_name):
 
 def plot_courses(semester):
     semester = sys.argv[1]
-    courses = json.load(open("./data/courses.json","r"), object_pairs_hook=OrderedDict)
-    scales = json.load(open("./data/"+semester+"/outputs/scales.json","r"), object_pairs_hook=OrderedDict)
+    courses = load_json("./data/courses.json")
+    scales = load_json("./data/"+semester+"/outputs/scales.json")
     generate_plots(courses, scales, semester)
 
 if __name__ == "__main__":

@@ -14,10 +14,11 @@ import os
 import sys
 from collections import OrderedDict
 import json
+from file_funcs import dump_json, load_json
 
 def course_divide(semester, num):
     p = "./data/"+semester+"/outputs/courses.json"
-    semester = json.load(open(p), object_pairs_hook=OrderedDict)
+    semester = load_json(p)
     courses = []
     for name, data in semester.items():
         answers = data["respondents"]["answered"]

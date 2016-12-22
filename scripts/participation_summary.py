@@ -16,9 +16,10 @@ import sys
 import json
 import argparse
 from collections import OrderedDict
+from file_funcs import dump_json, load_json
 
 def participation_summary(input_path, output_path):
-    semester = json.load(open(input_path), object_pairs_hook=OrderedDict)
+    semester = load_json(input_path)
     #if not os.path.exists(output_path):
     with open(output_path, "w") as f:
         f.write("\n".join([
