@@ -15,13 +15,21 @@ import json
 
 def dump_to_file(data, filename):
     with open(filename, 'w') as outfile:
-        json.dump(data, outfile, indent=4, ensure_ascii=False)
+        json.dump(data, outfile, ensure_ascii=False)
 
 def get_course_data(path):
     course = json.load(open(path), object_pairs_hook=OrderedDict)
-    course["general"] = course["questions"]["general"]
-    del course["general"]["counts"]
-    del course["general"]["most_common"]
+    language = course["language"]
+
+    if language == "NO":
+        general_question = "Hva er ditt generelle intrykk av kurset?"
+    elif language == "EN":
+        general_question = "How do you rate the course in general?"
+    else:
+        print("Unknown language: "+language)
+        sys.exit(1)
+
+    course[general_question] = course["questions"][general_question]
     del course["questions"]
     return course
 

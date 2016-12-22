@@ -21,8 +21,13 @@ sample_data:
 	git submodule update
 	cp -r sample_data data
 
-json:
+responses:
 	python3 scripts/responses.py -s all
+
+scales:
+	python3 scripts/scales.py $(SEMESTER)
+
+json:
 	python3 scripts/course.py data
 	python3 scripts/semester.py
 	python3 scripts/courses.py
@@ -38,13 +43,10 @@ tex:
 pdf: tex
 	./scripts/pdf.sh $(SEMESTER)
 
-scales:
-	python3 scripts/misc/scales.py
-
 plots:
 	python3 scripts/plot_courses.py $(SEMESTER)
 
-all: scales json plots tex pdf
+all: responses scales json plots tex pdf
 
 open:
 	open data/$(SEMESTER)/outputs/report/fui-kk_report*.pdf
@@ -56,12 +58,16 @@ web:
 
 help:
 	@echo "Available targets:"
+	@echo "install-mac"
 	@echo "download"
 	@echo "sample_data"
 	@echo "all"
+	@echo "scales"
 	@echo "json"
+	@echo "plots"
 	@echo "tex"
 	@echo "pdf"
+	@echo "web"
 
 clean:
 	@find ./data -type d -name "outputs" -exec rm -rf {} +

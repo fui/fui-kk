@@ -24,7 +24,7 @@ def read_from_file(filename):
     with open(filename, 'r') as in_file:
         return json.load(in_file, object_pairs_hook=OrderedDict)
 
-def generate_stats(responses, participation):
+def generate_stats(responses, participation, scales):
     stats = OrderedDict()
     started = int(participation["started"])
     answered = int(participation["answered"])
@@ -43,31 +43,31 @@ def generate_stats(responses, participation):
 
     questions = OrderedDict()
 
-    language = ""
+    language = None
 
-    scales = json.load(open("data/scales.json"))
     for question in responses:
-        if question in scales["questions"]:
-            if language == "":
-                if question[0:3] == "Hva":
+        if question in scales:
+            if language is None:
+                if "Hva" in question or "Hvordan" in question:
                     language = "NO"
-                if question[0:3] == "How":
+                elif "How" in question or "What" in question:
                     language = "EN"
+                else:
+                    print("Unable to detect language:")
+                    print(question)
+                    sys.exit(1)
             question_answers = responses[question]
-            scale_key = scales["questions"][question]["scale"]
-            qid = scales["questions"][question]["qid"]
-            scale = scales["scales"][scale_key]
+            answer_order = list(reversed(scales[question]["order"]))
+            answer_ignore = scales[question]["ignore"]
+            questions[question] = OrderedDict()
 
-            questions[qid] = OrderedDict()
-            questions[qid]["text"] = question
-
-            counts = {}
+            counts = OrderedDict()
             total = 0;
             ctr = 0;
             for answer in question_answers:
-                if answer not in scales["invalid"]:
+                if answer not in answer_ignore:
                     ctr += 1
-                    total += scale[answer]
+                    total += answer_order.index(answer)
                 if answer in counts:
                     counts[answer] += 1
                 else:
@@ -79,51 +79,52 @@ def generate_stats(responses, participation):
             delta = 1000
             average_text = ""
             if average != "None":
-                for grade in scale:
-                    d = abs(average - scale[grade])
-                    if d < delta:
-                        delta = d
-                        average_text = grade
-            questions[qid]["counts"] = counts
-            questions[qid]["average"] = average
-            questions[qid]["average_text"] = average_text
+                rounded = int(round(average, 0))
+                average_text = answer_order[rounded]
+            questions[question]["counts"] = counts
+            questions[question]["average"] = average
+            questions[question]["average_text"] = average_text
 
-            max_people = 0
-            most_common = []
-            for c in counts:
-                if counts[c] > max_people:
-                    most_common = [c]
-                    max_people = counts[c]
-                elif counts[c] == max_people:
-                    most_common.append(c)
-            questions[qid]["most_common"] = OrderedDict()
-            questions[qid]["most_common"]["words"] = most_common
-            questions[qid]["most_common"]["num"] = max_people
-            questions[qid]["most_common"]["per"] = max_people/answered
+            # max_people = 0
+            # most_common = []
+            # for c in counts:
+            #     if counts[c] > max_people:
+            #         most_common = [c]
+            #         max_people = counts[c]
+            #     elif counts[c] == max_people:
+            #         most_common.append(c)
+            # questions[question]["most_common_answer"] = OrderedDict()
+            # questions[question]["most_common_answer"]["text"] = most_common
+            # questions[question]["most_common_answer"]["people"] = max_people
+            # questions[question]["most_common_answer"]["percentage"] = max_people/answered
 
     stats["language"] = language
     stats["questions"] = questions
     return stats
 
-def generate_stats_file(responses_path, participation_path, output_path):
+def generate_stats_file(responses_path, participation_path, output_path, scales):
     responses = read_from_file(responses_path)
     participation = read_from_file(participation_path)
-    stats = generate_stats(responses, participation)
+    stats = generate_stats(responses, participation, scales)
     if stats is not None:
         dump_to_file(stats, output_path)
 
-def generate_stats_dir(responses_dir, participation_dir, output_dir):
+def generate_stats_dir(responses_dir, participation_dir, output_dir, scales):
     for filename in os.listdir(responses_dir):
         if ".json" in filename:
             responses_path = os.path.join(responses_dir,filename)
             participation_path = os.path.join(participation_dir,filename)
             output_path = os.path.join(output_dir, filename)
-            generate_stats_file(responses_path, participation_path, output_path)
+            generate_stats_file(responses_path, participation_path, output_path, scales)
 
 def generate_stats_semester(semester_path):
+    scales_path = semester_path+"/outputs/scales.json"
+    with open(scales_path, 'r') as f:
+        scales = json.load(f, object_pairs_hook=OrderedDict)
     generate_stats_dir(semester_path+"/outputs/responses",
                        semester_path+"/downloads/participation",
-                       semester_path+"/outputs/stats")
+                       semester_path+"/outputs/stats",
+                       scales)
 
 if __name__ == '__main__':
     if len(sys.argv) == 1 or not os.path.isdir(sys.argv[1]):

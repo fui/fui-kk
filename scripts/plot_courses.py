@@ -37,22 +37,26 @@ from collections import OrderedDict
 
 from functools import partial
 
-def plot_course(course_name, courses, output, scales, semester):
-    course = courses[course_name]
+def get_general_question(course_semester):
+    language = course_semester["language"]
 
-    if(course[semester]["language"] == "NO"):
-        scale = scales["kvalitet"]
+    if language == "NO":
+        return "Hva er ditt generelle intrykk av kurset?"
+    elif language == "EN":
+        return "How do you rate the course in general?"
     else:
-        scale = scales["quality"]
+        print("Unknown language: "+language)
+        sys.exit(1)
 
-    scale_val = []
-    scale_text = []
-    for (key,val) in scale.items():
-        if not val in scale_val:
-            scale_val.append(val)
-            scale_text.append(key)
+def plot_course(course_name, courses, output, scales, semester):
+    print(course_name)
+    course = courses[course_name]
+    general_question = get_general_question(course[semester])
 
-    scale = [y for (x,y) in sorted(zip(scale_val, scale_text))]
+    scale_text = list(reversed(scales[general_question]["order"]))
+    scale_val = list(range(len(scale_text)))
+
+    scale = scale_text
 
     semester_codes = list(course.keys())
     if semester in semester_codes:
@@ -61,7 +65,10 @@ def plot_course(course_name, courses, output, scales, semester):
         print("Warning: the course {} doesn't have data for {}".format(course_name, semester))
     semesters = list(course.items())
 
-    scores = [course[semester]["general"]["average"] for semester in semester_codes]
+    scores = []
+    for semester in semester_codes:
+        semester_question = get_general_question(course[semester])
+        scores.append(course[semester][semester_question]["average"])
 
     fig = plt.figure(figsize=(10, 5), edgecolor='k')
     plt.title('Generell vurdering fra ' + semester_codes[0])
@@ -76,8 +83,8 @@ def plot_course(course_name, courses, output, scales, semester):
     plt.xticks(semester_nums, semester_codes)
 
     # Rating descriptions along the y-axis
-    plt.ylim(0.5, 6.5)
-    plt.yticks(range(1, len(scale) + 1), scale)
+    plt.ylim(-0.5, len(scale)-0.5)
+    plt.yticks(range(len(scale)), scale)
 
     axis = plt.gca()
     axis.yaxis.grid(True)
@@ -98,9 +105,8 @@ def generate_plots(courses, scales, semester_name):
 
 def plot_courses(semester):
     semester = sys.argv[1]
-    courses = json.load(open("./data/courses.json"), object_pairs_hook=OrderedDict)
-    scales = json.load(open("./data/scales.json"), object_pairs_hook=OrderedDict)
-    scales = scales["scales"]
+    courses = json.load(open("./data/courses.json","r"), object_pairs_hook=OrderedDict)
+    scales = json.load(open("./data/"+semester+"/outputs/scales.json","r"), object_pairs_hook=OrderedDict)
     generate_plots(courses, scales, semester)
 
 if __name__ == "__main__":
