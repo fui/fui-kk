@@ -14,6 +14,8 @@ import requests
 from collections import OrderedDict
 from bs4 import BeautifulSoup
 
+from file_funcs import dump_json, load_json
+
 def get_args():
     argparser = argparse.ArgumentParser(description='Download report data from nettskjema.uio.no')
     argparser.add_argument('--url', '-u', help='URL', type=str)
@@ -27,10 +29,6 @@ def write_page(content, path):
     os.makedirs(dirname, exist_ok=True)
     with open(path+".html", 'wb') as f:
         f.write(content)
-
-def dump_to_file(data, filename):
-    with open(filename, 'w') as outfile:
-        json.dump(data, outfile, indent=4, ensure_ascii=False)
 
 def course_dict(html):
     courses = OrderedDict()
@@ -63,7 +61,7 @@ def course_list(url, path, filters_path):
 
     html = page.content.decode("utf-8")
     courses = course_filter(course_dict(html), filters)
-    dump_to_file(courses, path)
+    dump_json(courses, path)
 
 if __name__ == '__main__':
     args = get_args()

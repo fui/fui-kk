@@ -15,6 +15,7 @@ import json
 import argparse
 import re
 from collections import OrderedDict, deque
+from file_funcs import dump_json, load_json
 
 def get_args():
     argparser = argparse.ArgumentParser(description='Combine tex reports into 1 document')
@@ -40,10 +41,10 @@ def tex_combine(semester, verbose=False):
     semester_folder = data_folder(semester)
 
     path = semester_folder+"/resources/course_names/all.json"
-    course_names = json.load(open(path), object_pairs_hook=OrderedDict)
+    course_names = load_json(path)
 
     path = semester_folder + "/outputs/courses.json"
-    semester_data = json.load(open(path), object_pairs_hook=OrderedDict)
+    semester_data = load_json(path)
 
     tex_contents = deque([])
 

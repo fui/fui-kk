@@ -15,6 +15,8 @@ import json
 from bs4 import BeautifulSoup
 from collections import OrderedDict
 
+from file_funcs import dump_json, load_json
+
 def answer_case(answer_raw):
     answer = answer_raw.upper()
     if answer == "OK":
@@ -31,9 +33,7 @@ def convert_answer_case(scales):
                 [answer_case(x) for x in scales[question][answer_list]]
 
 def scales_add_course(response_file_path, scales):
-    course = OrderedDict()
-    with open(response_file_path, "r") as f:
-        course = json.load(f, object_pairs_hook=OrderedDict)
+    course = load_json(response_file_path)
     for question, answers in course.items():
         if question in scales:
             if "order" not in scales[question]:
@@ -110,8 +110,7 @@ def save_prompt_exit(scales, scales_path):
     print("Do you want to save (overwrite) scales before quitting?(y/n)")
     inp = yes_or_no()
     if inp == "y":
-        with open(scales_path, "w") as f:
-            json.dump(scales, f, indent=4, ensure_ascii=False)
+        dump_json(scales, scales_path)
     sys.exit(1)
 
 class AutofillException(Exception):
@@ -221,26 +220,14 @@ def print_error_check(scales):
     print("")
     return True
 
-def json_loader(path):
-    try:
-        with open(path, "r") as f:
-            scales = json.load(f, object_pairs_hook=OrderedDict)
-    except json.decoder.JSONDecodeError as err:
-        print("ERROR: The file '{}' contains invalid json syntax: {}".format(path,err))
-        sys.exit(1)
-    except FileNotFoundError:
-        print("ERROR: Could not open '{}' for read, file doesn't exist.".format(path))
-        sys.exit(1)
-    return scales
-
 def generate_scales(semester):
     scales = OrderedDict()
     scales_path = "./data/"+semester+"/outputs/scales.json"
     default_scales_path = "./resources/scales.json"
     if not os.path.exists(scales_path):
-        scales = json_loader(default_scales_path)
+        scales = load_json(default_scales_path)
     else:
-        scales = json_loader(scales_path)
+        scales = load_json(scales_path)
 
     if not scales:
         scales = OrderedDict()
@@ -262,9 +249,7 @@ def generate_scales(semester):
         autofill_scales(scales)
     except AutofillException:
         save_prompt_exit(scales, scales_path)
-
-    with open(scales_path, "w") as f:
-        json.dump(scales, f, indent=4, ensure_ascii=False)
+    dump_json(scales, scales_path)
     if print_error_check(scales):
         print("One or more inconsistency detected in " + scales_path)
         print("You will have to edit the file manually to add/edit/remove questions.")

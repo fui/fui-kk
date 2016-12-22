@@ -13,10 +13,7 @@ import sys
 from bs4 import BeautifulSoup
 from collections import OrderedDict
 import json
-
-def dump_to_file(data, filename):
-    with open(filename, 'w') as outfile:
-        json.dump(data, outfile, indent=4, ensure_ascii=False)
+from file_funcs import dump_json, load_json
 
 def get_semester_order(start_year, stop_year):
     start_year = int(start_year)
@@ -43,9 +40,9 @@ if __name__ == '__main__':
     courses = OrderedDict()
     for s in semesters:
         p = "./data/"+s+"/outputs/courses.json"
-        semester = json.load(open(p), object_pairs_hook=OrderedDict)
+        semester = load_json(p)
         for course in semester:
             if course not in courses:
                 courses[course] = OrderedDict()
             courses[course][s] = semester[course]
-    dump_to_file(courses, "./data/courses.json")
+    dump_json(courses, "./data/courses.json")

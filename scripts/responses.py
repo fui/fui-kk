@@ -16,6 +16,8 @@ import argparse
 from bs4 import BeautifulSoup
 from collections import OrderedDict
 
+from file_funcs import dump_json, load_json
+
 def get_args():
     argparser = argparse.ArgumentParser(
                 description = "Parse tsv file(s) and output json course data")
@@ -69,10 +71,6 @@ def init_csv_reader():
             overflow = True
             csv_max = int(csv_max/16)
 
-def dump_to_file(data, filename):
-    with open(filename, 'w') as outfile:
-        json.dump(data, outfile, indent=4, ensure_ascii=False)
-
 def parse_tsv_files(input_path, output_dir):
     if not os.path.exists(input_path):
         sys.exit("Error: invalid input path '{}'".format(input_path))
@@ -97,7 +95,7 @@ def parse_tsv_files(input_path, output_dir):
         coursename = coursename.replace(input_path, "")
         coursename = coursename.replace("/", "")
         content = parse_course_tsv(tsv_filename)
-        dump_to_file(content, os.path.join(output_dir,coursename)+".json")
+        dump_json(content, os.path.join(output_dir,coursename)+".json")
 
 def main():
     args = get_args()

@@ -12,13 +12,10 @@ import sys
 from bs4 import BeautifulSoup
 from collections import OrderedDict
 import json
-
-def dump_to_file(data, filename):
-    with open(filename, 'w') as outfile:
-        json.dump(data, outfile, ensure_ascii=False)
+from file_funcs import dump_json, load_json
 
 def get_course_data(path):
-    course = json.load(open(path), object_pairs_hook=OrderedDict)
+    course = load_json(path)
     language = course["language"]
 
     if language == "NO":
@@ -42,7 +39,7 @@ def main(semester_dir):
     for f in files:
         course_name = f.replace(".json", "")
         semester_data[course_name] = get_course_data(semester_dir+"/outputs/stats/"+f)
-    dump_to_file(semester_data, semester_dir+"/outputs/courses.json")
+    dump_json(semester_data, semester_dir+"/outputs/courses.json")
 
 if __name__ == '__main__':
     semesters = []

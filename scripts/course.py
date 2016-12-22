@@ -12,17 +12,7 @@ import sys
 from bs4 import BeautifulSoup
 import json
 from collections import OrderedDict
-
-def dump_to_file(data, filename):
-    folder = os.path.dirname(filename)
-    if not os.path.exists(folder):
-        os.makedirs(folder)
-    with open(filename, 'w') as out_file:
-        json.dump(data, out_file, indent=4, ensure_ascii=False)
-
-def read_from_file(filename):
-    with open(filename, 'r') as in_file:
-        return json.load(in_file, object_pairs_hook=OrderedDict)
+from file_funcs import dump_json, load_json
 
 def generate_stats(responses, participation, scales):
     stats = OrderedDict()
@@ -103,11 +93,11 @@ def generate_stats(responses, participation, scales):
     return stats
 
 def generate_stats_file(responses_path, participation_path, output_path, scales):
-    responses = read_from_file(responses_path)
-    participation = read_from_file(participation_path)
+    responses = load_json(responses_path)
+    participation = load_json(participation_path)
     stats = generate_stats(responses, participation, scales)
     if stats is not None:
-        dump_to_file(stats, output_path)
+        dump_json(stats, output_path)
 
 def generate_stats_dir(responses_dir, participation_dir, output_dir, scales):
     for filename in os.listdir(responses_dir):
@@ -119,8 +109,7 @@ def generate_stats_dir(responses_dir, participation_dir, output_dir, scales):
 
 def generate_stats_semester(semester_path):
     scales_path = semester_path+"/outputs/scales.json"
-    with open(scales_path, 'r') as f:
-        scales = json.load(f, object_pairs_hook=OrderedDict)
+    scales = load_json(scales_path)
     generate_stats_dir(semester_path+"/outputs/responses",
                        semester_path+"/downloads/participation",
                        semester_path+"/outputs/stats",
