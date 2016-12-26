@@ -52,9 +52,11 @@ open:
 	open data/$(SEMESTER)/outputs/report/fui-kk_report*.pdf
 
 web:
-	#mkdir -p data/$(SEMESTER)/outputs/web/converted
-	#./scripts/web.sh $(SEMESTER)
+	./scripts/web.sh $(SEMESTER)
 	python3 ./scripts/web_reports.py data/$(SEMESTER)
+
+score:
+	python3 ./scripts/score.py $(SEMESTER)
 
 help:
 	@echo "Available targets:"

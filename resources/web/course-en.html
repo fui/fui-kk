@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>$COURSE_CODE - $COURSE_NAME</title>
+  <link rel="stylesheet" href="kurs.css" type="text/css">
+  <script src="highcharts.js"></script>
+  <script src="vurdering.js"></script>
+  <script type="text/plain" id="emnedata">$COURSE_RATING</script>
+</head>
+<body><div id="vrtx-content">
+	<div class="vrtx-header-false vrtx-more-false white-box vrtx-distach-bottom vrtx-main-content-first vrtx-main-content-last" id="vrtx-main-content" role="main">
+<div class="vrtx-box-content">
+
+<h2 class="fui_header">FUI's course evaluation</h2>
+<h1 class="fui_emne">$COURSE_CODE - $COURSE_NAME</h1>
+<div class="fui_vurdering" data-emnekode="$COURSE_CODE"></div>
+
+$MAIN_BODY
+
+${include:file file=[../fellestekst/main-after.html]}
+</div>
+</div>
+
+<div id="vrtx-additional-content">
+<div class="vrtx-frontpage-box vrtx-more-false vrtx-distach-bottom vrtx-additional-content-first" id="vrtx-additional-content-1">
+
+<h2>Information</h2>
+
+<div class="vrtx-box-content">
+<p><b>Generell assessment: </b><em>$GENERAL_AVERAGE_TEXT</em></p>
+<p><b>Semester: </b>$SEMESTER</p>
+<p>$PARTICIPATION_STRING</p>
+<p><b>Data: </b><a href="stats/$COURSE_CODE.js">JSON</a></p>
+
+</div>
+</div>
+
+<div class="vrtx-frontpage-box vrtx-header-false vrtx-distach-bottom grey-box" id="vrtx-additional-content-2">
+<div class="vrtx-more"><span><a class="vrtx-link-check" href="$COURSE_URL">Course website</a></span></div>
+</div>
+${include:file file=[../fellestekst/kontakt.html]}</div>
+</div>
+</body>
+</html>
