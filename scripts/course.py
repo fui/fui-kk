@@ -14,8 +14,9 @@ import json
 from collections import OrderedDict
 from file_funcs import dump_json, load_json
 
-def generate_stats(responses, participation, scales):
-    stats = OrderedDict()
+def generate_stats(responses, participation, scales, stats=None):
+    if stats is None:
+        stats = OrderedDict()
     started = int(participation["started"])
     answered = int(participation["answered"])
     if(answered == 0):
@@ -92,28 +93,41 @@ def generate_stats(responses, participation, scales):
     stats["questions"] = questions
     return stats
 
-def generate_stats_file(responses_path, participation_path, output_path, scales):
+def generate_stats_file(responses_path, participation_path, output_path, scales, course):
     responses = load_json(responses_path)
     participation = load_json(participation_path)
-    stats = generate_stats(responses, participation, scales)
+    stats = OrderedDict()
+    stats["course"] = course
+    stats = generate_stats(responses, participation, scales, stats)
     if stats is not None:
         dump_json(stats, output_path)
 
-def generate_stats_dir(responses_dir, participation_dir, output_dir, scales):
+def generate_stats_dir(responses_dir, participation_dir, output_dir, scales, course_names, semester_name):
     for filename in os.listdir(responses_dir):
         if ".json" in filename:
+            course = OrderedDict()
+            course_code = os.path.splitext(filename)[0]
+            try:
+                course_name = course_names[course_code]
+            except KeyError:
+                course_name = "Unknown"
+                print("Warning: could not find name for course " + course_code)
+            course["code"] = course_code
+            course["name"] = course_name
+            course["semester"] = semester_name
             responses_path = os.path.join(responses_dir,filename)
             participation_path = os.path.join(participation_dir,filename)
             output_path = os.path.join(output_dir, filename)
-            generate_stats_file(responses_path, participation_path, output_path, scales)
+            generate_stats_file(responses_path, participation_path, output_path, scales, course)
 
-def generate_stats_semester(semester_path):
+def generate_stats_semester(semester_path, semester_name):
     scales_path = semester_path+"/outputs/scales.json"
     scales = load_json(scales_path)
+    course_names = load_json("./resources/course_names/all.json")
     generate_stats_dir(semester_path+"/outputs/responses",
                        semester_path+"/downloads/participation",
                        semester_path+"/outputs/stats",
-                       scales)
+                       scales, course_names, semester_name)
 
 if __name__ == '__main__':
     if len(sys.argv) == 1 or not os.path.isdir(sys.argv[1]):
@@ -129,4 +143,4 @@ if __name__ == '__main__':
                 os.makedirs(os.path.join(root,d,"inputs","tex"), exist_ok=True)
         break
     for d in semester_dirs:
-        generate_stats_semester(d)
+        generate_stats_semester(d, os.path.basename(d))

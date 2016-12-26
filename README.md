@@ -38,6 +38,12 @@ make tex
 make pdf
 ```
 
+## Web reports
+```
+make json
+make web
+```
+
 ## Publish raw data:
 
 ### Mount DAV
