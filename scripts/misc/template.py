@@ -8,8 +8,7 @@ __copyright__  = "Ole Herman Schumacher Elgesem"
 __credits__    = ["Person1", "Person2", "Person3"]
 __version__    = "0.1"
 __license__    = "MIT"
-# This file is subject to the terms and conditions defined in
-# file 'LICENSE.txt', which is part of this source code package.
+# This file is subject to the terms and conditions defined in 'LICENSE.txt'
 
 import os
 import sys
