@@ -1,6 +1,6 @@
 **File:** README.md<br>
 **Project:** FUI-KK<br>
-**Date:** 2016-06-03<br>
+**Date:** 2016-12-26<br>
 **License:** MIT LICENSE
 
 # FUI Course evaluation software
@@ -55,7 +55,7 @@ Use script `upload-reports.py` to move html reports to the mounted folder struct
 
 ## Folder structure
 
-### data folder
+### ./data
 
 Reports and survey answers are downloaded to `download/` and sorted into `data/`.
 This folder contains *everything*, html reports, json statistics, plots etc. for all semesters.
@@ -63,13 +63,25 @@ Note that `downloads` and `data` folders are in `.gitignore` so git doesn't trac
 This means you can work on the real data in the same project folder as you do development,
 you will *not* push confidential content to github.
 
-### old folders
+### ./scripts
+Python and bash scripts. See Makefile for example usage.
+
+### ./old
 
 `scripts/old/` contain old scripts which are no longer in use.
 
-### misc folders
+### ./misc
 
-`misc/` and `scripts/misc` contain files and scripts that are not important for one semester run of kk.
+`misc/` and `scripts/misc` contain files that can be ignored.
+
+## Contributors
+Thank you to everyone who has been involved with this project over the years, including:
+ * [https://github.com/larstvei](Lars Tveito)
+ * [https://github.com/knneth](Kenneth Klette Jonassen)
+ * [https://github.com/bendikro](Bendik Rønning Opstad)
+ * [https://github.com/helgany](Helga Nyrud)
+ * [https://github.com/olehermanse](Ole Herman Schumacher Elgesem)
+ * [https://github.com/evestera](Erik Vesteraas)
 
 ## MIT License
 
