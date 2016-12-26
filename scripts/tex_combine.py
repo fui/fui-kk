@@ -34,9 +34,6 @@ def extract_number(course_code):
         return None
     return int(m.group(0))
 
-def latex_label_value(label, value, post=""):
-    return r"".join([r"\textbf{",label,r":} ",str(value),post])
-
 def tex_combine(semester, verbose=False):
     semester_folder = data_folder(semester)
 
