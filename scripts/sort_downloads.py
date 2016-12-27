@@ -33,7 +33,7 @@ def main():
     delete = args.delete
     exclude_pattern = re.compile(args.exclude)
     semester_pattern = re.compile(r'(V|H)[0-9]{4}')
-    course_code_pattern = re.compile(r'(([A-Z]{2,4}-){0,1}[A-Z]{2,4}[0-9]{4})([A-Z]{2,4}){0,1}')
+    course_code_pattern = re.compile(r'(([A-Z]{1,5}-){0,1}[A-Z]{1,5}[0-9]{3,4})([A-Z]{1,5}){0,1}')
     for root, subdirs, files in os.walk(args.input):
         for file_x in files:
             path = os.path.join(root, file_x)
