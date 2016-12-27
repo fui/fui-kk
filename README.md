@@ -63,6 +63,10 @@ Note that `downloads` and `data` folders are in `.gitignore` so git doesn't trac
 This means you can work on the real data in the same project folder as you do development,
 you will *not* push confidential content to github.
 
+This is a mirror of the data folder used by FUI, without file contents:
+
+https://github.com/fui/fui-kk-data-structure
+
 ### ./scripts
 Python and bash scripts. See Makefile for example usage.
 
