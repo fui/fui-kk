@@ -30,14 +30,16 @@ __license__    = "MIT"
 # DEALINGS IN THE SOFTWARE.
 
 import multiprocessing, pipes, os, re
+import matplotlib
+matplotlib.use('agg')
 import matplotlib.pyplot as plt
 import json
 import sys
 from collections import OrderedDict
+from functools import partial
 
 from file_funcs import dump_json, load_json
 
-from functools import partial
 
 def get_general_question(course_semester):
     language = course_semester["language"]

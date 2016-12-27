@@ -1,0 +1,30 @@
+language: python
+env:
+  global:
+    - CI=true
+
+matrix:
+  include:
+    - os: linux
+      python: 3.5
+    - os: linux
+      python: 3.4
+    - os: osx
+      language: generic
+
+install:
+    - chmod u+x travis/install.sh
+    - travis/install.sh
+    - pip3 --version
+
+script:
+    - make sample_data
+    - make responses
+    - make scales
+    - make json
+    - make plots
+    # - make all
+    # - py.test
+
+notifications:
+    email: false
