@@ -25,7 +25,7 @@ responses:
 	python3 scripts/responses.py -s all
 
 scales:
-	python3 scripts/scales.py $(SEMESTER)
+	python3 scripts/scales.py all
 
 json:
 	python3 scripts/course.py data
@@ -46,7 +46,7 @@ pdf: tex
 plots:
 	python3 scripts/plot_courses.py $(SEMESTER)
 
-all: responses scales json plots tex pdf
+all: responses scales json plots tex pdf web
 
 open:
 	open data/$(SEMESTER)/outputs/report/fui-kk_report*.pdf
