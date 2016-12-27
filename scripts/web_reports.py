@@ -29,7 +29,7 @@ def get_participation_string(participation, language):
         answered,
         invited,
         labels = labels,
-        percentage = answered / invited * 100)
+        percentage = 0 if invited == 0 else (answered / invited * 100))
 
 def web_report_course(summary_path, stat_path, output_path, html_templates, courses):
     with open(summary_path,'r') as f:

@@ -34,6 +34,24 @@ def extract_number(course_code):
         return None
     return int(m.group(0))
 
+def get_participation_string(participation, language):
+    if language == "EN":
+        labels = ["Respondents","of"]
+    elif language == "NO":
+        labels = ["Antall besvarelser","av"]
+    else:
+        print("Unknown language: " + str(language))
+        sys.exit(1)
+    invited = int(participation["invited"])
+    answered = int(participation["answered"])
+    return r"\textbf{lcb}{labels[0]}:{rcb} {} {labels[1]} {} ({percentage:.1f}\%)".format(
+        answered,
+        invited,
+        labels = labels,
+        lcb = r"{",
+        rcb = r"}",
+        percentage = 0 if invited == 0 else (answered / invited * 100))
+
 def tex_combine(semester, verbose=False):
     semester_folder = data_folder(semester)
 
@@ -49,26 +67,17 @@ def tex_combine(semester, verbose=False):
         tex_contents.append(f.read())
 
     for course_code, course_data in semester_data.items():
+        language = course_data["language"]
         if extract_number(course_code) >= 4000:
-            labels = ["Respondents","of"]
+            langueage = "EN"
         else:
-            labels = ["Antall besvarelser","av"]
+            language = "NO"
 
         path = semester_folder + "downloads/participation/" + course_code + ".json"
         participation_string = ""
         try:
-            with open(path,'r') as f:
-                participation_data = json.load(f)
-                invited = int(participation_data["invited"])
-                answered = int(participation_data["answered"])
-                participation = answered / invited
-                participation_string = r" ".join([
-                r"\textbf{", labels[0], r":}",
-                str(answered),
-                labels[1],
-                str(invited),
-                "({0:.1f}\%)".format(participation*100)
-                ])
+            participation = load_json(path)
+            participation_string = get_participation_string(participation, language)
         except FileNotFoundError:
             print('Could not open '+path+' ! Skipping...')
             participation_string = ("\nThe course "+course_code+" numbers.json file is missing!\n")
@@ -76,9 +85,12 @@ def tex_combine(semester, verbose=False):
         path = semester_folder + "outputs/tex/" + course_code + ".tex"
         try:
             with open(path,'r') as f:
-                tex_contents.append("".join([
-                r"\section{",course_code,r" - ",
-                                course_names[course_code],r"}"]))
+                try:
+                    course_name = course_names[course_code]
+                except KeyError:
+                    course_name = "Unknown course name"
+                    print("Warning: Unknown course name:" + course_code)
+                tex_contents.append(r"\section{"+course_code+r" - "+course_name+r"}")
                 tex_contents.append(r"\label{course:"+course_code+r"}")
                 tex_contents.append(participation_string)
                 tex_contents.append(r'''
