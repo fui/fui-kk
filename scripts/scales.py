@@ -255,8 +255,18 @@ def generate_scales(semester):
         print("You will have to edit the file manually to add/edit/remove questions.")
         sys.exit(1)
 
+def all_semesters():
+    for (dirpath, dirnames, filenames) in os.walk("./data"):
+        for semester in dirnames:
+            if semester[0] != ".":
+                generate_scales(semester)
+        break
+
 if __name__ == '__main__':
     if len(sys.argv) != 2:
         print("Usage: python3 ./scripts/scales.py SEMESTER")
         sys.exit(1)
-    generate_scales(sys.argv[1])
+    if sys.argv[1] == "all":
+        all_semesters()
+    else:
+        generate_scales(sys.argv[1])
