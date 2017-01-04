@@ -92,3 +92,22 @@ float: right;
 div.vrtx-more a:before {
 display: none;
 }
+
+/* D3-kk */
+.chart {
+  font-family: sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: black;
+  shape-rendering: crispEdges;
+}
+
+.tooltip {
+  position: absolute;
+  padding: 3px;
+  border-radius: 2px;
+  background: white;
+}
