@@ -11,7 +11,7 @@ __license__    = "MIT"
 import os
 import sys
 import json
-import argparse
+import re
 from collections import OrderedDict
 from file_funcs import dump_json, load_json
 
@@ -31,7 +31,26 @@ def get_participation_string(participation, language):
         labels = labels,
         percentage = 0 if invited == 0 else (answered / invited * 100))
 
-def web_report_course(summary_path, stat_path, output_path, html_templates, courses):
+def create_chart_js(question, question_stats, scales, chart_id):
+    chart_data = []
+    answers = scales[question]["order"]
+    for answer in answers:
+        if answer in question_stats["counts"]:
+            count = question_stats["counts"][answer]
+        else:
+            count = 0
+        chart_data.append('{{ label: "{}", value: {} }}'.format(answer, count))
+    if len(answers) == 6:
+        colors = "['#1a9850', '#91cf60', '#d9ef8b', '#fee08b', '#fc8d59', '#d73027']"
+    elif len(answers) == 5:
+        colors = "['#d7191c', '#fdae61', '#91cf60', '#abd9e9', '#2c7bb6']"
+    else:
+        print("Warning: Chart for '{}' omitted. No colors defined for questions with {} alternatives".format(
+            question, len(answers)))
+        return ''
+    return 'insert_chart("#{}", [{}], {});'.format(chart_id, ", ".join(chart_data), colors)
+
+def web_report_course(summary_path, stat_path, output_path, html_templates, courses, scales):
     with open(summary_path,'r') as f:
         summary = f.read()
     summary = summary.replace("</p>\n</blockquote>", "</blockquote>")
@@ -56,6 +75,7 @@ def web_report_course(summary_path, stat_path, output_path, html_templates, cour
     course_url = "https://www.uio.no/studier/emner/matnat/ifi/"+course_code
 
     main_contents = []
+    additional_js = []
     if language == "NO":
         main_contents.append(r"<h2>Vurdering:</h2>")
         main_contents.append(r"(Gjennomsnittlige svar på de viktigste spørsmålene)<br />")
@@ -63,8 +83,11 @@ def web_report_course(summary_path, stat_path, output_path, html_templates, cour
         main_contents.append(r"<h2>Assessment:</h2>")
         main_contents.append(r"(Average answers to the most important questions)<br />")
 
-    for question, qustion_stats in stats["questions"].items():
-        main_contents.append(r"<i>"+question+"</i> " + qustion_stats["average_text"] + " <br />")
+    for question, question_stats in stats["questions"].items():
+        main_contents.append(r"<i>"+question+"</i> " + question_stats["average_text"] + " <br />")
+        chart_id = 'chart_' + re.sub('[^a-z]+', '', question.lower())
+        main_contents.append('<div id="{}" class="chart"></div>'.format(chart_id))
+        additional_js.append(create_chart_js(question, question_stats, scales, chart_id))
 
     if language == "NO":
         main_contents.append(r"<h2>Oppsummering:</h2>")
@@ -103,6 +126,7 @@ def web_report_course(summary_path, stat_path, output_path, html_templates, cour
         "$SEMESTER": semester,
         "$GENERAL_AVERAGE_TEXT": general_average_text,
         "$MAIN_BODY": main_body,
+        "$ADDITIONAL_JS": "\n".join(additional_js),
         "$COURSE_URL": course_url,
         "$COURSE_RATING": str(course_rating).replace("'", '"')
     }
@@ -117,6 +141,7 @@ def web_report_course(summary_path, stat_path, output_path, html_templates, cour
 def web_reports_semester_folder(semester_path):
     semester = os.path.basename(semester_path)
     courses = load_json(semester_path+"/outputs/courses.json")
+    scales = load_json(semester_path+"/outputs/scales.json")
     stats_path = semester_path+"/outputs/stats/"
     summaries_path = semester_path+"/outputs/web/converted"
     upload_path = semester_path+"/outputs/web/upload/"+semester
@@ -140,7 +165,7 @@ def web_reports_semester_folder(semester_path):
         stat_path = os.path.join(stats_path, course_code+".json")
         output_path = os.path.join(upload_path, course_code+".html")
 
-        web_report_course(summary_path, stat_path, output_path, html_templates, courses_all)
+        web_report_course(summary_path, stat_path, output_path, html_templates, courses_all, scales)
 
         course_name = courses[course_code]["course"]["name"]
         links.append('<li><a href="'+course_code+'.html">' + course_code + ' - ' + course_name + '</a></li>')
