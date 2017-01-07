@@ -80,12 +80,12 @@ Python and bash scripts. See Makefile for example usage.
 
 ## Contributors
 Thank you to everyone who has been involved with this project over the years, including:
- * [https://github.com/larstvei](Lars Tveito)
- * [https://github.com/knneth](Kenneth Klette Jonassen)
- * [https://github.com/bendikro](Bendik Rønning Opstad)
- * [https://github.com/helgany](Helga Nyrud)
- * [https://github.com/olehermanse](Ole Herman Schumacher Elgesem)
- * [https://github.com/evestera](Erik Vesteraas)
+ * [Lars Tveito](https://github.com/larstvei)
+ * [Kenneth Klette Jonassen](https://github.com/knneth)
+ * [Bendik Rønning Opstad](https://github.com/bendikro)
+ * [Helga Nyrud](https://github.com/helgany)
+ * [Ole Herman Schumacher Elgesem](https://github.com/olehermanse)
+ * [Erik Vesteraas](https://github.com/evestera)
 
 ## MIT License
 
