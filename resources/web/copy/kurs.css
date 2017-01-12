@@ -110,4 +110,7 @@ display: none;
   padding: 3px;
   border-radius: 2px;
   background: white;
+  font-family: sans-serif;
+  font-size: 14px;
+  line-height: 16px;
 }

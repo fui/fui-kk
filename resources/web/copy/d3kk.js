@@ -1,19 +1,20 @@
 "use strict";
 
-var width = 400;
-var height = 30;
-
 var tooltip = d3.select("body").append("div").attr("class", "tooltip");
 
 function show_tooltip(message) {
-    tooltip.html(message).style("left", d3.event.pageX + "px").style("top", d3.event.pageY - 28 + "px").style("opacity", 1);
+    tooltip.html(message).style("left", d3.event.pageX + 3 + "px").style("top", d3.event.pageY - 28 + "px").style("opacity", 1);
 }
 
 function hide_tooltip() {
     tooltip.style("opacity", 0);
 }
 
-function insert_chart(target, data, colors) {
+function insert_chart(target_selector, data, colors) {
+    var target = d3.select(target_selector);
+    var width = target.node().getBoundingClientRect().width;
+    var height = 30;
+
     var scale = d3.scale.linear().domain([0, d3.sum(data, function (d) {
         return d.value;
     })]).range([0, width]);
@@ -22,7 +23,7 @@ function insert_chart(target, data, colors) {
         return d.value;
     })]).range([0, 100]);
 
-    var svg = d3.select(target).append("svg").attr("width", width).attr("height", height).on("mouseleave", function (d) {
+    var svg = target.append("svg").attr("width", width).attr("height", height).on("mouseleave", function (d) {
         return hide_tooltip();
     });
 
@@ -85,7 +86,9 @@ function insert_chart(target, data, colors) {
     });
 };
 
-var insert_stacked = function insert_stacked(target, data, colors) {
+var insert_stacked = function insert_stacked(target_selector, data, colors) {
+    var target = d3.select(target_selector);
+    var width = target.node().getBoundingClientRect().width;
     var height = 300;
     var margin = {
         left: 30,
@@ -106,7 +109,7 @@ var insert_stacked = function insert_stacked(target, data, colors) {
 
     var yScale = d3.scale.linear().domain([0, 1]).range([0, height]);
 
-    var svg = d3.select(target).append("svg").attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom).attr("style", "margin-left: -" + margin.left + "px; " + ("margin-right: -" + margin.right + "px;")).on("mouseleave", function (d) {
+    var svg = target.append("svg").attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom).attr("style", "margin-left: -" + margin.left + "px; " + ("margin-right: -" + margin.right + "px;")).on("mouseleave", function (d) {
         return hide_tooltip();
     }).append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
