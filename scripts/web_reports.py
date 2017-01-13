@@ -102,19 +102,16 @@ def web_report_course(summary_path, stat_path, output_path, html_templates, cour
         additional_js.append(create_chart_js(question, question_stats, scales, chart_id))
         options.append('<option value="{}">{}</option>'.format(question_id, question))
 
-    main_contents.append('<select id="select_question" onchange="select_question();">')
+    main_contents.append('<select id="select_question" onchange="show_selected_question();">')
     main_contents.extend(options)
     main_contents.append('</select>')
+    main_contents.append('<button onclick="show_all_questions();">{}</button>'.format(
+        'Vis alle' if language == "NO" else 'Show all'
+    ))
     main_contents.extend(questions)
 
     additional_js.append('''
-        var questions = document.querySelectorAll('.question');
-        for (var i = 0; i < questions.length; i++) {
-            questions[i].style.display = 'none';
-        }
-        questions[0].style.display = 'block';
-
-        function select_question(){
+        function show_selected_question() {
             var choice = document.getElementById("select_question").value;
             var questions = document.querySelectorAll('.question');
             for (var i = 0; i < questions.length; i++) {
@@ -122,6 +119,15 @@ def web_report_course(summary_path, stat_path, output_path, html_templates, cour
             }
             document.querySelector('#' + choice).style.display = 'block';
         }
+
+        function show_all_questions() {
+            var questions = document.querySelectorAll('.question');
+            for (var i = 0; i < questions.length; i++) {
+                questions[i].style.display = 'block';
+            }
+        }
+
+        show_selected_question();
     ''')
 
     if language == "NO":
