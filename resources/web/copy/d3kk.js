@@ -47,29 +47,69 @@ function insert_chart(target_selector, data, colors) {
 
     svg.on("click", function () {
         if (!expanded) {
-            svg.selectAll("text").remove();
-            hide_tooltip();
+            (function () {
+                svg.selectAll("text").remove();
+                hide_tooltip();
 
-            var cury = 0;
-            for (var i = 0; i < data.length; i++) {
-                svg.select(".rect-" + i).transition().duration(100).attr("y", cury).transition().duration(100).attr("x", 130);
+                var col_base = 130;
 
-                svg.append("text").transition().delay(200).attr("x", 125).attr("y", cury + height / 2).attr("alignment-baseline", "middle").attr("dominant-baseline", "middle").attr("text-anchor", "end").text(data[i].label);
+                var cury = 0;
 
-                var labelinside = percentage(data[i].value) > 20;
-                var _width = scale(data[i].value);
+                var _loop = function _loop(i) {
+                    svg.select(".rect-" + i).transition().duration(100).attr("y", cury).transition().duration(100).attr("x", col_base);
 
-                svg.append("text").transition().delay(200).attr("x", 130 + (labelinside ? _width - 5 : _width + 5)).attr("y", cury + height / 2).attr("dominant-baseline", "middle").attr("text-anchor", labelinside ? "end" : "start").text(Math.round(percentage(data[i].value)) + "%");
+                    var font_size = 16;
+                    var label_base = col_base - 5;
 
-                cury += height;
-            }
+                    // Make sure the text we are making will fit. Since we are not actually
+                    // rendering the text yet, render dummy nodes to measure.
+                    var measured_text_width = void 0;
+                    do {
+                        var dummy = svg.append("text").attr("font-size", font_size + "px").text(data[i].label);
+                        measured_text_width = dummy.node().getBoundingClientRect().width;
+                        dummy.remove();
+                        if (measured_text_width > label_base) font_size--;
+                    } while (measured_text_width > label_base);
 
-            svg.transition().duration(100).attr("height", cury);
+                    svg.append("text").transition().delay(200).attr("x", label_base).attr("y", cury + height / 2).attr("alignment-baseline", "middle").attr("dominant-baseline", "middle").attr("text-anchor", "end").attr("font-size", font_size + "px").text(data[i].label);
 
-            expanded = true;
+                    var labelinside = percentage(data[i].value) > 20;
+                    var col_width = scale(data[i].value);
+
+                    if (col_width + col_base > width) {
+                        (function () {
+                            col_width = width - col_base;
+
+                            // The following is just a roundabout way to draw a zig-zag marker
+                            // on the column, to indicate that it has been truncated.
+                            var yScale = d3.scale.linear().domain([0, 100]).range([0, height]);
+                            var area = d3.svg.line().x(function (d) {
+                                return d.x / 3 + (col_base + col_width / 2);
+                            }).y(function (d) {
+                                return cury + yScale(d.y);
+                            });
+
+                            svg.append('path').datum([{ 'x': 0, 'y': 0 }, { 'x': 25, 'y': 33 }, { 'x': 0, 'y': 66 }, { 'x': 25, 'y': 100 }, { 'x': 50, 'y': 100 }, { 'x': 25, 'y': 66 }, { 'x': 50, 'y': 33 }, { 'x': 25, 'y': 0 }]).attr('fill', 'white').transition().delay(200).attr('d', area);
+                        })();
+                    }
+
+                    svg.append("text").transition().delay(200).attr("x", col_base + (labelinside ? col_width - 5 : col_width + 5)).attr("y", cury + height / 2).attr("dominant-baseline", "middle").attr("text-anchor", labelinside ? "end" : "start").text(Math.round(percentage(data[i].value)) + "%");
+
+                    cury += height;
+                };
+
+                for (var i = 0; i < data.length; i++) {
+                    _loop(i);
+                }
+
+                svg.transition().duration(100).attr("height", cury);
+
+                expanded = true;
+            })();
         } else {
             (function () {
                 svg.selectAll("text").remove();
+                svg.selectAll("path").remove();
 
                 var curx = 0;
                 svg.selectAll("rect").transition().duration(100).attr("x", function (d) {
