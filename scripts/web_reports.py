@@ -78,10 +78,10 @@ def web_report_course(summary_path, stat_path, output_path, html_templates, cour
     additional_js = []
     if language == "NO":
         main_contents.append(r"<h2>Vurdering:</h2>")
-        main_contents.append(r"(Gjennomsnittlige svar på de viktigste spørsmålene)<br />")
+        main_contents.append(r"Velg spørsmål for å se data fra studentenes vurdering:<br />")
     else:
         main_contents.append(r"<h2>Assessment:</h2>")
-        main_contents.append(r"(Average answers to the most important questions)<br />")
+        main_contents.append(r"Choose a question to see data from the student assessment:<br />")
 
     options = []
     questions = []
@@ -90,12 +90,15 @@ def web_report_course(summary_path, stat_path, output_path, html_templates, cour
         chart_id = 'chart_' + question_id
         questions.append('''
             <div id="{question_id}" class="question">
-                <i>{question}</i> {average} <br />
+                <h4>{question_label}: {question}</h4>
+                <p>{average_label}: {average}</p>
                 <div id="{chart_id}" class="chart"></div>
             </div>
         '''.format(
             question_id=question_id,
+            question_label='Spørsmål' if language == "NO" else 'Question',
             question=question,
+            average_label='Gjennsomsnittlig svar' if language == "NO" else 'Average answer',
             average=question_stats["average_text"],
             chart_id=chart_id
         ))
@@ -105,9 +108,9 @@ def web_report_course(summary_path, stat_path, output_path, html_templates, cour
     main_contents.append('<select id="select_question" onchange="show_selected_question();">')
     main_contents.extend(options)
     main_contents.append('</select>')
-    main_contents.append('<button onclick="show_all_questions();">{}</button>'.format(
-        'Vis alle' if language == "NO" else 'Show all'
-    ))
+    main_contents.append(
+        '<button id="button_show_all_questions" onclick="show_all_questions();">{}</button>'
+            .format('Vis alle' if language == "NO" else 'Show all'))
     main_contents.extend(questions)
 
     additional_js.append('''

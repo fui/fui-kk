@@ -93,6 +93,26 @@ div.vrtx-more a:before {
 display: none;
 }
 
+#select_question {
+  max-width: 70%;
+}
+
+#button_show_all_questions {
+  max-width: 25%;
+}
+
+@media (max-width: 600px) {
+  #select_question {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  #button_show_all_questions {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
 /* D3-kk */
 .chart {
   font-family: sans-serif;
