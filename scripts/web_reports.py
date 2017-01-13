@@ -118,15 +118,19 @@ def web_report_course(summary_path, stat_path, output_path, html_templates, cour
             var choice = document.getElementById("select_question").value;
             var questions = document.querySelectorAll('.question');
             for (var i = 0; i < questions.length; i++) {
-                questions[i].style.display = 'none';
+                questions[i].hidden = true;
             }
-            document.querySelector('#' + choice).style.display = 'block';
+            document.querySelector('#' + choice).hidden = false;
         }
 
         function show_all_questions() {
+            if (!document.querySelector('.question[hidden]')) {
+                show_selected_question();
+                return;
+            }
             var questions = document.querySelectorAll('.question');
             for (var i = 0; i < questions.length; i++) {
-                questions[i].style.display = 'block';
+                questions[i].hidden = false;
             }
         }
 
