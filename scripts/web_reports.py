@@ -83,11 +83,46 @@ def web_report_course(summary_path, stat_path, output_path, html_templates, cour
         main_contents.append(r"<h2>Assessment:</h2>")
         main_contents.append(r"(Average answers to the most important questions)<br />")
 
+    options = []
+    questions = []
     for question, question_stats in stats["questions"].items():
-        main_contents.append(r"<i>"+question+"</i> " + question_stats["average_text"] + " <br />")
-        chart_id = 'chart_' + re.sub('[^a-z]+', '', question.lower())
-        main_contents.append('<div id="{}" class="chart"></div>'.format(chart_id))
+        question_id = re.sub('[^a-z]+', '', question.lower())
+        chart_id = 'chart_' + question_id
+        questions.append('''
+            <div id="{question_id}" class="question">
+                <i>{question}</i> {average} <br />
+                <div id="{chart_id}" class="chart"></div>
+            </div>
+        '''.format(
+            question_id=question_id,
+            question=question,
+            average=question_stats["average_text"],
+            chart_id=chart_id
+        ))
         additional_js.append(create_chart_js(question, question_stats, scales, chart_id))
+        options.append('<option value="{}">{}</option>'.format(question_id, question))
+
+    main_contents.append('<select id="select_question" onchange="select_question();">')
+    main_contents.extend(options)
+    main_contents.append('</select>')
+    main_contents.extend(questions)
+
+    additional_js.append('''
+        var questions = document.querySelectorAll('.question');
+        for (var i = 0; i < questions.length; i++) {
+            questions[i].style.display = 'none';
+        }
+        questions[0].style.display = 'block';
+
+        function select_question(){
+            var choice = document.getElementById("select_question").value;
+            var questions = document.querySelectorAll('.question');
+            for (var i = 0; i < questions.length; i++) {
+                questions[i].style.display = 'none';
+            }
+            document.querySelector('#' + choice).style.display = 'block';
+        }
+    ''')
 
     if language == "NO":
         main_contents.append(r"<h2>Oppsummering:</h2>")
