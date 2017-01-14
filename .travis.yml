@@ -23,6 +23,7 @@ script:
     - make scales
     - make json
     - make plots
+    - make web
     # - make all
     # - py.test
 
