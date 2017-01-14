@@ -108,9 +108,13 @@ def web_report_course(summary_path, stat_path, output_path, html_templates, cour
     main_contents.append('<select id="select_question" onchange="show_selected_question();">')
     main_contents.extend(options)
     main_contents.append('</select>')
-    main_contents.append(
-        '<button id="button_show_all_questions" onclick="show_all_questions();">{}</button>'
-            .format('Vis alle' if language == "NO" else 'Show all'))
+    main_contents.append('''
+        <button id="button_show_all_questions" onclick="show_all_questions();">{}</button>
+        <button id="button_hide_all_questions" onclick="show_all_questions();">{}</button>
+    '''.format(
+        'Vis alle' if language == "NO" else 'Show all',
+        'Skjul' if language == "NO" else 'Hide'
+    ))
     main_contents.extend(questions)
 
     additional_js.append('''
@@ -121,6 +125,9 @@ def web_report_course(summary_path, stat_path, output_path, html_templates, cour
                 questions[i].hidden = true;
             }
             document.querySelector('#' + choice).hidden = false;
+
+            document.querySelector('#button_show_all_questions').style.display = 'inline';
+            document.querySelector('#button_hide_all_questions').style.display = 'none';
         }
 
         function show_all_questions() {
@@ -132,6 +139,9 @@ def web_report_course(summary_path, stat_path, output_path, html_templates, cour
             for (var i = 0; i < questions.length; i++) {
                 questions[i].hidden = false;
             }
+
+            document.querySelector('#button_show_all_questions').style.display = 'none';
+            document.querySelector('#button_hide_all_questions').style.display = 'inline';
         }
 
         show_selected_question();
