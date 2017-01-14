@@ -1,3 +1,6 @@
 [submodule "sample_data"]
 	path = sample_data
 	url = https://github.com/fui/fui-kk-sample-data.git
+[submodule "resources/d3-charts"]
+	path = resources/d3-charts
+	url = https://github.com/fui/D3-kk.git
