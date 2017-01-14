@@ -2,6 +2,8 @@ if [[ $TRAVIS_OS_NAME == 'osx' ]]; then
     brew update;
     brew install freetype;
     brew install python3;
+    brew install rename;
+    brew install pandoc;
     brew tap Homebrew/python
     pip3 install -U pip wheel;
     pip3 install --only-binary=numpy numpy;
