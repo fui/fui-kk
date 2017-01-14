@@ -2,6 +2,7 @@ mkdir -p ./data/$1/outputs/web/converted
 mkdir -p ./data/$1/outputs/web/upload/$1/stats/
 
 cp -r ./resources/web/copy/ ./data/$1/outputs/web/upload/$1/
+cp -r ./resources/d3-charts/dist/ ./data/$1/outputs/web/upload/$1/
 cp -r ./data/$1/outputs/stats/ ./data/$1/outputs/web/upload/$1/stats/
 rename -f -S .json .js ./data/$1/outputs/web/upload/$1/stats/*
 
