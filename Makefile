@@ -55,6 +55,16 @@ web:
 	./scripts/web.sh $(SEMESTER)
 	python3 ./scripts/web_reports.py data/$(SEMESTER)
 
+web-preview: web
+	@echo "---------------------------------------------"
+	@echo " WARNING: Do NOT commit changes to ./docs if"
+	@echo " you are working with real data!"
+	@echo "---------------------------------------------"
+	rm -rf ./docs
+	mkdir ./docs
+	cp -r ./data/$(SEMESTER)/outputs/web/upload/$(SEMESTER)/* ./docs
+	python3 ./scripts/adapt_preview_html.py
+
 score:
 	python3 ./scripts/score.py $(SEMESTER)
 
@@ -70,6 +80,7 @@ help:
 	@echo "tex"
 	@echo "pdf"
 	@echo "web"
+	@echo "web-preview"
 
 clean:
 	@find ./data -type d -name "outputs" -exec rm -rf {} +
