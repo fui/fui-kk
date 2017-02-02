@@ -13,8 +13,12 @@ install-mac: # mac only :)
 
 download:
 	# python3 scripts/download_reports.py
-	python3 scripts/download_reports.py -u fui -f "testskjema"
-	python3 scripts/sort_downloads.py -i downloads -o data -e "(INF9)|(testskjema)|(\*\*\*)"
+	python3 scripts/download_reports.py -u fui -f "H2016"
+	python3 scripts/sort_downloads.py --delete -i downloads -o data -e "(INF9)|(testskjema)|(\*\*\*)"
+	# Warning: Please delete the downloads folder once per semester
+	#          after closing the forms, to ensure that up to date
+	#          reports are downloaded. (The download script will not
+	#          redownload forms with ID in downloaded.txt)
 
 sample_data:
 	git submodule init
@@ -65,8 +69,15 @@ web-preview: web
 	cp -r ./data/$(SEMESTER)/outputs/web/upload/$(SEMESTER)/* ./docs
 	python3 ./scripts/adapt_preview_html.py
 
+upload_raw:
+	# Mount KURS folder to /Volumes/KURS (mac) or similar before running:
+	python3 scripts/upload_reports.py --input ./data --output /Volumes/KURS/ --semester $(SEMESTER)
+
 score:
 	python3 ./scripts/score.py $(SEMESTER)
+
+clean:
+	find ./data -type d -name "outputs" -exec rm -rf {} +
 
 help:
 	@echo "Available targets:"
@@ -82,7 +93,4 @@ help:
 	@echo "web"
 	@echo "web-preview"
 
-clean:
-	@find ./data -type d -name "outputs" -exec rm -rf {} +
-
-.PHONY: default install-mac download sample_data json tex pdf scales plots all help clean web
+.PHONY: default install-mac download sample_data responses scales json tex pdf plots all open web upload_raw score clean help

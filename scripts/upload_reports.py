@@ -20,7 +20,7 @@ def get_args():
                             help='Input directory (default="./data")',
                             type=str, default='./data')
     argparser.add_argument( '--output', '-o',
-                            help='Output directory (default="/Volumes/kursevaluering/")',
+                            help='Output directory (default="/Volumes/KURS/")',
                             type=str, default='/Volumes/KURS/')
     argparser.add_argument( '--semester', '-s', help='Semester', type=str)
     argparser.add_argument( '--verbose', '-v',
@@ -42,18 +42,19 @@ def upload_files(args):
     """
     Moves files from args.input(local) to args.output(mounted webDAV)
 
-    Example of html report locations: (args.semester = "V2016")
+    Example of html report locations:
 
+    args.semester = "V2016"
     args.input = "./data":
     args.output = "/Volumes/KURS/":
 
-    from_path = ./data/V2016/html/INF1000.html
+    from_path = ./data/V2016/downloads/html/INF1000.html
     to_path = /Volumes/KURS/INF1000/V2016/INF1000.html
 
     This function will create the necessary folders and copy the reports.
     """
 
-    fromdir = args.input+"/"+args.semester+"/html/"
+    fromdir = args.input+"/"+args.semester+"/downloads/html/"
     print(fromdir)
     for report in os.listdir(fromdir):
         course = report[:-5]
