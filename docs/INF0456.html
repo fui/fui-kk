@@ -1,0 +1,226 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+
+<head>
+        <link rel="stylesheet" href="https://www.mn.uio.no/vrtx/decorating/resources/dist/src/css/style.css" type="text/css">
+        <link rel="stylesheet" media="only screen and (max-width: 15.5cm) and (orientation : portrait), only screen and (max-width: 17.5cm) and (orientation : landscape)" href="https://www.mn.uio.no/vrtx/decorating/resources/dist/src/css/responsive.css">
+        <link rel="stylesheet" media="print" href="https://www.mn.uio.no/vrtx/decorating/resources/dist/src/css/print.css">
+        <script type="text/javascript" src="https://www.mn.uio.no/vrtx/decorating/resources/dist/src/lib/jquery.min.js"></script>
+    
+  <meta charset="utf-8">
+  <title>INF0456 - Unknown</title>
+  <link rel="stylesheet" href="kurs.css" type="text/css">
+  <link rel="stylesheet" href="d3kk.css" type="text/css">
+  <script src="highcharts.js"></script>
+  <script src="vurdering.js"></script>
+  <script type="text/plain" id="emnedata">[["V2012", 4.67], ["V2014", 4.67], ["V2015", 4.67], ["V2016", 4.67]]</script>
+</head>
+
+<body>
+        <div id="main">
+            <div id="left-main" style="background: #eee;"></div>
+            <div id="right-main" class="uio-main">
+    
+  <div id="vrtx-content">
+    <div class="vrtx-header-false vrtx-more-false white-box vrtx-distach-bottom vrtx-main-content-first vrtx-main-content-last" id="vrtx-main-content" role="main">
+      <div class="vrtx-box-content">
+
+        <h2 class="fui_header">FUI's course evaluation</h2>
+        <h1 class="fui_emne">INF0456 - Unknown</h1>
+        <div class="fui_vurdering" data-emnekode="INF0456"></div>
+
+        <h2>Assessment:</h2>
+Choose a question to see data from the student assessment:<br />
+<select id="select_question" onchange="show_selected_question();">
+<option value="howdoyouratethecourseingeneral">How do you rate the course in general?</option>
+<option value="howdoyouratethelevelofthecourse">How do you rate the level of the course?</option>
+<option value="howdoyouratetheworkloadinproportiontothenumberofcreditsachieved">How do you rate the work load in proportion to the number of credits achieved?</option>
+<option value="thequalityofthelectures">The quality of the lectures?</option>
+<option value="thelecturesrelevanceandusefulnessinregardtorelayingwhatyouneedtolearn">The lectures' relevance and usefulness in regard to relaying what you need to learn?</option>
+<option value="thequalityofthegrouptuitionasawhole">The quality of the group tuition as a whole?</option>
+<option value="inwhatdegreedoesgrouptuitionandweeklyassignmentsgiveyoupracticalskillsandthepossibilitytomakeuseofthetheoryathand">In what degree does group tuition and weekly assignments give you practical skills and the possibility to make use of the theory at hand?</option>
+<option value="arethecurriculumandlearningoutcomesofthecoursesufficientlydefined">Are the curriculum and learning outcomes of the course sufficiently defined?</option>
+<option value="howdoyouratethecoursematerialusedtextbooketc">How do you rate the course material used (text book etc.)?</option>
+<option value="howdoyouratethedifficultyleveloftheobligatoryassignments">How do you rate the difficulty level of the obligatory assignments?</option>
+<option value="whatisyouropinioninregardtothenumberofobligatoryassignments">What is your opinion in regard to the number of obligatory assignments?</option>
+<option value="howdoyouratethedifficultylevelofthefinalexamination">How do you rate the difficulty level of the final examination?</option>
+</select>
+
+        <button id="button_show_all_questions" onclick="show_all_questions();">Show all</button>
+        <button id="button_hide_all_questions" onclick="show_all_questions();">Hide</button>
+    
+
+            <div id="howdoyouratethecourseingeneral" class="question">
+                <h4>Question: How do you rate the course in general?</h4>
+                <p>Average answer: Very good</p>
+                <div id="chart_howdoyouratethecourseingeneral" class="chart"></div>
+            </div>
+        
+
+            <div id="howdoyouratethelevelofthecourse" class="question">
+                <h4>Question: How do you rate the level of the course?</h4>
+                <p>Average answer: Easy</p>
+                <div id="chart_howdoyouratethelevelofthecourse" class="chart"></div>
+            </div>
+        
+
+            <div id="howdoyouratetheworkloadinproportiontothenumberofcreditsachieved" class="question">
+                <h4>Question: How do you rate the work load in proportion to the number of credits achieved?</h4>
+                <p>Average answer: OK</p>
+                <div id="chart_howdoyouratetheworkloadinproportiontothenumberofcreditsachieved" class="chart"></div>
+            </div>
+        
+
+            <div id="thequalityofthelectures" class="question">
+                <h4>Question: The quality of the lectures?</h4>
+                <p>Average answer: Very good</p>
+                <div id="chart_thequalityofthelectures" class="chart"></div>
+            </div>
+        
+
+            <div id="thelecturesrelevanceandusefulnessinregardtorelayingwhatyouneedtolearn" class="question">
+                <h4>Question: The lectures' relevance and usefulness in regard to relaying what you need to learn?</h4>
+                <p>Average answer: Not that good</p>
+                <div id="chart_thelecturesrelevanceandusefulnessinregardtorelayingwhatyouneedtolearn" class="chart"></div>
+            </div>
+        
+
+            <div id="thequalityofthegrouptuitionasawhole" class="question">
+                <h4>Question: The quality of the group tuition as a whole?</h4>
+                <p>Average answer: Good</p>
+                <div id="chart_thequalityofthegrouptuitionasawhole" class="chart"></div>
+            </div>
+        
+
+            <div id="inwhatdegreedoesgrouptuitionandweeklyassignmentsgiveyoupracticalskillsandthepossibilitytomakeuseofthetheoryathand" class="question">
+                <h4>Question: In what degree does group tuition and weekly assignments give you practical skills and the possibility to make use of the theory at hand?</h4>
+                <p>Average answer: Good</p>
+                <div id="chart_inwhatdegreedoesgrouptuitionandweeklyassignmentsgiveyoupracticalskillsandthepossibilitytomakeuseofthetheoryathand" class="chart"></div>
+            </div>
+        
+
+            <div id="arethecurriculumandlearningoutcomesofthecoursesufficientlydefined" class="question">
+                <h4>Question: Are the curriculum and learning outcomes of the course sufficiently defined?</h4>
+                <p>Average answer: Good</p>
+                <div id="chart_arethecurriculumandlearningoutcomesofthecoursesufficientlydefined" class="chart"></div>
+            </div>
+        
+
+            <div id="howdoyouratethecoursematerialusedtextbooketc" class="question">
+                <h4>Question: How do you rate the course material used (text book etc.)?</h4>
+                <p>Average answer: Not that good</p>
+                <div id="chart_howdoyouratethecoursematerialusedtextbooketc" class="chart"></div>
+            </div>
+        
+
+            <div id="howdoyouratethedifficultyleveloftheobligatoryassignments" class="question">
+                <h4>Question: How do you rate the difficulty level of the obligatory assignments?</h4>
+                <p>Average answer: OK</p>
+                <div id="chart_howdoyouratethedifficultyleveloftheobligatoryassignments" class="chart"></div>
+            </div>
+        
+
+            <div id="whatisyouropinioninregardtothenumberofobligatoryassignments" class="question">
+                <h4>Question: What is your opinion in regard to the number of obligatory assignments?</h4>
+                <p>Average answer: High</p>
+                <div id="chart_whatisyouropinioninregardtothenumberofobligatoryassignments" class="chart"></div>
+            </div>
+        
+
+            <div id="howdoyouratethedifficultylevelofthefinalexamination" class="question">
+                <h4>Question: How do you rate the difficulty level of the final examination?</h4>
+                <p>Average answer: Too high</p>
+                <div id="chart_howdoyouratethedifficultylevelofthefinalexamination" class="chart"></div>
+            </div>
+        
+<h2>Summary:</h2>
+<p>Lorem ipsum dolor sit amet, bortsett fra at dette er V2015, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Også en setning med <em>meget bra</em> og <em>lite bra</em>.</p>
+
+<h2>Quotes:</h2>
+<blockquote>Yeah, the feedback is pretty bad. I mean, you could at least turn the mic away from the speakers, so this doesn't happen so often. I can't go to school with hearing protectors every day. I get sore around my ears.</blockquote>
+<blockquote>More betterness. Less badness. Thanks!</blockquote>
+<blockquote>There were none assignments, but they was extremely complex to answer. I mean, that's criticism right there.</blockquote>
+
+
+        <h2>About the course evaluation</h2>
+        <p>The course evaluation is done by students in FUI (Fagutvalget ved Institutt for informatikk), and is based on questionnaires made at the end of each semester.</p>
+
+      </div>
+    </div>
+
+    <div id="vrtx-additional-content">
+      <div class="vrtx-frontpage-box vrtx-more-false vrtx-distach-bottom vrtx-additional-content-first" id="vrtx-additional-content-1">
+
+        <h2>Information</h2>
+        <div class="vrtx-box-content">
+          <p><b>Generell assessment: </b><em>Very good</em></p>
+          <p><b>Semester: </b>V2016</p>
+          <p><b>Respondents:</b> 3 of 6 (50.0%)</p>
+          <p><b>Data: </b><a href="stats/INF0456.js">JSON</a></p>
+        </div>
+      </div>
+
+      <div class="vrtx-frontpage-box vrtx-header-false vrtx-distach-bottom grey-box" id="vrtx-additional-content-2">
+        <div class="vrtx-more"><span><a class="vrtx-link-check" href="https://www.uio.no/studier/emner/matnat/ifi/INF0456">Course website</a></span></div>
+      </div>
+      <div class="vrtx-frontpage-box vrtx-more-false vrtx-additional-content-last" id="vrtx-additional-content-3">
+        <h2>Contact</h2>
+        <div class="vrtx-box-content">
+          <p><a href="mailto:fui-kk@ifi.uio.no">FUI course evaluation</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+  <script src="d3kk.js"></script>
+  <script type="text/javascript">
+  insert_chart("#chart_howdoyouratethecourseingeneral", [{ label: "Exceptionally good", value: 1 }, { label: "Very good", value: 1 }, { label: "Good", value: 0 }, { label: "OK", value: 1 }, { label: "Not that good", value: 0 }, { label: "Not good", value: 0 }], ['#1a9850', '#91cf60', '#d9ef8b', '#fee08b', '#fc8d59', '#d73027']);
+insert_chart("#chart_howdoyouratethelevelofthecourse", [{ label: "Too difficult", value: 0 }, { label: "Difficult", value: 1 }, { label: "OK", value: 0 }, { label: "Easy", value: 1 }, { label: "Too easy", value: 1 }], ['#d7191c', '#fdae61', '#91cf60', '#abd9e9', '#2c7bb6']);
+insert_chart("#chart_howdoyouratetheworkloadinproportiontothenumberofcreditsachieved", [{ label: "Too large", value: 1 }, { label: "Large", value: 0 }, { label: "OK", value: 1 }, { label: "Small", value: 0 }, { label: "Too small", value: 1 }], ['#d7191c', '#fdae61', '#91cf60', '#abd9e9', '#2c7bb6']);
+insert_chart("#chart_thequalityofthelectures", [{ label: "Exceptionally good", value: 1 }, { label: "Very good", value: 1 }, { label: "Good", value: 0 }, { label: "OK", value: 0 }, { label: "Not that good", value: 0 }, { label: "Not good", value: 0 }], ['#1a9850', '#91cf60', '#d9ef8b', '#fee08b', '#fc8d59', '#d73027']);
+insert_chart("#chart_thelecturesrelevanceandusefulnessinregardtorelayingwhatyouneedtolearn", [{ label: "Exceptionally good", value: 0 }, { label: "Very good", value: 0 }, { label: "Good", value: 0 }, { label: "OK", value: 1 }, { label: "Not that good", value: 0 }, { label: "Not good", value: 1 }], ['#1a9850', '#91cf60', '#d9ef8b', '#fee08b', '#fc8d59', '#d73027']);
+insert_chart("#chart_thequalityofthegrouptuitionasawhole", [{ label: "Exceptionally good", value: 1 }, { label: "Very good", value: 0 }, { label: "Good", value: 0 }, { label: "OK", value: 0 }, { label: "Not that good", value: 1 }, { label: "Not good", value: 0 }], ['#1a9850', '#91cf60', '#d9ef8b', '#fee08b', '#fc8d59', '#d73027']);
+insert_chart("#chart_inwhatdegreedoesgrouptuitionandweeklyassignmentsgiveyoupracticalskillsandthepossibilitytomakeuseofthetheoryathand", [{ label: "Exceptionally good", value: 0 }, { label: "Very good", value: 0 }, { label: "Good", value: 1 }, { label: "OK", value: 0 }, { label: "Not that good", value: 0 }, { label: "Not good", value: 0 }], ['#1a9850', '#91cf60', '#d9ef8b', '#fee08b', '#fc8d59', '#d73027']);
+insert_chart("#chart_arethecurriculumandlearningoutcomesofthecoursesufficientlydefined", [{ label: "Exceptionally good", value: 0 }, { label: "Very good", value: 0 }, { label: "Good", value: 1 }, { label: "OK", value: 0 }, { label: "Not that good", value: 0 }, { label: "Not good", value: 0 }], ['#1a9850', '#91cf60', '#d9ef8b', '#fee08b', '#fc8d59', '#d73027']);
+insert_chart("#chart_howdoyouratethecoursematerialusedtextbooketc", [{ label: "Exceptionally good", value: 0 }, { label: "Very good", value: 0 }, { label: "Good", value: 0 }, { label: "OK", value: 1 }, { label: "Not that good", value: 0 }, { label: "Not good", value: 1 }], ['#1a9850', '#91cf60', '#d9ef8b', '#fee08b', '#fc8d59', '#d73027']);
+insert_chart("#chart_howdoyouratethedifficultyleveloftheobligatoryassignments", [{ label: "Too high", value: 1 }, { label: "High", value: 0 }, { label: "OK", value: 0 }, { label: "Low", value: 1 }, { label: "Too low", value: 1 }], ['#d7191c', '#fdae61', '#91cf60', '#abd9e9', '#2c7bb6']);
+insert_chart("#chart_whatisyouropinioninregardtothenumberofobligatoryassignments", [{ label: "Too high", value: 1 }, { label: "High", value: 0 }, { label: "OK", value: 2 }, { label: "Low", value: 0 }, { label: "Too low", value: 0 }], ['#d7191c', '#fdae61', '#91cf60', '#abd9e9', '#2c7bb6']);
+insert_chart("#chart_howdoyouratethedifficultylevelofthefinalexamination", [{ label: "Too high", value: 2 }, { label: "High", value: 0 }, { label: "OK", value: 0 }, { label: "Low", value: 0 }, { label: "Too low", value: 0 }], ['#d7191c', '#fdae61', '#91cf60', '#abd9e9', '#2c7bb6']);
+
+        function show_selected_question() {
+            var choice = document.getElementById("select_question").value;
+            var questions = document.querySelectorAll('.question');
+            for (var i = 0; i < questions.length; i++) {
+                questions[i].hidden = true;
+            }
+            document.querySelector('#' + choice).hidden = false;
+
+            document.querySelector('#button_show_all_questions').style.display = 'inline';
+            document.querySelector('#button_hide_all_questions').style.display = 'none';
+        }
+
+        function show_all_questions() {
+            if (!document.querySelector('.question[hidden]')) {
+                show_selected_question();
+                return;
+            }
+            var questions = document.querySelectorAll('.question');
+            for (var i = 0; i < questions.length; i++) {
+                questions[i].hidden = false;
+            }
+
+            document.querySelector('#button_show_all_questions').style.display = 'none';
+            document.querySelector('#button_hide_all_questions').style.display = 'inline';
+        }
+
+        show_selected_question();
+    
+  </script>
+
+</body>
+            </div>
+        </div>
+    
+
+</html>
