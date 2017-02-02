@@ -1,5 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
 <html>
+
 <head>
   <meta charset="utf-8">
   <title>$COURSE_CODE - $COURSE_NAME</title>
@@ -9,53 +10,54 @@
   <script src="vurdering.js"></script>
   <script type="text/plain" id="emnedata">$COURSE_RATING</script>
 </head>
-<body><div id="vrtx-content">
-	<div class="vrtx-header-false vrtx-more-false white-box vrtx-distach-bottom vrtx-main-content-first vrtx-main-content-last" id="vrtx-main-content" role="main">
-<div class="vrtx-box-content">
 
-<h2 class="fui_header">Fagutvalgets kursevaluering</h2>
-<h1 class="fui_emne">$COURSE_CODE - $COURSE_NAME</h1>
-<div class="fui_vurdering" data-emnekode="$COURSE_CODE"></div>
+<body>
+  <div id="vrtx-content">
+    <div class="vrtx-header-false vrtx-more-false white-box vrtx-distach-bottom vrtx-main-content-first vrtx-main-content-last" id="vrtx-main-content" role="main">
+      <div class="vrtx-box-content">
 
-$MAIN_BODY
+        <h2 class="fui_header">Fagutvalgets kursevaluering</h2>
+        <h1 class="fui_emne">$COURSE_CODE - $COURSE_NAME</h1>
+        <div class="fui_vurdering" data-emnekode="$COURSE_CODE"></div>
 
-<h2>Om kursevalueringen</h2>
+        $MAIN_BODY
 
-<p>Kursevalueringen gjøres av Fagutvalget ved Institutt for informatikk, og er basert på spørreundersøkelser mot slutten av hvert semester.</p>
+        <h2>Om kursevalueringen</h2>
+        <p>Kursevalueringen gjøres av Fagutvalget ved Institutt for informatikk, og er basert på spørreundersøkelser mot slutten av hvert semester.</p>
 
-</div>
-</div>
+      </div>
+    </div>
 
-<div id="vrtx-additional-content">
-<div class="vrtx-frontpage-box vrtx-more-false vrtx-distach-bottom vrtx-additional-content-first" id="vrtx-additional-content-1">
+    <div id="vrtx-additional-content">
+      <div class="vrtx-frontpage-box vrtx-more-false vrtx-distach-bottom vrtx-additional-content-first" id="vrtx-additional-content-1">
 
-<h2>Informasjon</h2>
-<div class="vrtx-box-content">
-<p><b>Generell vurdering: </b><em>$GENERAL_AVERAGE_TEXT</em></p>
-<p><b>Semester: </b>$SEMESTER</p>
-<p>$PARTICIPATION_STRING</p>
-<p><b>Data: </b><a href="stats/$COURSE_CODE.js">JSON</a></p>
+        <h2>Informasjon</h2>
+        <div class="vrtx-box-content">
+          <p><b>Generell vurdering: </b><em>$GENERAL_AVERAGE_TEXT</em></p>
+          <p><b>Semester: </b>$SEMESTER</p>
+          <p>$PARTICIPATION_STRING</p>
+          <p><b>Data: </b><a href="stats/$COURSE_CODE.js">JSON</a></p>
+        </div>
+      </div>
 
-</div>
-</div>
+      <div class="vrtx-frontpage-box vrtx-header-false vrtx-distach-bottom grey-box" id="vrtx-additional-content-2">
+        <div class="vrtx-more"><span><a class="vrtx-link-check" href="$COURSE_URL">Emnepresentasjon</a></span></div>
+      </div>
+      <div class="vrtx-frontpage-box vrtx-more-false vrtx-additional-content-last" id="vrtx-additional-content-3">
+        <h2>Kontakt</h2>
+        <div class="vrtx-box-content">
+          <p><a href="mailto:fui-kk@ifi.uio.no">FUI Kursevaluering</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
 
-<div class="vrtx-frontpage-box vrtx-header-false vrtx-distach-bottom grey-box" id="vrtx-additional-content-2">
-<div class="vrtx-more"><span><a class="vrtx-link-check" href="$COURSE_URL">Emnepresentasjon</a></span></div>
-</div>
-<div class="vrtx-frontpage-box vrtx-more-false vrtx-additional-content-last" id="vrtx-additional-content-3">
-<h2>Kontakt</h2>
-<div class="vrtx-box-content">
-<p><a href="mailto:fui-kk@ifi.uio.no">FUI Kursevaluering</a></p>
-</div>
-</div>
-</div>
-</div>
-
-<script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-<script src="d3kk.js"></script>
-<script type="text/javascript">
-$ADDITIONAL_JS
-</script>
+  <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+  <script src="d3kk.js"></script>
+  <script type="text/javascript">
+  $ADDITIONAL_JS
+  </script>
 
 </body>
+
 </html>
