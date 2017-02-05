@@ -12,13 +12,12 @@ install-mac: # mac only :)
 	pip3 install beautifulsoup4
 
 download:
-	# python3 scripts/download_reports.py
 	python3 scripts/download_reports.py -u fui -f "H2016"
 	python3 scripts/sort_downloads.py --delete -i downloads -o data -e "(INF9)|(testskjema)|(\*\*\*)"
-	# Warning: Please delete the downloads folder once per semester
-	#          after closing the forms, to ensure that up to date
-	#          reports are downloaded. (The download script will not
-	#          redownload forms with ID in downloaded.txt)
+	@echo "Warning: Please delete the downloads folder once per semester"
+	@echo "         after closing the forms, to ensure that up to date"
+	@echo "         reports are downloaded. (The download script will not"
+	@echo "         redownload forms with ID in downloaded.txt)"
 
 sample_data:
 	git submodule init
@@ -70,7 +69,7 @@ web-preview: web
 	python3 ./scripts/adapt_preview_html.py
 
 upload_raw:
-	# Mount KURS folder to /Volumes/KURS (mac) or similar before running:
+	@echo "Mount KURS folder to /Volumes/KURS (mac) or similar before running:"
 	python3 scripts/upload_reports.py --input ./data --output /Volumes/KURS/ --semester $(SEMESTER)
 
 score:
