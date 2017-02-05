@@ -7,6 +7,10 @@
 A collection of scripts and tools for gathering, processing and exporting
 course evaluation survey results.
 
+## Demonstration
+A demo can be found on github pages: 
+http://fui.github.io/fui-kk/
+
 ## Hacking
 If you want to test this software, or contribute to the project you can get started like this:
 ```
