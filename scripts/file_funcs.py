@@ -34,3 +34,6 @@ def load_json(filename):
     except json.decoder.JSONDecodeError as err:
         print("ERROR: The file '{}' contains invalid json syntax: {}".format(path,err))
         sys.exit(1)
+
+def path_join(*args):
+    return "/".join(args)
