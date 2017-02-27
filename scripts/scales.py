@@ -15,7 +15,7 @@ import json
 from bs4 import BeautifulSoup
 from collections import OrderedDict
 
-from file_funcs import dump_json, load_json
+from file_funcs import dump_json, load_json, path_join
 
 def answer_case(answer_raw):
     answer = answer_raw.upper()
@@ -240,7 +240,7 @@ def generate_scales(semester):
     for (dirpath, dirnames, filenames) in os.walk(responses_path):
         for filename in filenames:
             if filename.endswith(".json"):
-                file_path = os.path.join(dirpath,filename)
+                file_path = path_join(dirpath,filename)
                 scales_add_course(file_path, scales)
         break
 

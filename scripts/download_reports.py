@@ -26,10 +26,10 @@ import argparse
 import json
 import re
 import pickle
-
 import requests
-
 from selenium import webdriver
+
+from file_funcs import path_join
 
 def get_args():
     argparser = argparse.ArgumentParser(description='Download report data from nettskjema.uio.no')
@@ -70,7 +70,7 @@ def login(driver, args):
 def write_to_file(folder, name, extension, content):
     if not os.path.exists(folder):
         os.makedirs(folder)
-    filename = os.path.join(folder, name) + '.' + extension
+    filename = path_join(folder, name) + '.' + extension
     filename = filename.replace(' ', '_')
     with open(filename, 'w', encoding="utf-8") as f:
         f.write(content)
@@ -152,9 +152,9 @@ def download_files(driver, args):
     for cookie in cookies:
         session.cookies.set(cookie['name'], cookie['value'])
 
-    tsv_path = os.path.join(args.out, 'tsv')
-    html_path = os.path.join(args.out, 'html')
-    stats_path = os.path.join(args.out, 'stats')
+    tsv_path = path_join(args.out, 'tsv')
+    html_path = path_join(args.out, 'html')
+    stats_path = path_join(args.out, 'stats')
 
     for (name, url) in formdata:
         form_id = get_id(url)

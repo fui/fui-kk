@@ -14,7 +14,7 @@ import sys
 import argparse
 import re
 from shutil import copyfile
-
+from file_funcs import path_join
 
 def get_args():
     argparser = argparse.ArgumentParser(description='Download report data from nettskjema.uio.no')
@@ -36,7 +36,7 @@ def main():
     course_code_pattern = re.compile(r'(([A-Z]{1,5}-){0,1}[A-Z]{1,5}[0-9]{3,4})([A-Z]{1,5}){0,1}')
     for root, subdirs, files in os.walk(args.input):
         for file_x in files:
-            path = os.path.join(root, file_x)
+            path = path_join(root, file_x)
             filename, extension = os.path.splitext(path)
             m = exclude_pattern.search(path)
             if m is not None or path[0] == ".":
@@ -56,9 +56,9 @@ def main():
             dir_name = extension[1:]
             if dir_name == "json":
                 dir_name = "participation"
-            target_folder = os.path.join(args.output, semester, "downloads", dir_name)
+            target_folder = path_join(args.output, semester, "downloads", dir_name)
             os.makedirs( target_folder, exist_ok=True )
-            newpath = os.path.join(target_folder, course + extension )
+            newpath = path_join(target_folder, course + extension )
 
             if delete:
                 # I hate windows:

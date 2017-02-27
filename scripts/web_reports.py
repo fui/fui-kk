@@ -13,7 +13,7 @@ import sys
 import json
 import re
 from collections import OrderedDict
-from file_funcs import dump_json, load_json
+from file_funcs import dump_json, load_json, path_join
 
 def get_participation_string(participation, language):
     if language == "EN":
@@ -219,9 +219,9 @@ def web_reports_semester_folder(semester_path):
     links = []
     links.append('<ul class="fui_courses">')
     for course_code in courses:
-        summary_path = os.path.join(summaries_path, course_code+".html")
-        stat_path = os.path.join(stats_path, course_code+".json")
-        output_path = os.path.join(upload_path, course_code+".html")
+        summary_path = path_join(summaries_path, course_code+".html")
+        stat_path = path_join(stats_path, course_code+".json")
+        output_path = path_join(upload_path, course_code+".html")
 
         web_report_course(summary_path, stat_path, output_path, html_templates, courses_all, scales)
 

@@ -16,7 +16,7 @@ import argparse
 from bs4 import BeautifulSoup
 from collections import OrderedDict
 
-from file_funcs import dump_json, load_json
+from file_funcs import dump_json, load_json, path_join
 
 def get_args():
     argparser = argparse.ArgumentParser(
@@ -37,8 +37,8 @@ def get_args():
                     os.system("python3 scripts/responses.py -s "+d)
             sys.exit()
         else:
-            args.input = os.path.join("data",args.semester,"downloads/tsv")
-            args.output = os.path.join("data",args.semester,"outputs/responses")
+            args.input = path_join("data",args.semester,"downloads/tsv")
+            args.output = path_join("data",args.semester,"outputs/responses")
 
     if not args.input or not args.output:
         sys.exit("Error: Specify input and output using -i and -o parameters, or semester using -s parameter")
@@ -82,7 +82,7 @@ def parse_tsv_files(input_path, output_dir):
         for (root, dirs, files) in os.walk(input_path):
             for file_x in files:
                 if file_x.endswith(".tsv"):
-                    input_files.append(os.path.join(root,file_x))
+                    input_files.append(path_join(root,file_x))
 
     if os.path.exists(output_dir):
         if os.path.isfile(output_dir):
@@ -95,7 +95,7 @@ def parse_tsv_files(input_path, output_dir):
         coursename = coursename.replace(input_path, "")
         coursename = coursename.replace("/", "")
         content = parse_course_tsv(tsv_filename)
-        dump_json(content, os.path.join(output_dir,coursename)+".json")
+        dump_json(content, path_join(output_dir,coursename)+".json")
 
 def main():
     args = get_args()

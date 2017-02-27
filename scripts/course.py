@@ -12,7 +12,7 @@ import sys
 from bs4 import BeautifulSoup
 import json
 from collections import OrderedDict
-from file_funcs import dump_json, load_json
+from file_funcs import dump_json, load_json, path_join
 
 def generate_stats(responses, participation, scales, stats=None):
     if stats is None:
@@ -115,9 +115,9 @@ def generate_stats_dir(responses_dir, participation_dir, output_dir, scales, cou
             course["code"] = course_code
             course["name"] = course_name
             course["semester"] = semester_name
-            responses_path = os.path.join(responses_dir,filename)
-            participation_path = os.path.join(participation_dir,filename)
-            output_path = os.path.join(output_dir, filename)
+            responses_path = path_join(responses_dir,filename)
+            participation_path = path_join(participation_dir,filename)
+            output_path = path_join(output_dir, filename)
             generate_stats_file(responses_path, participation_path, output_path, scales, course)
 
 def generate_stats_semester(semester_path, semester_name):
@@ -137,10 +137,10 @@ if __name__ == '__main__':
     for (root, dirs, files) in os.walk(directory):
         for d in dirs:
             if "." not in d:
-                semester_dirs.append(os.path.join(root, d))
+                semester_dirs.append(path_join(root, d))
                 # TODO: Move this somewhere else:
-                os.makedirs(os.path.join(root,d,"inputs","md"), exist_ok=True)
-                os.makedirs(os.path.join(root,d,"inputs","tex"), exist_ok=True)
+                os.makedirs(path_join(root,d,"inputs","md"), exist_ok=True)
+                os.makedirs(path_join(root,d,"inputs","tex"), exist_ok=True)
         break
     for d in semester_dirs:
         generate_stats_semester(d, os.path.basename(d))
