@@ -72,7 +72,7 @@ def write_to_file(folder, name, extension, content):
         os.makedirs(folder)
     filename = os.path.join(folder, name) + '.' + extension
     filename = filename.replace(' ', '_')
-    with open(filename, 'w') as f:
+    with open(filename, 'w', encoding="utf-8") as f:
         f.write(content)
 
 def try_to_find_int(driver, selector):

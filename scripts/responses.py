@@ -46,7 +46,7 @@ def get_args():
 
 def parse_course_tsv(tsv_filename):
     data = []
-    with open(tsv_filename) as tsv_file:
+    with open(tsv_filename, encoding='utf-8') as tsv_file:
         for row in csv.reader(tsv_file, delimiter='\t'):
             data.append(row)
     labels = data[0]

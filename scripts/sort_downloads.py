@@ -61,6 +61,11 @@ def main():
             newpath = os.path.join(target_folder, course + extension )
 
             if delete:
+                # I hate windows:
+                try:
+                    os.remove(newpath)
+                except:
+                    pass
                 os.rename(path, newpath)
             else:
                 copyfile(path, newpath)
