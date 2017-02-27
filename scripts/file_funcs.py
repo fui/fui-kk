@@ -15,17 +15,18 @@ import os
 import sys
 import json
 from collections import OrderedDict
+import io
 
 def dump_json(data, filename):
     folder = os.path.dirname(filename)
     if not os.path.exists(folder):
         os.makedirs(folder, exist_ok=True)
-    with open(filename, 'w') as out_file:
+    with open(filename, 'w', encoding="utf-8") as out_file:
         json.dump(data, out_file, indent=2, ensure_ascii=False)
 
 def load_json(filename):
     try:
-        with open(filename, 'r') as in_file:
+        with open(filename, 'r', encoding="utf-8") as in_file:
             return json.load(in_file, object_pairs_hook=OrderedDict)
     except FileNotFoundError:
         print("ERROR: Could not open '{}' for read, file doesn't exist.".format(filename))
