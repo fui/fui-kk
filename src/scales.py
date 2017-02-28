@@ -264,7 +264,7 @@ def all_semesters():
 
 if __name__ == '__main__':
     if len(sys.argv) != 2:
-        print("Usage: python3 ./scripts/scales.py SEMESTER")
+        print("Usage: python3 ./src/scales.py SEMESTER")
         sys.exit(1)
     if sys.argv[1] == "all":
         all_semesters()

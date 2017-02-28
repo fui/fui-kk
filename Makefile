@@ -12,8 +12,8 @@ install-mac: # mac only :)
 	pip3 install beautifulsoup4
 
 download:
-	python3 scripts/download_reports.py -u fui -f "H2016"
-	python3 scripts/sort_downloads.py --delete -i downloads -o data -e "(INF9)|(testskjema)|(\*\*\*)"
+	python3 src/download_reports.py -u fui -f "H2016"
+	python3 src/sort_downloads.py --delete -i downloads -o data -e "(INF9)|(testskjema)|(\*\*\*)"
 	@echo "Warning: Please delete the downloads folder once per semester"
 	@echo "         after closing the forms, to ensure that up to date"
 	@echo "         reports are downloaded. (The download script will not"
@@ -25,29 +25,29 @@ sample_data:
 	cp -r sample_data data
 
 responses:
-	python3 scripts/responses.py -s all
+	python3 src/responses.py -s all
 
 scales:
-	python3 scripts/scales.py all
+	python3 src/scales.py all
 
 json:
-	python3 scripts/course.py data
-	python3 scripts/semester.py
-	python3 scripts/courses.py
+	python3 src/course.py data
+	python3 src/semester.py
+	python3 src/courses.py
 
 tex:
 	rename -v -f -S inf INF ./data/*/inputs/md/*
 	sed -i.bak 's/å/å/g' ./data/*/inputs/md/*.md
 	find ./data -type f -name *.md.bak -delete
-	./scripts/tex.sh $(SEMESTER)
-	python3 scripts/participation_summary.py $(SEMESTER)
-	python3 scripts/tex_combine.py -s $(SEMESTER)
+	./src/tex.sh $(SEMESTER)
+	python3 src/participation_summary.py $(SEMESTER)
+	python3 src/tex_combine.py -s $(SEMESTER)
 
 pdf: tex
-	./scripts/pdf.sh $(SEMESTER)
+	./src/pdf.sh $(SEMESTER)
 
 plots:
-	python3 scripts/plot_courses.py $(SEMESTER)
+	python3 src/plot_courses.py $(SEMESTER)
 
 all: responses scales json plots tex pdf web
 
@@ -55,8 +55,8 @@ open:
 	open data/$(SEMESTER)/outputs/report/fui-kk_report*.pdf
 
 web:
-	./scripts/web.sh $(SEMESTER)
-	python3 ./scripts/web_reports.py data/$(SEMESTER)
+	./src/web.sh $(SEMESTER)
+	python3 ./src/web_reports.py data/$(SEMESTER)
 
 web-preview: web
 	@echo "---------------------------------------------"
@@ -66,14 +66,14 @@ web-preview: web
 	rm -rf ./docs
 	mkdir ./docs
 	cp -r ./data/$(SEMESTER)/outputs/web/upload/$(SEMESTER)/* ./docs
-	python3 ./scripts/adapt_preview_html.py
+	python3 ./src/adapt_preview_html.py
 
 upload_raw:
 	@echo "Mount KURS folder to /Volumes/KURS (mac) or similar before running:"
-	python3 scripts/upload_reports.py --input ./data --output /Volumes/KURS/ --semester $(SEMESTER)
+	python3 src/upload_reports.py --input ./data --output /Volumes/KURS/ --semester $(SEMESTER)
 
 score:
-	python3 ./scripts/score.py $(SEMESTER)
+	python3 ./src/score.py $(SEMESTER)
 
 clean:
 	find ./data -type d -name "outputs" -exec rm -rf {} +

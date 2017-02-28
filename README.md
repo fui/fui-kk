@@ -8,7 +8,7 @@ A collection of scripts and tools for gathering, processing and exporting
 course evaluation survey results.
 
 ## Demonstration
-A demo can be found on github pages: 
+A demo can be found on github pages:
 http://fui.github.io/fui-kk/
 
 ## Hacking
@@ -21,7 +21,7 @@ make sample_data
 You will now have some test data to work with.
 
 ## KK Report (pdf)
-The makefile is meant as a simple tool to run all the scripts.
+The makefile is meant as a simple tool to run different parts of the software.
 
 If you need to download reports from nettskjema:
 ```
@@ -71,16 +71,16 @@ This is a mirror of the data folder used by FUI, without file contents:
 
 https://github.com/fui/fui-kk-data-structure
 
-### ./scripts
+### ./src
 Python and bash scripts. See Makefile for example usage.
 
 ### ./old
 
-`scripts/old/` contain old scripts which are no longer in use.
+`src/old/` contain old scripts which are no longer in use.
 
 ### ./misc
 
-`misc/` and `scripts/misc` contain files that can be ignored.
+`misc/` and `src/misc` contain files that can be ignored.
 
 ## Contributors
 Thank you to everyone who has been involved with this project over the years, including:
