@@ -13,6 +13,7 @@ sample_data/*
 
 # Python:
 __pycache__
+.cache
 
 # OS X:
 .DS_Store
