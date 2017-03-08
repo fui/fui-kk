@@ -12,7 +12,7 @@ install-mac: # mac only :)
 	pip3 install beautifulsoup4
 
 download:
-	python3 src/download_reports.py -u fui -f "H2016"
+	python3 src/download_reports.py -u fui
 	python3 src/sort_downloads.py --delete -i downloads -o data -e "(INF9)|(testskjema)|(\*\*\*)"
 	@echo "Warning: Please delete the downloads folder once per semester"
 	@echo "         after closing the forms, to ensure that up to date"
@@ -77,6 +77,8 @@ score:
 
 clean:
 	find ./data -type d -name "outputs" -exec rm -rf {} +
+	find ./data -type d -name "downloads" -exec rm -rf {} +
+	rm -rf ./downloads
 
 help:
 	@echo "Available targets:"
