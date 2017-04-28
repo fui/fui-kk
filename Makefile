@@ -70,7 +70,7 @@ web-preview: web
 
 upload_raw:
 	@echo "Mount KURS folder to /Volumes/KURS (mac) or similar before running:"
-	python3 src/upload_reports.py --input ./data --output /Volumes/KURS/ --semester $(SEMESTER)
+	python3 src/upload_reports.py -v --input ./data --output /Volumes/KURS/ --semester $(SEMESTER)
 
 score:
 	python3 ./src/score.py $(SEMESTER)
