@@ -5,6 +5,7 @@ downloads
 backup
 data.tgz
 sample_data/*
+venv
 
 # Editor files:
 *~
@@ -14,6 +15,7 @@ sample_data/*
 # Python:
 __pycache__
 .cache
+*.pyc
 
 # OS X:
 .DS_Store

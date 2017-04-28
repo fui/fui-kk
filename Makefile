@@ -80,6 +80,16 @@ clean:
 	find ./data -type d -name "downloads" -exec rm -rf {} +
 	rm -rf ./downloads
 
+venv:
+	python3 -m venv venv
+	# Activate virtual environment by running venv/bin/activate in your shell
+
+pip-install:
+	pip install -r requirements.txt
+
+pip3-install:
+	pip3 install -r requirements.txt
+
 help:
 	@echo "Available targets:"
 	@echo "install-mac"
@@ -94,4 +104,4 @@ help:
 	@echo "web"
 	@echo "web-preview"
 
-.PHONY: default install-mac download sample_data responses scales json tex pdf plots all open web upload_raw score clean help
+.PHONY: default install-mac download sample_data responses scales json tex pdf plots all open web upload_raw score clean help venv pip-install pip3-install
