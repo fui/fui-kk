@@ -22,6 +22,7 @@ __license__    = "MIT"
 import getpass
 import os
 import sys
+import locale
 import argparse
 import json
 import re
@@ -132,6 +133,20 @@ def write_binary(path, data):
     with open(path, 'wb') as fp:
         pickle.dump(data, fp)
 
+def os_encode(msg):
+    os_encoding = locale.getpreferredencoding()
+    return msg.encode(os_encoding)
+
+def error(msg, exception=None, *, label=None):
+    if label:
+        print("\n***FUI-KK ERROR: {}***".format(label))
+    else:
+        print("\n***FUI-KK ERROR***")
+    if exception:
+        print("Exception: {}\n".format(type(exception)))
+    print(msg)
+    sys.exit(-1)
+
 def download_files(driver, args):
     downloaded = read_list(args.out+"/downloaded.txt")
 
@@ -158,11 +173,25 @@ def download_files(driver, args):
 
     for (name, url) in formdata:
         form_id = get_id(url)
-        if form_id in downloaded:
-            print("Skipping {} (id={})".format(name,form_id))
-            continue
-        print("Fetching {} (id={})".format(name,form_id))
 
+        try:
+            if form_id in downloaded:
+                print("Skipping {} (id={})".format(name,form_id))
+                continue
+            print("Fetching {} (id={})".format(name,form_id))
+        except UnicodeEncodeError as e:
+            # NOTE: This error can be fixed by using os_encode on name,
+            #       however I think it is useful to force windows users
+            #       to change to utf-8, just in case wrong encoding
+            #       causes problems elsewhere.
+            error_msg = "\n".join([
+            "Form id={}".format(form_id),
+            "Form name: {}".format(os_encode(name)),
+            "Your terminal probably doesn't like unicode.",
+            "To fix this on windows, change codepage using this command:",
+            "chcp 65001"
+            ])
+            error(error_msg, e, label="Non-unicode codepage")
         results_url = url.replace('preview', 'results')
         driver.get(results_url)
         stats = {
@@ -197,6 +226,10 @@ def main():
     try:
         login(driver, args)
         download_files(driver, args)
+    except requests.exceptions.TooManyRedirects as e:
+        error("Sometimes nettskjema doesn't like us.\n"\
+              "Just wait a little while and continue\n"\
+              "by rerunning script.", e, label="Nettskjema")
     finally:
         driver.close()
         driver.quit()
