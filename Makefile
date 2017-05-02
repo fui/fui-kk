@@ -37,7 +37,7 @@ json:
 
 tex:
 	rename -v -f -S inf INF ./data/*/inputs/md/*
-	sed -i.bak 's/å/å/g' ./data/*/inputs/md/*.md
+	sed -i.bak 's/å/å/g' ./data/*/inputs/md/*.md
 	find ./data -type f -name *.md.bak -delete
 	./src/tex.sh $(SEMESTER)
 	python3 src/participation_summary.py $(SEMESTER)
@@ -82,7 +82,7 @@ clean:
 
 venv:
 	python3 -m venv venv
-	# Activate virtual environment by running venv/bin/activate in your shell
+	# Activate virtual environment by running "source venv/bin/activate" in your shell
 
 pip-install:
 	pip install -r requirements.txt
