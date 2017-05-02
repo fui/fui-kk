@@ -37,7 +37,7 @@ json:
 
 tex:
 	rename -v -f -S inf INF ./data/*/inputs/md/*
-	sed -i.bak 's/å/å/g' ./data/*/inputs/md/*.md
+	perl -i.bak -pe 's/\x61\xCC\x8A/\xC3\xA5/g' ./data/*/inputs/md/*.md
 	find ./data -type f -name *.md.bak -delete
 	./src/tex.sh $(SEMESTER)
 	python3 src/participation_summary.py $(SEMESTER)
