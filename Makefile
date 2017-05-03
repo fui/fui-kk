@@ -37,7 +37,7 @@ json:
 
 tex:
 	rename -v -f -S inf INF ./data/*/inputs/md/*
-	sed -i.bak 's/å/å/g' ./data/*/inputs/md/*.md
+	perl -i.bak -pe 's/\x61\xCC\x8A/\xC3\xA5/g' ./data/*/inputs/md/*.md
 	find ./data -type f -name *.md.bak -delete
 	./src/tex.sh $(SEMESTER)
 	python3 src/participation_summary.py $(SEMESTER)
@@ -70,7 +70,7 @@ web-preview: web
 
 upload_raw:
 	@echo "Mount KURS folder to /Volumes/KURS (mac) or similar before running:"
-	python3 src/upload_reports.py --input ./data --output /Volumes/KURS/ --semester $(SEMESTER)
+	python3 src/upload_reports.py -v --input ./data --output /Volumes/KURS/ --semester $(SEMESTER)
 
 score:
 	python3 ./src/score.py $(SEMESTER)
@@ -79,6 +79,16 @@ clean:
 	find ./data -type d -name "outputs" -exec rm -rf {} +
 	find ./data -type d -name "downloads" -exec rm -rf {} +
 	rm -rf ./downloads
+
+venv:
+	python3 -m venv venv
+	# Activate virtual environment by running "source venv/bin/activate" in your shell
+
+pip-install:
+	pip install -r requirements.txt
+
+pip3-install:
+	pip3 install -r requirements.txt
 
 help:
 	@echo "Available targets:"
@@ -94,4 +104,4 @@ help:
 	@echo "web"
 	@echo "web-preview"
 
-.PHONY: default install-mac download sample_data responses scales json tex pdf plots all open web upload_raw score clean help
+.PHONY: default install-mac download sample_data responses scales json tex pdf plots all open web upload_raw score clean help venv pip-install pip3-install

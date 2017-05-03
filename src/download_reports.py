@@ -22,6 +22,7 @@ __license__    = "MIT"
 import getpass
 import os
 import sys
+import locale
 import argparse
 import json
 import re
@@ -29,7 +30,7 @@ import pickle
 import requests
 from selenium import webdriver
 
-from file_funcs import path_join
+from file_funcs import path_join, path_clean, filename_clean
 
 def get_args():
     argparser = argparse.ArgumentParser(description='Download report data from nettskjema.uio.no')
@@ -71,7 +72,7 @@ def write_to_file(folder, name, extension, content):
     if not os.path.exists(folder):
         os.makedirs(folder)
     filename = path_join(folder, name) + '.' + extension
-    filename = filename.replace(' ', '_')
+    filename = path_clean(filename)
     with open(filename, 'w', encoding="utf-8") as f:
         f.write(content)
 
@@ -132,6 +133,20 @@ def write_binary(path, data):
     with open(path, 'wb') as fp:
         pickle.dump(data, fp)
 
+def os_encode(msg):
+    os_encoding = locale.getpreferredencoding()
+    return msg.encode(os_encoding)
+
+def error(msg, exception=None, *, label=None):
+    if label:
+        print("\n***FUI-KK ERROR: {}***".format(label))
+    else:
+        print("\n***FUI-KK ERROR***")
+    if exception:
+        print("Exception: {}\n".format(type(exception)))
+    print(msg)
+    sys.exit(-1)
+
 def download_files(driver, args):
     downloaded = read_list(args.out+"/downloaded.txt")
 
@@ -151,18 +166,32 @@ def download_files(driver, args):
     cookies = driver.get_cookies()
     for cookie in cookies:
         session.cookies.set(cookie['name'], cookie['value'])
-
-    tsv_path = path_join(args.out, 'tsv')
-    html_path = path_join(args.out, 'html')
-    stats_path = path_join(args.out, 'stats')
+    out_path = path_clean(args.out)
+    tsv_path = path_join(out_path, 'tsv')
+    html_path = path_join(out_path, 'html')
+    stats_path = path_join(out_path, 'stats')
 
     for (name, url) in formdata:
         form_id = get_id(url)
-        if form_id in downloaded:
-            print("Skipping {} (id={})".format(name,form_id))
-            continue
-        print("Fetching {} (id={})".format(name,form_id))
 
+        try:
+            if form_id in downloaded:
+                print("Skipping {} (id={})".format(name,form_id))
+                continue
+            print("Fetching {} (id={})".format(name,form_id))
+        except UnicodeEncodeError as e:
+            # NOTE: This error can be fixed by using os_encode on name,
+            #       however I think it is useful to force windows users
+            #       to change to utf-8, just in case wrong encoding
+            #       causes problems elsewhere.
+            error_msg = "\n".join([
+            "Form id={}".format(form_id),
+            "Form name: {}".format(os_encode(name)),
+            "Your terminal probably doesn't like unicode.",
+            "To fix this on windows, change codepage using this command:",
+            "chcp 65001"
+            ])
+            error(error_msg, e, label="Non-unicode codepage")
         results_url = url.replace('preview', 'results')
         driver.get(results_url)
         stats = {
@@ -170,20 +199,20 @@ def download_files(driver, args):
             'started': try_to_find_int(driver, '.saved-submissions .number'),
             'invited': try_to_find_int(driver, '.valid-invitations .number')
         }
-        name_underscored = name.replace("/", "_")
+        name_cleaned = filename_clean(name)
         if args.tsv:
             tsv_url = url.replace('preview', 'download') + '&encoding=utf-8'
             response = session.get(tsv_url)
-            write_to_file(tsv_path, name_underscored, 'tsv', response.text)
+            write_to_file(tsv_path, name_cleaned, 'tsv', response.text)
 
         if args.html:
             html_url = url.replace('preview', 'report/web') + '&include-open=1&remove-profile=1'
             response = session.get(html_url)
-            write_to_file(html_path, name_underscored, 'html', render_html(name, stats, response.text))
+            write_to_file(html_path, name_cleaned, 'html', render_html(name, stats, response.text))
 
         if args.stats:
             stats_json = json.dumps(stats)
-            write_to_file(stats_path, name_underscored, 'json', stats_json)
+            write_to_file(stats_path, name_cleaned, 'json', stats_json)
 
         with open(args.out+"/downloaded.txt", 'a') as f:
             f.write(form_id+"\n")
@@ -197,6 +226,10 @@ def main():
     try:
         login(driver, args)
         download_files(driver, args)
+    except requests.exceptions.TooManyRedirects as e:
+        error("Sometimes nettskjema doesn't like us.\n"\
+              "Just wait a little while and continue\n"\
+              "by rerunning script.", e, label="Nettskjema")
     finally:
         driver.close()
         driver.quit()
