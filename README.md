@@ -11,6 +11,11 @@ course evaluation survey results.
 A demo can be found on github pages:
 http://fui.github.io/fui-kk/
 
+## Illustration (Norwegian)
+<a href="https://github.com/fui/fui-kk/master/docs/graphics/fui-kk_visuals.pdf">
+<img alt="docs/graphics/fui-kk_visuals.png" style="border-width:0" src="https://raw.githubusercontent.com/fui/fui-kk/master/docs/graphics/fui-kk_visuals.png" />
+</a><br />.
+
 ## Hacking
 If you want to test this software, or contribute to the project you can get started like this:
 ```
