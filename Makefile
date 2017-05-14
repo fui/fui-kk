@@ -7,9 +7,10 @@ install-mac: # mac only :)
 	brew install phantomjs
 	brew install rename
 	brew install pandoc
-	pip3 install requests
-	pip3 install selenium
-	pip3 install beautifulsoup4
+	pip3 install -r requirements.txt
+
+usernames:
+	python3 src/get_usernames.py
 
 download:
 	python3 src/download_reports.py -u fui
@@ -104,4 +105,4 @@ help:
 	@echo "web"
 	@echo "web-preview"
 
-.PHONY: default install-mac download sample_data responses scales json tex pdf plots all open web upload_raw score clean help venv pip-install pip3-install
+.PHONY: default install-mac download sample_data responses scales json tex pdf plots all open web upload_raw score clean help venv pip-install pip3-install usernames
