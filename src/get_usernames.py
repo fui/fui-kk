@@ -1,3 +1,12 @@
+#!/usr/bin/env python3
+"""Gets the usernames of students taking courses this semester"""
+
+__authors__    = ["Erik Vesteraas"]
+__copyright__  = "Erik Vesteraas"
+__license__    = "MIT"
+# This file is subject to the terms and conditions defined in
+# file 'LICENSE.txt', which is part of this source code package.
+
 import paramiko
 import getpass
 import argparse
@@ -47,6 +56,7 @@ def read_course_names(semester):
     return list(json_names.keys())
 
 def main(args):
+    print('Getting students for all courses in', args.semester)
     course_names = read_course_names(args.semester)
 
     client = paramiko.SSHClient()
@@ -58,7 +68,8 @@ def main(args):
     os.makedirs(outdir, exist_ok=True)
 
     try:
-        for course in course_names:
+        for (i, course) in enumerate(course_names):
+            print('Getting students for', course, '({}/{})'.format(i + 1, len(course_names)))
             lsng_arg = coursename_to_lsng_arg(course)
             stdin, stdout, stderr = client.exec_command('lsng ' + lsng_arg)
             usernames = stdout.read()
