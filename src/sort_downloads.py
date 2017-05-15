@@ -11,20 +11,26 @@ __license__    = "MIT"
 
 import os
 import sys
-import argparse
+from argparse import ArgumentParser, ArgumentDefaultsHelpFormatter
 import re
 from shutil import copyfile
 from file_funcs import path_join
 
 def get_args():
-    argparser = argparse.ArgumentParser(description='Download report data from nettskjema.uio.no')
-    argparser.add_argument('--input', '-i', help='Output directory (default="./downloads")', type=str, default='./downloads')
-    argparser.add_argument('--output', '-o', help='Output directory (default="./data")', type=str, default='./data')
-    argparser.add_argument('--verbose', '-v', help='Print moves', action="store_true")
-    argparser.add_argument('--delete', '-d', help='Delete moved files', action="store_true")
-    argparser.add_argument('--exclude', '-e', default=r'(testskjema)|(\*\*\*)', type=str,
-                            help=r'Exclude regex(default="(testskjema)|(\*\*\*)")')
-    args = argparser.parse_args()
+    ap = ArgumentParser(description='Sort downloads into folder structure',
+                        formatter_class=ArgumentDefaultsHelpFormatter)
+    ap.add_argument('--input', '-i', type=str, default='./downloads',
+                    help='Input directory')
+    ap.add_argument('--output', '-o', type=str, default='./data',
+                    help='Output directory')
+    ap.add_argument('--verbose', '-v', action="store_true",
+                    help='Print moves')
+    ap.add_argument('--delete', '-d', action="store_true",
+                    help='Delete moved files')
+    ap.add_argument('--exclude', '-e', type=str,
+                    help=r'Exclude regex',
+                    default=r'(testskjema)|(XXX)|(\*\*\*)')
+    args = ap.parse_args()
 
     return args
 
