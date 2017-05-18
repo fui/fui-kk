@@ -4,6 +4,7 @@ data
 downloads
 backup
 data.tgz
+downloads.tgz
 sample_data/*
 venv
 
