@@ -66,7 +66,19 @@ def tex_combine(semester, verbose=False):
     with open(semester_folder+"/inputs/tex/header.tex") as f:
         tex_contents.append(f.read())
 
-    for course_code, course_data in semester_data.items():
+    course_codes = []
+    for x in course_names:
+        if x not in course_codes:
+            course_codes.append(x)
+
+    for x in semester_data:
+        if x not in course_codes:
+            course_codes.append(x)
+
+    for course_code in course_codes:
+        if course_code not in semester_data:
+            continue
+        course_data = semester_data[course_code]
         language = course_data["language"]
         if extract_number(course_code) >= 4000:
             langueage = "EN"
