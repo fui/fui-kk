@@ -14,7 +14,7 @@ usernames:
 
 download:
 	python3 src/download_reports.py -u fui
-	python3 src/sort_downloads.py --delete -i downloads -o data -e "(INF9)|(testskjema)|(\*\*\*)"
+	python3 src/sort_downloads.py --delete -i downloads -o data -e "(INF9)|(testskjema)|(\*\*\*)|(XXX)"
 	@echo "Warning: Please delete the downloads folder once per semester"
 	@echo "         after closing the forms, to ensure that up to date"
 	@echo "         reports are downloaded. (The download script will not"
