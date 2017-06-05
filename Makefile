@@ -78,8 +78,13 @@ score:
 
 clean:
 	find ./data -type d -name "outputs" -exec rm -rf {} +
-	find ./data -type d -name "downloads" -exec rm -rf {} +
 	rm -rf ./downloads
+
+super-clean:
+	find ./data -type d -name "outputs" -exec rm -rf {} +
+	rm -rf ./data/$(SEMESTER)/resources
+	rm -rf ./downloads
+
 
 venv:
 	python3 -m venv venv
