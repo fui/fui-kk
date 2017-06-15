@@ -1,6 +1,4 @@
 {
-    "INF-BIO5121": "High Throughput Sequencing technologies and bioinformatics analysis",
-    "INF-BIO9121": "High Throughput Sequencing technologies and bioinformatics analysis",
     "INF0010": "Forkurs i informatikk",
     "INF1000": "Grunnkurs i objektorientert programmering",
     "INF1001": "Grunnkurs i objektorientert programmering",
@@ -55,6 +53,8 @@
     "INF5820": "Språkteknologiske anvendelser",
     "INF5850": "IKT for utvikling: Lager vi en bedre verden?",
     "INF5880": "Master seminar in language technology",
+    "INF-BIO5121": "High Throughput Sequencing technologies and bioinformatics analysis",
+    "INF-BIO9121": "High Throughput Sequencing technologies and bioinformatics analysis",
     "MAT-INF1100": "Modellering og beregninger",
     "MAT-INF3600": "Matematisk logikk",
     "MAT-INF4300": "Partielle differensialligninger og Sobolev rom I"

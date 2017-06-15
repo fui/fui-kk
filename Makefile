@@ -14,7 +14,7 @@ usernames:
 
 download:
 	python3 src/download_reports.py -u fui
-	python3 src/sort_downloads.py --delete -i downloads -o data -e "(INF9)|(testskjema)|(\*\*\*)"
+	python3 src/sort_downloads.py --delete -i downloads -o data -e "(INF9)|(testskjema)|(\*\*\*)|(XXX)"
 	@echo "Warning: Please delete the downloads folder once per semester"
 	@echo "         after closing the forms, to ensure that up to date"
 	@echo "         reports are downloaded. (The download script will not"
@@ -78,8 +78,13 @@ score:
 
 clean:
 	find ./data -type d -name "outputs" -exec rm -rf {} +
-	find ./data -type d -name "downloads" -exec rm -rf {} +
 	rm -rf ./downloads
+
+super-clean:
+	find ./data -type d -name "outputs" -exec rm -rf {} +
+	rm -rf ./data/$(SEMESTER)/resources
+	rm -rf ./downloads
+
 
 venv:
 	python3 -m venv venv
