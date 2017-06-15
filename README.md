@@ -67,9 +67,27 @@ make web
 ## Publish raw data:
 
 ### Mount DAV
-https://www-dav.mn.uio.no/ifi/livet-rundt-studiene/organisasjoner/fui-kk/kursevaluering/
+https://www-dav.mn.uio.no/ifi/livet-rundt-studiene/organisasjoner/fui/kursevaluering/
 
+#### OSX:
 Finder -> Go -> Connect to Server.
+
+#### Windows:
+##### WebDrive:
+* Open WebDrive
+* Click "New"
+* Select "Secure WebDAV"
+* Copy the above link into the url field
+* Use appopriate credentials. 
+* Done
+
+##### Windows Network drive:
+* Open "This PC"
+* Rightclick->"Add network location"
+* "Choose custom network location"
+* Copy the above link
+* Use appropriate credentials
+* Click next until done.
 
 Use script `upload-reports.py` to move html reports to the mounted folder structure.
 
