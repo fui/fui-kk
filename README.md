@@ -1,15 +1,26 @@
 **File:** README.md<br>
 **Project:** FUI-KK<br>
-**Date:** 2016-12-26<br>
 **License:** MIT LICENSE
 
-# FUI Course evaluation software
-A collection of scripts and tools for gathering, processing and exporting
-course evaluation survey results.
+# FUI Course evaluation software (fui-kk)
+This piece of software was written by and for students in FUI - the student council at the department of informatics, University of Oslo. FUI evaluates all informatics courses every semester for the department. Students are invited to fill out surveys for their courses. The fui-kk software is used to gather, process and distribute data from these surveys. Summaries and statistics are posted online for other students. Lecturers gain access to all of the data for their course. The department gets a written pdf (LaTeX) report.
+
+**PS:** Documentation includes some Norwegian translations for clarity.
+ English readers can ignore these.
+
+## User Documentation
+Separate documentation for users of this software is avaliable:
+* [Course Evaluation coordinator (Undervisningsansvarlig)](./guide/coordinator.md)
+* [Report writers (KK-gruppa)](./guide/writers.md)
+
+The rest of this README is more geared towards those who want to understand
+or contribute to the code.
 
 ## Demonstration
-A demo can be found on github pages:
+A Work-In-Progress (WIP) demo can be found on github pages:
 http://fui.github.io/fui-kk/
+
+Please note that this is missing the default styling of UiO websites.
 
 ## Illustration (Norwegian)
 <a href="https://github.com/fui/fui-kk/master/docs/graphics/fui-kk_visuals.pdf">
@@ -56,9 +67,27 @@ make web
 ## Publish raw data:
 
 ### Mount DAV
-https://www-dav.mn.uio.no/ifi/livet-rundt-studiene/organisasjoner/fui-kk/kursevaluering/
+https://www-dav.mn.uio.no/ifi/livet-rundt-studiene/organisasjoner/fui/kursevaluering/
 
+#### OSX:
 Finder -> Go -> Connect to Server.
+
+#### Windows:
+##### WebDrive:
+* Open WebDrive
+* Click "New"
+* Select "Secure WebDAV"
+* Copy the above link into the url field
+* Use appopriate credentials. 
+* Done
+
+##### Windows Network drive:
+* Open "This PC"
+* Rightclick->"Add network location"
+* "Choose custom network location"
+* Copy the above link
+* Use appropriate credentials
+* Click next until done.
 
 Use script `upload-reports.py` to move html reports to the mounted folder structure.
 
