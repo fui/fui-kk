@@ -44,7 +44,7 @@ def generate_stats(responses, participation, scales, stats=None):
                 elif "How" in question or "What" in question:
                     language = "EN"
                 else:
-                    print("Unable to detect language:")
+                    print("Unable to detect language in question:")
                     print(question)
                     sys.exit(1)
             question_answers = responses[question]
@@ -99,8 +99,17 @@ def generate_stats_file(responses_path, participation_path, output_path, scales,
     stats = OrderedDict()
     stats["course"] = course
     stats = generate_stats(responses, participation, scales, stats)
-    if stats is not None:
-        dump_json(stats, output_path)
+    if not stats:
+        print("Skipping course with 0 answers:")
+        print(json.dumps(course, indent=2))
+        return
+    if not stats["language"]:
+        print("Unable to detect language in course:")
+        print(json.dumps(course, indent=2))
+        print("This most likely means that the questions have changed and need to be added to scales.json")
+        sys.exit(1)
+
+    dump_json(stats, output_path)
 
 def generate_stats_dir(responses_dir, participation_dir, output_dir, scales, course_names, semester_name):
     for filename in os.listdir(responses_dir):

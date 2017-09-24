@@ -19,14 +19,22 @@ def get_course_data(path):
     language = course["language"]
 
     if language == "NO":
-        general_question = "Hva er ditt generelle intrykk av kurset?"
+        general_questions = ["Hva er ditt generelle intrykk av kurset?",
+                             "Hva er ditt generelle inntrykk av kurset?"]
     elif language == "EN":
-        general_question = "How do you rate the course in general?"
+        general_questions = ["How do you rate the course in general?",
+                             "What is your general impression of the course?"]
     else:
-        print("Unknown language: "+language)
+        print("Unknown language: " + str(language))
+        print("Path:" + str(path))
+        print("JSON:")
+        print(json.dumps(course, indent=2))
         sys.exit(1)
 
-    course[general_question] = course["questions"][general_question]
+    for general_question in general_questions:
+        if general_question in course["questions"]:
+            course[general_question] = course["questions"][general_question]
+            break
     del course["questions"]
     return course
 
