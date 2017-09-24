@@ -1,3 +1,4 @@
+#!/usr/bin/env/bash
 mkdir -p ./data/$1/outputs/tex
 mkdir -p ./data/$1/inputs/md
 mkdir -p ./data/$1/outputs/report
@@ -19,5 +20,5 @@ if [ ! -f ./data/$1/inputs/tex/tail.tex ]; then
   cp ./templates/tail.tex ./data/$1/inputs/tex/tail.tex
 fi
 
-cd ./data/$1/inputs/md
+cd ./data/$1/inputs/md || exit 1
 find . -iname "*.md" -type f -exec sh -c 'pandoc "${0}" -o "../../outputs/tex/${0%.md}.tex"' {} \;
