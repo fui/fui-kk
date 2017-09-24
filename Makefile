@@ -7,6 +7,15 @@ install-mac: # mac only :)
 	brew install phantomjs
 	brew install rename
 	brew install pandoc
+	# TODO: Add LaTeX installation
+	pip3 install -r requirements.txt
+
+install-linux:
+	apt install python3
+	apt install python3-pip
+	# TODO: Add phantomjs installation (apt doesn't work!)
+	apt install pandoc
+	# TODO: Add LaTeX installation
 	pip3 install -r requirements.txt
 
 usernames:
@@ -72,6 +81,7 @@ web-preview: web
 upload_raw:
 	@echo "Mount KURS folder to /Volumes/KURS (mac) or similar before running:"
 	python3 src/upload_reports.py -v --input ./data --output /Volumes/KURS/ --semester $(SEMESTER)
+	# python3 src/upload_reports.py -v --input ./data --output "Z:/KURS/" --semester $(SEMESTER)
 
 score:
 	python3 ./src/score.py $(SEMESTER)
