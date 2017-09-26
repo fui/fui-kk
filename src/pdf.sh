@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 function triplelatex {
     filename=$(basename "$1")
     filename="${filename%.*}"
@@ -15,5 +16,5 @@ function triplelatex {
 }
 
 mkdir -p ./data/$1/outputs/report
-cd ./data/$1/outputs/report
+cd ./data/$1/outputs/report || exit 1
 triplelatex fui-kk_report_$1.tex
