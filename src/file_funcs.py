@@ -26,6 +26,9 @@ def path_clean(p):
 def filename_clean(p):
     return path_clean(p).replace("/", "_").replace("\\", "_")
 
+def print_json(data):
+    print(json.dumps(data, indent=2))
+
 def dump_json(data, path):
     path = path_clean(path)
     folder = os.path.dirname(path)

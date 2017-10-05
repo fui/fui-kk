@@ -37,20 +37,23 @@ import json
 import sys
 from collections import OrderedDict
 from functools import partial
+from copy import copy
 
-from file_funcs import dump_json, load_json
+from file_funcs import dump_json, load_json, print_json
 
 
 def get_general_question(course_semester):
     language = course_semester["language"]
+    general_questions = ["Hva er ditt generelle intrykk av kurset?",
+                         "Hva er ditt generelle inntrykk av kurset?",
+                         "What is your general impression of the course?",
+                         "How do you rate the course in general?"]
+    for question in general_questions:
+        if question in course_semester:
+            return question
 
-    if language == "NO":
-        return "Hva er ditt generelle intrykk av kurset?"
-    elif language == "EN":
-        return "How do you rate the course in general?"
-    else:
-        print("Unknown language: "+language)
-        sys.exit(1)
+    print("Cannot find general question: " + json.dumps(course_semester, indent=2))
+    sys.exit(1)
 
 def plot_course(course_name, courses, output, scales, semester):
     course = courses[course_name]
@@ -62,16 +65,26 @@ def plot_course(course_name, courses, output, scales, semester):
     scale = scale_text
 
     semester_codes = list(course.keys())
-    if semester in semester_codes:
-        semester_codes = semester_codes[0:semester_codes.index(semester)+1]
-    else:
+
+    # Filter out semesters which had a different question:
+    for semester_code in semester_codes:
+        if general_question not in course[semester_code]:
+            del course[semester_code]
+
+    if semester not in semester_codes:
         print("Warning: the course {} doesn't have data for {}".format(course_name, semester))
-    semesters = list(course.items())
+        return
+
+    semester_codes = list(course.keys())
+    semesters      = list(course.items())
+
+    end_index      = semester_codes.index(semester)+1
+    semester_codes = semester_codes[0:end_index]
+    semesters      = semesters[0:end_index]
 
     scores = []
-    for semester in semester_codes:
-        semester_question = get_general_question(course[semester])
-        scores.append(course[semester][semester_question]["average"])
+    for semester_code in semester_codes:
+        scores.append(course[semester_code][general_question]["average"])
 
     fig = plt.figure(figsize=(10, 5), edgecolor='k')
     plt.title('Generell vurdering fra ' + semester_codes[0])
@@ -93,6 +106,7 @@ def plot_course(course_name, courses, output, scales, semester):
     axis.yaxis.grid(True)
     plt.subplots_adjust(left=0.2, right=0.8, top=0.9, bottom=0.1)
 
+    print("Generated plot: " + output+course_name+'.pdf')
     plt.savefig(output+course_name+'.pdf', format='pdf')
     plt.savefig(output+course_name+'.png', format='png')
     plt.close('all')
