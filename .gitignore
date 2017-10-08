@@ -7,6 +7,7 @@ data.tgz
 downloads.tgz
 sample_data/*
 venv
+REPORT_WRITERS.json
 
 # Editor files:
 *~
