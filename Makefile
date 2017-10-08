@@ -1,6 +1,7 @@
 default: help
 
 SEMESTER = V2016
+REPORT_WRITERS = 8
 
 install-mac: # mac only :)
 	brew install python3
@@ -60,6 +61,11 @@ plots:
 	python3 src/plot_courses.py $(SEMESTER)
 
 all: responses scales json plots tex pdf web
+
+assign-courses:
+	python3 src/course_divide.py $(REPORT_WRITERS) $(SEMESTER) > REPORT_WRITERS.json
+	cat REPORT_WRITERS.json
+	@echo "The assignments above are also saved to 'REPORT_WRITERS.json'"
 
 open:
 	open data/$(SEMESTER)/outputs/report/fui-kk_report*.pdf
