@@ -89,6 +89,8 @@ def tex_combine(semester, verbose=False):
         participation_string = ""
         try:
             participation = load_json(path)
+            if participation["answered"] <= 4:
+                continue
             participation_string = get_participation_string(participation, language)
         except FileNotFoundError:
             print('Could not open '+path+' ! Skipping...')
