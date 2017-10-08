@@ -49,12 +49,12 @@ tex:
 	rename -v -f -S inf INF ./data/*/inputs/md/*
 	perl -i.bak -pe 's/\x61\xCC\x8A/\xC3\xA5/g' ./data/*/inputs/md/*.md
 	find ./data -type f -name *.md.bak -delete
-	./src/tex.sh $(SEMESTER)
+	bash ./src/tex.sh $(SEMESTER)
 	python3 src/participation_summary.py $(SEMESTER)
 	python3 src/tex_combine.py -s $(SEMESTER)
 
 pdf: tex
-	./src/pdf.sh $(SEMESTER)
+	bash ./src/pdf.sh $(SEMESTER)
 
 plots:
 	python3 src/plot_courses.py $(SEMESTER)
@@ -65,7 +65,7 @@ open:
 	open data/$(SEMESTER)/outputs/report/fui-kk_report*.pdf
 
 web:
-	./src/web.sh $(SEMESTER)
+	bash ./src/web.sh $(SEMESTER)
 	python3 ./src/web_reports.py data/$(SEMESTER)
 
 web-preview: web
