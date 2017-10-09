@@ -22,7 +22,8 @@ def course_divide(semester, num):
     courses = []
     for name, data in semester.items():
         answers = data["respondents"]["answered"]
-        courses.append((name, answers))
+        if answers > 4:
+            courses.append((name, answers))
     courses = sorted(courses, reverse=True, key= lambda x: x[1])
     people = []
     for i in range(num):

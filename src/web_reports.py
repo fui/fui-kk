@@ -62,8 +62,11 @@ def web_report_course(summary_path, stat_path, output_path, html_templates, cour
     language = stats["language"]
     semester = stats["course"]["semester"]
     participation = stats["respondents"]
+    if participation["answered"] <= 4:
+        return False
     participation_string = get_participation_string(participation, language)
 
+    # TODO: Fix for new questions!
     if language == "NO":
         general_question = "Hva er ditt generelle intrykk av kurset?"
     elif language == "EN":
@@ -194,7 +197,7 @@ def web_report_course(summary_path, stat_path, output_path, html_templates, cour
 
     with open(output_path,'w') as f:
         f.write(html)
-    return course_code, course_name
+    return True
 
 def web_reports_semester_folder(semester_path):
     semester = os.path.basename(semester_path)
@@ -223,10 +226,10 @@ def web_reports_semester_folder(semester_path):
         stat_path = path_join(stats_path, course_code+".json")
         output_path = path_join(upload_path, course_code+".html")
 
-        web_report_course(summary_path, stat_path, output_path, html_templates, courses_all, scales)
-
-        course_name = courses[course_code]["course"]["name"]
-        links.append('<li><a href="'+course_code+'.html">' + course_code + ' - ' + course_name + '</a></li>')
+        res = web_report_course(summary_path, stat_path, output_path, html_templates, courses_all, scales)
+        if res:
+            course_name = courses[course_code]["course"]["name"]
+            links.append('<li><a href="'+course_code+'.html">' + course_code + ' - ' + course_name + '</a></li>')
     links.append("</ul>")
     links_str = "\n".join(links)
 
