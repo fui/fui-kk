@@ -65,20 +65,22 @@ def create_chart_js(question, question_stats, scales, chart_id):
     return 'insert_chart("#{}", [{}], {});'.format(chart_id, ", ".join(chart_data), colors)
 
 def web_report_course(summary_path, stat_path, output_path, html_templates, courses, scales):
+    stats = load_json(stat_path)
+
+    participation = stats["respondents"]
+    if participation["answered"] <= 4:
+        return False
+
+    course_code = stats["course"]["code"]
+    course_name = stats["course"]["name"]
+    semester = stats["course"]["semester"]
+    language = stats["language"]
+    participation_string = get_participation_string(participation, language)
+
     with open(summary_path,'r') as f:
         summary = f.read()
     summary = summary.replace("</p>\n</blockquote>", "</blockquote>")
     summary = summary.replace("<blockquote>\n<p>", "<blockquote>")
-
-    stats = load_json(stat_path)
-    course_code = stats["course"]["code"]
-    course_name = stats["course"]["name"]
-    language = stats["language"]
-    semester = stats["course"]["semester"]
-    participation = stats["respondents"]
-    if participation["answered"] <= 4:
-        return False
-    participation_string = get_participation_string(participation, language)
 
     general_questions = get_general_questions()
     general_question = None
