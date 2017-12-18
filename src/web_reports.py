@@ -15,6 +15,20 @@ import re
 from collections import OrderedDict
 from file_funcs import dump_json, load_json, path_join
 
+def get_general_questions():
+    general_questions = []
+    general_questions.append("Hva er ditt generelle intrykk av kurset?")
+    general_questions.append("Hva er ditt generelle inntrykk av kurset?")
+    general_questions.append("How do you rate the course in general?")
+    general_questions.append("What is your general impression of the course?")
+    return general_questions
+
+def look_for_general_question(data):
+    for q in get_general_questions():
+        if q in data:
+            return q
+    return None
+
 def get_participation_string(participation, language):
     if language == "EN":
         labels = ["Respondents","of"]
@@ -66,14 +80,15 @@ def web_report_course(summary_path, stat_path, output_path, html_templates, cour
         return False
     participation_string = get_participation_string(participation, language)
 
-    # TODO: Fix for new questions!
-    if language == "NO":
-        general_question = "Hva er ditt generelle intrykk av kurset?"
-    elif language == "EN":
-        general_question = "How do you rate the course in general?"
-    else:
-        print("Error: Unknown language " + str(language))
-        sys.exit(1)
+    general_questions = get_general_questions()
+    general_question = None
+    for q in general_questions:
+        if q in stats["questions"]:
+            general_question = q
+            break
+    if not general_question:
+        print("Could not find general question for {}".format(output_path))
+
     general_average_text = stats["questions"][general_question]["average_text"]
     course_url = "https://www.uio.no/studier/emner/matnat/ifi/"+course_code
 
@@ -173,10 +188,8 @@ def web_report_course(summary_path, stat_path, output_path, html_templates, cour
     course_rating = []
     for semester, semester_data in courses[course_code].items():
         # Dirty, some courses have both english and norwegian semesters:
-        try:
-            average = semester_data["Hva er ditt generelle intrykk av kurset?"]["average"]
-        except:
-            average = semester_data["How do you rate the course in general?"]["average"]
+        question_text = look_for_general_question(semester_data)
+        average = semester_data[question_text]["average"]
         course_rating.append([semester, round(average+1.0, 2)])
 
     # Replace $ keywords from template html:
