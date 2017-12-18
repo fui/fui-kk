@@ -54,7 +54,12 @@ def create_chart_js(question, question_stats, scales, chart_id):
         else:
             count = 0
         chart_data.append('{{ label: "{}", value: {} }}'.format(answer, count))
-    if len(answers) == 6:
+    # TODO: Define 7 and 9 color scale
+    if len(answers) == 9:
+        colors = "['#00ff00', '#44ff00', '#88ff00', '#ccff00', '#ffff00', '#ffcc00', '#ff8800', '#ff4400', '#ff0000']"
+    elif len(answers) == 7:
+        colors = "['#00ff00', '#66ff00', '#ccff00', '#ffff00', '#ffcc00', '#ff6600', '#ff0000']"
+    elif len(answers) == 6:
         colors = "['#1a9850', '#91cf60', '#d9ef8b', '#fee08b', '#fc8d59', '#d73027']"
     elif len(answers) == 5:
         colors = "['#d7191c', '#fdae61', '#91cf60', '#abd9e9', '#2c7bb6']"
