@@ -1,6 +1,6 @@
 "use strict";
 
-var tooltip = d3.select("body").append("div").attr("class", "tooltip");
+var tooltip = d3.select("body").append("div").attr("class", "d3kk-tooltip");
 
 function show_tooltip(message) {
     tooltip.html(message).style("left", d3.event.pageX + 3 + "px").style("top", d3.event.pageY - 28 + "px").style("opacity", 1);
@@ -32,7 +32,7 @@ function insert_chart(target_selector, data, colors) {
     var expanded = false;
 
     svg.selectAll("rect").data(data).enter().append("rect").attr("class", function (d, i) {
-        return "rect-" + i;
+        return "d3kk-rect-" + i;
     }).attr("width", function (d) {
         return scale(d.value);
     }).attr("height", height).attr("x", function (d) {
@@ -56,7 +56,7 @@ function insert_chart(target_selector, data, colors) {
                 var cury = 0;
 
                 var _loop = function _loop(i) {
-                    svg.select(".rect-" + i).transition().duration(100).attr("y", cury).transition().duration(100).attr("x", col_base);
+                    svg.select(".d3kk-rect-" + i).transition().duration(100).attr("y", cury).transition().duration(100).attr("x", col_base);
 
                     var font_size = 16;
                     var label_base = col_base - 5;
@@ -77,20 +77,18 @@ function insert_chart(target_selector, data, colors) {
                     var col_width = scale(data[i].value);
 
                     if (col_width + col_base > width) {
-                        (function () {
-                            col_width = width - col_base;
+                        col_width = width - col_base;
 
-                            // The following is just a roundabout way to draw a zig-zag marker
-                            // on the column, to indicate that it has been truncated.
-                            var yScale = d3.scale.linear().domain([0, 100]).range([0, height]);
-                            var area = d3.svg.line().x(function (d) {
-                                return d.x / 3 + (col_base + col_width / 2);
-                            }).y(function (d) {
-                                return cury + yScale(d.y);
-                            });
+                        // The following is just a roundabout way to draw a zig-zag marker
+                        // on the column, to indicate that it has been truncated.
+                        var yScale = d3.scale.linear().domain([0, 100]).range([0, height]);
+                        var area = d3.svg.line().x(function (d) {
+                            return d.x / 3 + (col_base + col_width / 2);
+                        }).y(function (d) {
+                            return cury + yScale(d.y);
+                        });
 
-                            svg.append('path').datum([{ 'x': 0, 'y': 0 }, { 'x': 25, 'y': 33 }, { 'x': 0, 'y': 66 }, { 'x': 25, 'y': 100 }, { 'x': 50, 'y': 100 }, { 'x': 25, 'y': 66 }, { 'x': 50, 'y': 33 }, { 'x': 25, 'y': 0 }]).attr('fill', 'white').transition().delay(200).attr('d', area);
-                        })();
+                        svg.append('path').datum([{ 'x': 0, 'y': 0 }, { 'x': 25, 'y': 33 }, { 'x': 0, 'y': 66 }, { 'x': 25, 'y': 100 }, { 'x': 50, 'y': 100 }, { 'x': 25, 'y': 66 }, { 'x': 50, 'y': 33 }, { 'x': 25, 'y': 0 }]).attr('fill', 'white').transition().delay(200).attr('d', area);
                     }
 
                     svg.append("text").transition().delay(200).attr("x", col_base + (labelinside ? col_width - 5 : col_width + 5)).attr("y", cury + height / 2).attr("dominant-baseline", "middle").attr("text-anchor", labelinside ? "end" : "start").text(Math.round(percentage(data[i].value)) + "%");
@@ -107,21 +105,19 @@ function insert_chart(target_selector, data, colors) {
                 expanded = true;
             })();
         } else {
-            (function () {
-                svg.selectAll("text").remove();
-                svg.selectAll("path").remove();
+            svg.selectAll("text").remove();
+            svg.selectAll("path").remove();
 
-                var curx = 0;
-                svg.selectAll("rect").transition().duration(100).attr("x", function (d) {
-                    var ret = curx;
-                    curx += scale(d.value);
-                    return ret;
-                }).transition().duration(100).attr("y", 0);
+            var _curx = 0;
+            svg.selectAll("rect").transition().duration(100).attr("x", function (d) {
+                var ret = _curx;
+                _curx += scale(d.value);
+                return ret;
+            }).transition().duration(100).attr("y", 0);
 
-                svg.transition().delay(100).duration(100).attr("height", height);
+            svg.transition().delay(100).duration(100).attr("height", height);
 
-                expanded = false;
-            })();
+            expanded = false;
         }
     });
 };
@@ -183,7 +179,7 @@ var insert_stacked = function insert_stacked(target_selector, data, colors) {
         return yScale(d.y0 + d.y);
     });
 
-    svg.selectAll(".layer").data(layers).enter().append("path").attr("class", "layer").attr("d", function (d) {
+    svg.selectAll(".d3kk-layer").data(layers).enter().append("path").attr("class", "d3kk-layer").attr("d", function (d) {
         return area(d.values);
     }).style("fill", function (d, i) {
         return colors[i];
@@ -191,5 +187,5 @@ var insert_stacked = function insert_stacked(target_selector, data, colors) {
         return show_tooltip(d.key);
     });
 
-    svg.append("g").attr("class", "axis").attr("transform", "translate(0," + height + ")").call(xAxis);
+    svg.append("g").attr("class", "d3kk-axis").attr("transform", "translate(0," + height + ")").call(xAxis);
 };

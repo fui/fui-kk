@@ -1,16 +1,16 @@
-.chart {
+.d3kk-chart {
   font-family: sans-serif;
   cursor: pointer;
 }
 
-.axis path,
-.axis line {
+.d3kk-axis path,
+.d3kk-axis line {
   fill: none;
   stroke: black;
   shape-rendering: crispEdges;
 }
 
-.tooltip {
+.d3kk-tooltip {
   position: absolute;
   padding: 3px;
   border-radius: 2px;
