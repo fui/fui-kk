@@ -15,6 +15,20 @@ import re
 from collections import OrderedDict
 from file_funcs import dump_json, load_json, path_join
 
+def get_general_questions():
+    general_questions = []
+    general_questions.append("Hva er ditt generelle intrykk av kurset?")
+    general_questions.append("Hva er ditt generelle inntrykk av kurset?")
+    general_questions.append("How do you rate the course in general?")
+    general_questions.append("What is your general impression of the course?")
+    return general_questions
+
+def look_for_general_question(data):
+    for q in get_general_questions():
+        if q in data:
+            return q
+    return None
+
 def get_participation_string(participation, language):
     if language == "EN":
         labels = ["Respondents","of"]
@@ -40,7 +54,12 @@ def create_chart_js(question, question_stats, scales, chart_id):
         else:
             count = 0
         chart_data.append('{{ label: "{}", value: {} }}'.format(answer, count))
-    if len(answers) == 6:
+    # TODO: Define 7 and 9 color scale
+    if len(answers) == 9:
+        colors = "['#00ff00', '#44ff00', '#88ff00', '#ccff00', '#ffff00', '#ffcc00', '#ff8800', '#ff4400', '#ff0000']"
+    elif len(answers) == 7:
+        colors = "['#00ff00', '#66ff00', '#ccff00', '#ffff00', '#ffcc00', '#ff6600', '#ff0000']"
+    elif len(answers) == 6:
         colors = "['#1a9850', '#91cf60', '#d9ef8b', '#fee08b', '#fc8d59', '#d73027']"
     elif len(answers) == 5:
         colors = "['#d7191c', '#fdae61', '#91cf60', '#abd9e9', '#2c7bb6']"
@@ -51,29 +70,32 @@ def create_chart_js(question, question_stats, scales, chart_id):
     return 'insert_chart("#{}", [{}], {});'.format(chart_id, ", ".join(chart_data), colors)
 
 def web_report_course(summary_path, stat_path, output_path, html_templates, courses, scales):
+    stats = load_json(stat_path)
+
+    participation = stats["respondents"]
+    if participation["answered"] <= 4:
+        return False
+
+    course_code = stats["course"]["code"]
+    course_name = stats["course"]["name"]
+    semester = stats["course"]["semester"]
+    language = stats["language"]
+    participation_string = get_participation_string(participation, language)
+
     with open(summary_path,'r') as f:
         summary = f.read()
     summary = summary.replace("</p>\n</blockquote>", "</blockquote>")
     summary = summary.replace("<blockquote>\n<p>", "<blockquote>")
 
-    stats = load_json(stat_path)
-    course_code = stats["course"]["code"]
-    course_name = stats["course"]["name"]
-    language = stats["language"]
-    semester = stats["course"]["semester"]
-    participation = stats["respondents"]
-    if participation["answered"] <= 4:
-        return False
-    participation_string = get_participation_string(participation, language)
+    general_questions = get_general_questions()
+    general_question = None
+    for q in general_questions:
+        if q in stats["questions"]:
+            general_question = q
+            break
+    if not general_question:
+        print("Could not find general question for {}".format(output_path))
 
-    # TODO: Fix for new questions!
-    if language == "NO":
-        general_question = "Hva er ditt generelle intrykk av kurset?"
-    elif language == "EN":
-        general_question = "How do you rate the course in general?"
-    else:
-        print("Error: Unknown language " + str(language))
-        sys.exit(1)
     general_average_text = stats["questions"][general_question]["average_text"]
     course_url = "https://www.uio.no/studier/emner/matnat/ifi/"+course_code
 
@@ -173,10 +195,8 @@ def web_report_course(summary_path, stat_path, output_path, html_templates, cour
     course_rating = []
     for semester, semester_data in courses[course_code].items():
         # Dirty, some courses have both english and norwegian semesters:
-        try:
-            average = semester_data["Hva er ditt generelle intrykk av kurset?"]["average"]
-        except:
-            average = semester_data["How do you rate the course in general?"]["average"]
+        question_text = look_for_general_question(semester_data)
+        average = semester_data[question_text]["average"]
         course_rating.append([semester, round(average+1.0, 2)])
 
     # Replace $ keywords from template html:
