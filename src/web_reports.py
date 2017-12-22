@@ -95,7 +95,7 @@ def web_report_course(summary_path, stat_path, output_path, html_templates, cour
             <div id="{question_id}" class="question">
                 <h4>{question_label}: {question}</h4>
                 <p>{average_label}: {average}</p>
-                <div id="{chart_id}" class="chart"></div>
+                <div id="{chart_id}" class="d3kk-chart"></div>
             </div>
         '''.format(
             question_id=question_id,
