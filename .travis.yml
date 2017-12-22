@@ -17,6 +17,11 @@ matrix:
           - pandoc
     - os: osx
       language: generic
+      sudo: false
+  allow_failures:
+    - os: osx
+      language: generic
+      sudo: false
 
 install:
     - chmod u+x travis/install.sh
