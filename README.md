@@ -31,6 +31,7 @@ Please note that this is missing the default styling of UiO websites.
 If you want to test this software, or contribute to the project you can get started like this:
 ```
 git clone git@github.com:fui/fui-kk.git
+git submodule update --init --recursive
 cd fui-kk
 make sample_data
 ```
@@ -78,7 +79,7 @@ Finder -> Go -> Connect to Server.
 * Click "New"
 * Select "Secure WebDAV"
 * Copy the above link into the url field
-* Use appopriate credentials. 
+* Use appopriate credentials.
 * Done
 
 ##### Windows Network drive:

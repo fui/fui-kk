@@ -47,7 +47,7 @@ json:
 	python3 src/courses.py
 
 tex:
-	rename -v -f -S inf INF ./data/*/inputs/md/*
+	# rename -v -f -S inf INF ./data/*/inputs/md/* # Only on mac
 	perl -i.bak -pe 's/\x61\xCC\x8A/\xC3\xA5/g' ./data/*/inputs/md/*.md
 	find ./data -type f -name *.md.bak -delete
 	bash ./src/tex.sh $(SEMESTER)
