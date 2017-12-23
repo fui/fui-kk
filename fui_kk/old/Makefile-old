@@ -12,7 +12,7 @@ pdf: tex
 	@echo
 	@echo "Creating pdf file from latex source"
 	@echo "-----------------------------------"
-	./src/plotcourses.py -o plots/ -t .. -d . -r report.tex -m
+	./fui_kk/plotcourses.py -o plots/ -t .. -d . -r report.tex -m
 	pdflatex report.tex
 
 txt: pdf

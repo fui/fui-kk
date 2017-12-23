@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 
-from src.get_usernames import coursename_to_lsng_arg, read_course_names
+from fui_kk.get_usernames import coursename_to_lsng_arg, read_course_names
 
 def test_coursename_to_lsng_arg():
     assert coursename_to_lsng_arg('INF1010') == 'sinf1010'

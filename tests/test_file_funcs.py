@@ -3,7 +3,7 @@
 import path_fix
 
 # Test that all modules can be imported:
-from src.file_funcs import path_join, path_clean
+from fui_kk.file_funcs import path_join, path_clean
 
 def test_path_join():
     assert path_join("a", "b",   "e") == "a/b/e"

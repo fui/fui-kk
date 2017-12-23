@@ -34,7 +34,7 @@ def get_args():
                 if d.replace("/", "") == "all":
                     sys.exit("Error: Recursion check failed - 'all' folder!")
                 if d[0] != ".":
-                    os.system("python3 src/responses.py -s "+d)
+                    os.system("python3 fui_kk/responses.py -s "+d)
             sys.exit()
         else:
             args.input = path_join("data",args.semester,"downloads/tsv")

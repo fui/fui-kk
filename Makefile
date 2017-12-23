@@ -20,11 +20,11 @@ install-linux:
 	pip3 install -r requirements.txt
 
 usernames:
-	python3 src/get_usernames.py
+	python3 fui_kk/get_usernames.py
 
 download:
-	python3 src/download_reports.py -u fui
-	python3 src/sort_downloads.py --delete -i downloads -o data -e "(INF9)|(testskjema)|(\*\*\*)|(XXX)"
+	python3 fui_kk/download_reports.py -u fui
+	python3 fui_kk/sort_downloads.py --delete -i downloads -o data -e "(INF9)|(testskjema)|(\*\*\*)|(XXX)"
 	@echo "Warning: Please delete the downloads folder once per semester"
 	@echo "         after closing the forms, to ensure that up to date"
 	@echo "         reports are downloaded. (The download script will not"
@@ -36,34 +36,34 @@ sample_data:
 	cp -r sample_data data
 
 responses:
-	python3 src/responses.py -s all
+	python3 fui_kk/responses.py -s all
 
 scales:
-	python3 src/scales.py all
+	python3 fui_kk/scales.py all
 
 json:
-	python3 src/course.py data
-	python3 src/semester.py
-	python3 src/courses.py
+	python3 fui_kk/course.py data
+	python3 fui_kk/semester.py
+	python3 fui_kk/courses.py
 
 tex:
 	# rename -v -f -S inf INF ./data/*/inputs/md/* # Only on mac
 	perl -i.bak -pe 's/\x61\xCC\x8A/\xC3\xA5/g' ./data/*/inputs/md/*.md
 	find ./data -type f -name *.md.bak -delete
-	bash ./src/tex.sh $(SEMESTER)
-	python3 src/participation_summary.py $(SEMESTER)
-	python3 src/tex_combine.py -s $(SEMESTER)
+	bash ./fui_kk/tex.sh $(SEMESTER)
+	python3 fui_kk/participation_summary.py $(SEMESTER)
+	python3 fui_kk/tex_combine.py -s $(SEMESTER)
 
 pdf: tex
-	bash ./src/pdf.sh $(SEMESTER)
+	bash ./fui_kk/pdf.sh $(SEMESTER)
 
 plots:
-	python3 src/plot_courses.py $(SEMESTER)
+	python3 fui_kk/plot_courses.py $(SEMESTER)
 
 all: responses scales json plots tex pdf web
 
 assign-courses:
-	python3 src/course_divide.py $(REPORT_WRITERS) $(SEMESTER) > REPORT_WRITERS.json
+	python3 fui_kk/course_divide.py $(REPORT_WRITERS) $(SEMESTER) > REPORT_WRITERS.json
 	cat REPORT_WRITERS.json
 	@echo "The assignments above are also saved to 'REPORT_WRITERS.json'"
 
@@ -71,8 +71,8 @@ open:
 	open data/$(SEMESTER)/outputs/report/fui-kk_report*.pdf
 
 web:
-	bash ./src/web.sh $(SEMESTER)
-	python3 ./src/web_reports.py data/$(SEMESTER)
+	bash ./fui_kk/web.sh $(SEMESTER)
+	python3 ./fui_kk/web_reports.py data/$(SEMESTER)
 
 web-preview: web
 	@echo "---------------------------------------------"
@@ -82,15 +82,15 @@ web-preview: web
 	rm -rf ./docs
 	mkdir ./docs
 	cp -r ./data/$(SEMESTER)/outputs/web/upload/$(SEMESTER)/* ./docs
-	python3 ./src/adapt_preview_html.py
+	python3 ./fui_kk/adapt_preview_html.py
 
 upload_raw:
 	@echo "Mount KURS folder to /Volumes/KURS (mac) or similar before running:"
-	python3 src/upload_reports.py -v --input ./data --output /Volumes/KURS/ --semester $(SEMESTER)
-	# python3 src/upload_reports.py -v --input ./data --output "Z:/KURS/" --semester $(SEMESTER)
+	python3 fui_kk/upload_reports.py -v --input ./data --output /Volumes/KURS/ --semester $(SEMESTER)
+	# python3 fui_kk/upload_reports.py -v --input ./data --output "Z:/KURS/" --semester $(SEMESTER)
 
 score:
-	python3 ./src/score.py $(SEMESTER)
+	python3 ./fui_kk/score.py $(SEMESTER)
 
 clean:
 	find ./data -type d -name "outputs" -exec rm -rf {} +
