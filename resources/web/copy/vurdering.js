@@ -20,7 +20,8 @@ $(function () {
     'H2014': 4.20,
     'V2015': 4.23,
     'H2015': 4.30,
-    'V2016': 4.41
+    'V2016': 4.41,
+    'H2016': 4.19
   }
 
   if (document.body.lang && document.body.lang == "en") {
