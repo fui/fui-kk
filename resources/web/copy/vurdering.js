@@ -1,5 +1,5 @@
 $(function () {
-  var vurdering = ["Lite bra", "Mindre bra", "Greit", "Bra", "Meget bra", "Særdeles bra"];
+  var vurdering = ["Meget dårlig", "Ganske dårlig", "Noe dårlig", "Hverken bra eller dårlig", "Noe bra", "Ganske bra", "Meget bra"];
   var semesterkoder = {
     'H': 'høsten',
     'V': 'våren'
@@ -26,7 +26,7 @@ $(function () {
 
   if (document.body.lang && document.body.lang == "en") {
     title_prefix = 'General rating since '
-    vurdering = ["Not good", "Not that good", "OK", "Good", "Very good", "Exceptionally good"]
+    vurdering = ["Exceptionally bad", "Very bad", "Somewhat bad", "Neither good nor bad", "Somewhat good", "Very good", "Exceptionally good"]
     semesterkoder = {
       'H': 'autumn',
       'V': 'spring'
@@ -78,7 +78,7 @@ $(function () {
       yAxis: {
         allowDecimals: false,
         min: 1,
-        max: 6,
+        max: 7,
         title: null,
         opposite: false,
         tickInterval: 1,
@@ -97,7 +97,7 @@ $(function () {
         enabled: false
       },
       legend: {
-                                layout: 'vertical',
+        layout: 'vertical',
         enabled: emnekode != 'AVERAGE_SCORE'
       },
       credits: {
