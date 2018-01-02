@@ -106,16 +106,18 @@ This is a mirror of the data folder used by FUI, without file contents:
 
 https://github.com/fui/fui-kk-data-structure
 
-### ./src
-Python and bash scripts. See Makefile for example usage.
+### ./fui_kk
+Python package.
+Uses underscore to follow python convention.
+Also useful to have package name != project name (for searching).
 
 ### ./old
 
-`src/old/` contain old scripts which are no longer in use.
+`fui_kk/old/` contain old scripts which are no longer in use.
 
 ### ./misc
 
-`misc/` and `src/misc` contain files that can be ignored.
+`misc/` and `fui_kk/misc` contain files that can be ignored.
 
 ## Contributors
 Thank you to everyone who has been involved with this project over the years, including:

@@ -15,6 +15,21 @@ import re
 from collections import OrderedDict
 from file_funcs import dump_json, load_json, path_join
 
+def generate_semesters(start, stop):
+    yield start
+    current = start
+    while current != stop:
+        pre, year = current[0], int(current[1:])
+        assert pre == "V" or pre == "H"
+        assert year in range(1900, 2300)
+        if pre == "V":
+            pre = "H"
+        elif pre == "H":
+            pre = "V"
+            year += 1
+        current = pre + str(year)
+        yield current
+
 def get_general_questions():
     general_questions = []
     general_questions.append("Hva er ditt generelle intrykk av kurset?")
@@ -69,7 +84,7 @@ def create_chart_js(question, question_stats, scales, chart_id):
         return ''
     return 'insert_chart("#{}", [{}], {});'.format(chart_id, ", ".join(chart_data), colors)
 
-def web_report_course(summary_path, stat_path, output_path, html_templates, courses, scales):
+def web_report_course(summary_path, stat_path, output_path, html_templates, courses, scales, current_semester):
     stats = load_json(stat_path)
 
     participation = stats["respondents"]
@@ -193,7 +208,13 @@ def web_report_course(summary_path, stat_path, output_path, html_templates, cour
     main_body = "\n".join(main_contents)
 
     course_rating = []
-    for semester, semester_data in courses[course_code].items():
+    course_dict = courses[course_code]
+    if int(current_semester[1:]) >= 2017:
+        for sem in generate_semesters("V2000", "H2016"):
+            if sem in course_dict:
+                del course_dict[sem]
+
+    for semester, semester_data in course_dict.items():
         # Dirty, some courses have both english and norwegian semesters:
         question_text = look_for_general_question(semester_data)
         average = semester_data[question_text]["average"]
@@ -246,7 +267,7 @@ def web_reports_semester_folder(semester_path):
         stat_path = path_join(stats_path, course_code+".json")
         output_path = path_join(upload_path, course_code+".html")
 
-        res = web_report_course(summary_path, stat_path, output_path, html_templates, courses_all, scales)
+        res = web_report_course(summary_path, stat_path, output_path, html_templates, courses_all, scales, semester)
         if res:
             course_name = courses[course_code]["course"]["name"]
             links.append('<li><a href="'+course_code+'.html">' + course_code + ' - ' + course_name + '</a></li>')

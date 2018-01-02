@@ -4,5 +4,5 @@
 import sys
 import os
 sys.path.insert(0, "./")
-if "/src" not in os.getcwd() and os.path.exists("./src/__init__.py"):
-    sys.path.insert(0, "./src")
+if "fui_kk" not in os.getcwd() and os.path.exists("./fui_kk/__init__.py"):
+    sys.path.insert(0, "./fui_kk")

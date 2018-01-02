@@ -25,9 +25,7 @@
     "order": [
       "For vanskelig",
       "Vanskelig",
-      "Noe vanskelig",
       "Passe",
-      "Noe lett",
       "Lett",
       "For lett"
     ],
@@ -42,19 +40,17 @@
       "Lett"
     ],
     "ignore": [
+      "Noe vanskelig",
+      "Noe lett",
       ""
     ]
   },
   "Hva synes du om arbeidsmengden sett i forhold til antall studiepoeng?": {
     "order": [
-      "For høy",
       "For stor",
-      "Høy",
       "Stor",
       "Passe",
-      "Lav",
       "Liten",
-      "For lav",
       "For liten"
     ],
     "all": [
@@ -70,6 +66,10 @@
       "For lav"
     ],
     "ignore": [
+      "For høy",
+      "Høy",
+      "For lav",
+      "Lav",
       ""
     ]
   },
