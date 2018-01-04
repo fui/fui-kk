@@ -69,15 +69,15 @@ def create_chart_js(question, question_stats, scales, chart_id):
         else:
             count = 0
         chart_data.append('{{ label: "{}", value: {} }}'.format(answer, count))
-    # TODO: Define 7 and 9 color scale
+
     if len(answers) == 9:
-        colors = "['#00ff00', '#44ff00', '#88ff00', '#ccff00', '#ffff00', '#ffcc00', '#ff8800', '#ff4400', '#ff0000']"
+        colors = "['#21428c', '#4573b8', '#7c81be', '#a8bfd5', '#c2b59b', '#e2dda6', '#aad58f', '#f7a21c', '#bf2026']"
     elif len(answers) == 7:
-        colors = "['#00ff00', '#66ff00', '#ccff00', '#ffff00', '#ffcc00', '#ff6600', '#ff0000']"
+        colors = "['#21428c', '#4573b8', '#a8bfd5', '#c2b59b', '#e2dda6', '#f7a21c', '#bf2026']"
     elif len(answers) == 6:
-        colors = "['#1a9850', '#91cf60', '#d9ef8b', '#fee08b', '#fc8d59', '#d73027']"
+        colors = "['#21428c', '#4573b8', '#a8bfd5', '#c2b59b', '#f7a21c', '#bf2026']"
     elif len(answers) == 5:
-        colors = "['#d7191c', '#fdae61', '#91cf60', '#abd9e9', '#2c7bb6']"
+        colors = "['#21428c', '#4573b8', '#c2b59b', '#f7a21c', '#bf2026']"
     else:
         print("Warning: Chart for '{}' omitted. No colors defined for questions with {} alternatives".format(
             question, len(answers)))
