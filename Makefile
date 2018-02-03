@@ -3,6 +3,11 @@ default: help
 SEMESTER = V2016
 REPORT_WRITERS = 8
 
+# DAV mounted fui vortex folder (not mounted automatically):
+MOUNT_PATH = /Volumes/fui
+# MOUNT_PATH = Z:/fui
+# MOUNT_PATH = /mnt/fui
+
 install-mac: # mac only :)
 	brew install python3
 	brew install phantomjs
@@ -85,9 +90,8 @@ web-preview: web
 	python3 ./fui_kk/adapt_preview_html.py
 
 upload_raw:
-	@echo "Mount KURS folder to /Volumes/KURS (mac) or similar before running:"
-	python3 fui_kk/upload_reports.py -v --input ./data --output /Volumes/KURS/ --semester $(SEMESTER)
-	# python3 fui_kk/upload_reports.py -v --input ./data --output "Z:/KURS/" --semester $(SEMESTER)
+	@echo "Mount fui folder to MOUNT_PATH using DAV before running:"
+	python3 fui_kk/upload_reports.py -v --input ./data --output $(MOUNT_PATH)/KURS/ --semester $(SEMESTER)
 
 score:
 	python3 ./fui_kk/score.py $(SEMESTER)
