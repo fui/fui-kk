@@ -40,6 +40,7 @@ from functools import partial
 from copy import copy
 
 from file_funcs import dump_json, load_json, print_json
+from language import determine_language
 
 
 def get_general_question(course_semester):
@@ -86,8 +87,14 @@ def plot_course(course_name, courses, output, scales, semester):
     for semester_code in semester_codes:
         scores.append(course[semester_code][general_question]["average"])
 
+    language = determine_language(general_question) # Defaults to None
+
+    plot_title = ("General assessment since" if language == "EN" else
+                  "Generell vurdering fra") # Default to norwegian
+    plot_title = "{} {}".format(plot_title, semester_codes[0])
+
     fig = plt.figure(figsize=(10, 5), edgecolor='k')
-    plt.title('Generell vurdering fra ' + semester_codes[0])
+    plt.title(plot_title)
 
     semester_nums = range(len(semester_codes))
     plt.plot(semester_nums, scores, marker='o', markersize=5)
