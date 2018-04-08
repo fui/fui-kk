@@ -35,6 +35,10 @@
 \setlength{\textwidth}      {15.0cm}
 \setlength{\textheight}     {24.5cm}
 
+% Fix tightlist problem with newer version of pandoc
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
 \begin{document}
 
 \ififorside{}
