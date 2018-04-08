@@ -13,6 +13,7 @@ from bs4 import BeautifulSoup
 import json
 from collections import OrderedDict
 from file_funcs import dump_json, load_json, path_join
+from language import determine_language
 
 def generate_stats(responses, participation, scales, stats=None):
     if stats is None:
@@ -37,16 +38,9 @@ def generate_stats(responses, participation, scales, stats=None):
     language = None
 
     for question in responses:
+        if language is None:
+            language = determine_language(question)
         if question in scales:
-            if language is None:
-                if "Hva" in question or "Hvordan" in question:
-                    language = "NO"
-                elif "How" in question or "What" in question:
-                    language = "EN"
-                else:
-                    print("Unable to detect language in question:")
-                    print(question)
-                    sys.exit(1)
             question_answers = responses[question]
             answer_order = list(reversed(scales[question]["order"]))
             answer_ignore = scales[question]["ignore"]
@@ -88,7 +82,6 @@ def generate_stats(responses, participation, scales, stats=None):
             # questions[question]["most_common_answer"]["text"] = most_common
             # questions[question]["most_common_answer"]["people"] = max_people
             # questions[question]["most_common_answer"]["percentage"] = max_people/answered
-
     stats["language"] = language
     stats["questions"] = questions
     return stats
