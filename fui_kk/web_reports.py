@@ -96,9 +96,12 @@ def web_report_course(summary_path, stat_path, output_path, html_templates, cour
     semester = stats["course"]["semester"]
     language = stats["language"]
     participation_string = get_participation_string(participation, language)
-
-    with open(summary_path,'r') as f:
-        summary = f.read()
+    try:
+        with open(summary_path,'r') as f:
+            summary = f.read()
+    except:
+        print("Warning: Could not open '{}' - skipping".format(summary_path))
+        return False
     summary = summary.replace("</p>\n</blockquote>", "</blockquote>")
     summary = summary.replace("<blockquote>\n<p>", "<blockquote>")
 
