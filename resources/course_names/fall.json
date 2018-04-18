@@ -1,6 +1,6 @@
 {
     "INF0010": "Forkurs i informatikk",
-    "IN:KJM1900" : "Introduksjon i programmering for kjemikere",
+    "IN-KJM1900" : "Introduksjon i programmering for kjemikere",
     "IN1000" : "Introduksjon i objektorientert programmering",
     "IN1020" : "Introduksjon til datateknologi",
     "IN1050" : "Introduksjon til design, bruk, interaksjon",
@@ -12,8 +12,8 @@
     "IN5010" : "Design, Technology and Society",
     "IN5210" : "Information Systems",
     "INEC1800" : "Økonomi, finans og regnskap",
-    "INF:BIO5121" : "High Throughput Sequencing technologies and bioinformatics analysis",
-    "INF:GEO4310" : "Avbildning",
+    "INF-BIO5121" : "High Throughput Sequencing technologies and bioinformatics analysis",
+    "INF-GEO4310" : "Avbildning",
     "INF1060" : "Introduksjon til operativsystemer og datakommunikasjon",
     "INF1300" : "Introduksjon til databaser",
     "INF1400" : "Digital teknologi",
@@ -67,7 +67,7 @@
     "INF5850" : "IKT for utvikling: Lager vi en bedre verden?",
     "INF5880" : "Master seminar in language technology",
     "INF5906" : "Selected topics in static analysis",
-    "MAT:INF1100" : "Modellering og beregninger",
-    "MAT:INF3600" : "Matematisk logikk",
-    "MAT:INF4300" : "Partielle differensialligninger og Sobolev rom I"
+    "MAT-INF1100" : "Modellering og beregninger",
+    "MAT-INF3600" : "Matematisk logikk",
+    "MAT-INF4300" : "Partielle differensialligninger og Sobolev rom I"
 }
