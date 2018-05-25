@@ -19,9 +19,9 @@ install-mac: # mac only :)
 install-linux:
 	apt install python3
 	apt install python3-pip
-	# TODO: Add phantomjs installation (apt doesn't work!)
+	apt-get install phantomjs
 	apt install pandoc
-	# TODO: Add LaTeX installation
+	apt-get install texlive-full
 	pip3 install -r requirements.txt
 
 usernames:
