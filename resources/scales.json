@@ -578,24 +578,26 @@
   },
   "What is your general impression of the course?": {
     "order": [
-      "Exceptionally good",
       "Very good",
+      "Quite good",
       "Somewhat good",
       "Neither good nor bad",
       "Somewhat bad",
-      "Very bad",
-      "Exceptionally bad"
+      "Quite bad",
+      "Very bad"
     ],
     "all": [
       "Neither good nor bad",
       "Somewhat good",
       "Somewhat bad",
+      "Quite bad",
       "Very bad",
-      "Exceptionally bad",
+      "Very good",
+      "Quite good",
       "Exceptionally good",
-      "Very good"
+      "Exceptionally bad"
     ],
-    "ignore": []
+    "ignore": ["Exceptionally good", "Exceptionally bad"]
   },
   "What do you think of the course's difficulty level?": {
     "order": [
@@ -636,26 +638,26 @@
   },
   "What is your general impression of the quality of the lectures?": {
     "order": [
-      "Exceptionally good",
       "Very good",
+      "Quite good",
       "Somewhat good",
       "Neither good nor bad",
       "Somewhat bad",
-      "Very bad",
-      "Exceptionally bad"
+      "Quite bad",
+      "Very bad"
     ],
     "all": [
       "Somewhat good",
       "",
       "Somewhat bad",
       "Neither good nor bad",
+      "Quite bad",
       "Very bad",
-      "Exceptionally bad",
+      "Very good",
+      "Quite good",
       "Exceptionally good",
-      "Very good"
+      "Exceptionally bad"
     ],
-    "ignore": [
-      ""
-    ]
+    "ignore": ["", "Exceptionally good", "Exceptionally bad"]
   }
 }
