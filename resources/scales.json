@@ -593,7 +593,9 @@
       "Quite bad",
       "Very bad",
       "Very good",
-      "Quite good"
+      "Quite good",
+      "Exceptionally good",
+      "Exceptionally bad"
     ],
     "ignore": ["Exceptionally good", "Exceptionally bad"]
   },
@@ -652,7 +654,9 @@
       "Quite bad",
       "Very bad",
       "Very good",
-      "Quite good"
+      "Quite good",
+      "Exceptionally good",
+      "Exceptionally bad"
     ],
     "ignore": ["", "Exceptionally good", "Exceptionally bad"]
   }
